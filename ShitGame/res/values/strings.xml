@@ -4,5 +4,8 @@
     <string name="app_name">ShitGame</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="speed_up">speed_up</string>
+    <string name="speed_down">speed_down</string>
+	<string name="angel">angel</string>
+	<string name="shield">shield</string>
 </resources>
