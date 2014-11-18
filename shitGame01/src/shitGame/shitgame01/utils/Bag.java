@@ -75,8 +75,8 @@ public class Bag {
 	}
 	
 	public void buyItem(Item item,int num){
-		int tmp = item_to_num.getInt(used.getItem_id());
-		item_to_num.putInt(used.getItem_id(), tmp+num);
+		int tmp = item_to_num.getInt(item.getItem_id());
+		item_to_num.putInt(item.getItem_id(), tmp+num);
 	}
 	
 	
