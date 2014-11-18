@@ -27,7 +27,7 @@
         </activity>
         <activity android:name="shitGame.shitgame01.SelectMissionActivity">
             
-        </activity>
+        </activity>  
         <activity android:name="shitGame.shitgame01.SelectItemActivity">
             
         </activity>
