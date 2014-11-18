@@ -43,14 +43,14 @@ public class Bag {
 		selected_role = null;
 		sharedPreferences = context.getSharedPreferences("data",0);//read data of coin,item_to_num
 		
-		speedupString = context.getResources().getString(com.example.mmtest.R.string.speed_up);
-	    speeddownString = context.getResources().getString(com.example.mmtest.R.string.speed_down);
-		shieldString = context.getResources().getString(com.example.mmtest.R.string.shield);
-		angelString = context.getResources().getString(com.example.mmtest.R.string.angel);
-		roundString = context.getResources().getString(com.example.mmtest.R.string.round);
-		starString = context.getResources().getString(com.example.mmtest.R.string.star);
-		hexagonString = context.getResources().getString(com.example.mmtest.R.string.hexagon);
-		coinString = context.getResources().getString(com.example.mmtest.R.string.coin);
+		speedupString = context.getResources().getString(shitGame.shitgame01.R.string.speed_up);
+	    speeddownString = context.getResources().getString(shitGame.shitgame01.R.string.speed_down);
+		shieldString = context.getResources().getString(shitGame.shitgame01.R.string.shield);
+		angelString = context.getResources().getString(shitGame.shitgame01.R.string.angel);
+		roundString = context.getResources().getString(shitGame.shitgame01.R.string.round);
+		starString = context.getResources().getString(shitGame.shitgame01.R.string.star);
+		hexagonString = context.getResources().getString(shitGame.shitgame01.R.string.hexagon);
+		coinString = context.getResources().getString(shitGame.shitgame01.R.string.coin);
 		
 		speedupInt = sharedPreferences.getInt(speedupString, 0);
 		speeddownInt = sharedPreferences.getInt(speeddownString, 0);
