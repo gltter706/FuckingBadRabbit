@@ -25,9 +25,12 @@
         <activity android:name="shitGame.shitgame01.ShopActivity">
             
         </activity>
-        <activity android:name="shitGame.shitgame01.SelectMissionActivity">
+        <activity 
+            android:name="shitGame.shitgame01.SelectMissionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             
-        </activity>
+        </activity>  
         <activity android:name="shitGame.shitgame01.SelectItemActivity">
             
         </activity>
