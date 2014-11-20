@@ -1,17 +1,23 @@
 package shitGame.shitgame01.utils;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import android.R;
 import android.R.string;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Loader.ForceLoadContentObserver;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-public class Bag {
+public class Bag implements Serializable{
+	
 	private Bundle item_to_num;
 	private int coinInt;
 	private String coinString;
@@ -19,6 +25,7 @@ public class Bag {
 	private Item selected_1;
 	private Item selected_2;
 	private Item selected_role;
+	private int  mission;
 	private SharedPreferences sharedPreferences;
 	
 	private String speedupString;
@@ -61,6 +68,14 @@ public class Bag {
 		hexagonInt = sharedPreferences.getInt(hexagonString, 0);
 		coinInt = sharedPreferences.getInt("coin", 0);
 		
+		item_to_num.putInt(speedupString, speedupInt);
+		item_to_num.putInt(speeddownString, speeddownInt);
+		item_to_num.putInt(shieldString, shieldInt);
+		item_to_num.putInt(angelString, angelInt);
+		item_to_num.putInt(roundString, roundInt);
+		item_to_num.putInt(starString, starInt);
+		item_to_num.putInt(hexagonString, hexagonInt);
+		item_to_num.putInt(coinString, coinInt);
 	}
 	
 	public void select(Item item_1,Item item_2,Item role_item){
@@ -69,17 +84,42 @@ public class Bag {
 		selected_role = role_item;
 	}
 	
+	public void writeItem(String key,int val){
+		SharedPreferences.Editor editor;
+		editor=sharedPreferences.edit(); 
+		
+		editor.putInt(key, val);  
+		editor.commit();  
+	}
+	
+	public void sumItem(){
+		writeItem(speedupString, item_to_num.getInt(speedupString));
+		writeItem(speeddownString, item_to_num.getInt(speeddownString));
+		writeItem(shieldString, item_to_num.getInt(shieldString));
+		writeItem(coinString, item_to_num.getInt(coinString));
+		writeItem(roundString, item_to_num.getInt(roundString));
+		writeItem(starString, item_to_num.getInt(starString));
+		writeItem(hexagonString,item_to_num.getInt(hexagonString));
+	}
+	
 	public void useItem(Item used){
 		int tmp = item_to_num.getInt(used.getItem_id());
 		item_to_num.putInt(used.getItem_id(), tmp-1);
 	}
-	
+
 	public void buyItem(Item item,int num){
 		int tmp = item_to_num.getInt(item.getItem_id());
 		item_to_num.putInt(item.getItem_id(), tmp+num);
+		writeItem(item.getItem_id(), tmp+num);
 	}
 	
+	public void setMission(int mission){
+		this.mission = mission;
+	}
 	
+	public int getMission(){
+		return mission;
+	}
 	
 	public Bundle getItem_to_num() {
 		return item_to_num;
