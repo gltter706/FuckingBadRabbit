@@ -31,7 +31,9 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             
         </activity>  
-        <activity android:name="shitGame.shitgame01.SelectItemActivity">
+        <activity android:name="shitGame.shitgame01.SelectItemActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="landscape">
             
         </activity>
     </application>
