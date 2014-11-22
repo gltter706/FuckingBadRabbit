@@ -4,14 +4,16 @@
     <string name="app_name">ShitGame01</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-	<string name="speed_up">speed_up</string>
-	<string name="speed_down">speed_down</string>
-	<string name="shield">shield</string>
-	<string name="angel">angel</string>
-	<string name="round">round</string>
-	<string name="star">star</string>
-	<string name="hexagon">hexagon</string>
-	<string name="coin">coin</string>
-	<string name="confirm">确定</string>
-	<string name="cancel">取消</string>
+    <string name="speed_up">speed_up</string>
+    <string name="speed_down">speed_down</string>
+    <string name="shield">shield</string>
+    <string name="angel">angel</string>
+    <string name="round">round</string>
+    <string name="star">star</string>
+    <string name="hexagon">hexagon</string>
+    <string name="coin">coin</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="title_activity_first_play_display">FirstPlayDisplayActivity</string>
+
 </resources>

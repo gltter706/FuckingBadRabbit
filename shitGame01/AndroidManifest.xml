@@ -14,27 +14,34 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="shitGame.shitgame01.StartActivity"
-            android:label="@string/app_name" >
+            android:name=".activities.StartActivity"
+            android:label="@string/app_name" 
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="shitGame.shitgame01.ShopActivity">
-            
+        <activity android:name=".activities.ShopActivity" >
         </activity>
-        <activity 
-            android:name="shitGame.shitgame01.SelectMissionActivity"
+        <activity
+            android:name=".activities.SelectMissionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".activities.SelectItemActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".activities.FirstPlayDisplayActivity"
+            android:label="@string/title_activity_first_play_display" 
+            android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-            
-        </activity>  
-        <activity android:name="shitGame.shitgame01.SelectItemActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:screenOrientation="landscape">
-            
         </activity>
     </application>
 
