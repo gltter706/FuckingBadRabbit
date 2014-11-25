@@ -1,16 +1,20 @@
 package shitGame.shitgame01.activities;
 
 
+
 import shitGame.shitgame01.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SelectMissionActivity extends Activity{
 	private int missionPics[]=new int[]{1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9};//30 pictrues for 30 ImageButtons
@@ -184,4 +188,11 @@ public class SelectMissionActivity extends Activity{
 		}
 	}
 
+	public void selectmission_btn_OnClick(View view)
+	{
+		int cur_selected_mission=view.getId()-R.id.selectmission_btn0+cur_theme_first_mission_num;
+		Intent intent=new Intent(SelectMissionActivity.this, SelectItemActivity.class);
+		intent.putExtra("cur_selected_mission", cur_selected_mission);
+		startActivity(intent);
+	}
 }
