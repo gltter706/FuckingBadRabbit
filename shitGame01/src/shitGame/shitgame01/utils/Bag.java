@@ -48,6 +48,7 @@ public class Bag implements Serializable{
 		selected_1 = null;
 		selected_2 = null;
 		selected_role = null;
+		item_to_num = new Bundle();
 		sharedPreferences = context.getSharedPreferences("data",0);//read data of coin,item_to_num
 		
 		speedupString = context.getResources().getString(shitGame.shitgame01.R.string.speed_up);
@@ -107,10 +108,17 @@ public class Bag implements Serializable{
 		item_to_num.putInt(used.getItem_id(), tmp-1);
 	}
 
-	public void buyItem(Item item,int num){
+	public boolean buyItem(Item item,int num){
 		int tmp = item_to_num.getInt(item.getItem_id());
+		if(item.getCoin() > coinInt){
+			return false;
+		}
+		coinInt -= item.getCoin();
 		item_to_num.putInt(item.getItem_id(), tmp+num);
+		item_to_num.putInt(coinString, coinInt);
 		writeItem(item.getItem_id(), tmp+num);
+		writeItem(coinString, coinInt);
+		return true;
 	}
 	
 	public void setMission(int mission){
