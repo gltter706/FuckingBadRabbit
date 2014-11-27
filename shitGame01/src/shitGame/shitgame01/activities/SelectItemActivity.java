@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import shitGame.shitgame01.R;
+import shitGame.shitgame01.utils.Bag;
+import shitGame.shitgame01.utils.Item;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,26 +38,39 @@ public class SelectItemActivity extends Activity{
 			R.drawable.btn_selectmissionactivity_pic1_3,
 			R.drawable.btn_selectmissionactivity_pic1_4
 	};
-	public String[] desc = new String[]{"ÃèÊö1","ÃèÊö2","ÃèÊö3",
-			"ÃèÊö4","ÃèÊö5","ÃèÊö6","ÃèÊö7","ÃèÊö8","ÃèÊö9"};
-	public String[] personDesc = new String[]{"½ÇÉ«ÃèÊö1",
-			"½ÇÉ«ÃèÊö2","½ÇÉ«ÃèÊö3","½ÇÉ«ÃèÊö4"};
-	public String[] boughtString = new String[]{"ÒÑ¹ºÂò",
-			"Î´¹ºÂò","Î´¹ºÂò","ÒÑ¹ºÂò"};
-	public String[] amount = new String[]{"ÊıÁ¿:1","ÊıÁ¿:2",
-			"ÊıÁ¿:3","ÊıÁ¿:4","ÊıÁ¿:5","ÊıÁ¿:6","ÊıÁ¿:7","ÊıÁ¿:8",
-			"ÊıÁ¿:9"};
+	public String[] desc = new String[]{"æè¿°1","æè¿°2","æè¿°3",
+			"æè¿°4","æè¿°5","æè¿°6","æè¿°7","æè¿°8","æè¿°9"};
+	public String[] personDesc = new String[]{"è§’è‰²æè¿°1",
+			"è§’è‰²æè¿°2","è§’è‰²æè¿°3","è§’è‰²æè¿°4"};
+	public String[] boughtString = new String[]{"å·²è´­ä¹°",
+			"æœªè´­ä¹°","æœªè´­ä¹°","å·²è´­ä¹°"};
+	public String[] amount = new String[]{"æ•°é‡:1","æ•°é‡:2",
+			"æ•°é‡:3","æ•°é‡:4","æ•°é‡:5","æ•°é‡:6","æ•°é‡:7","æ•°é‡:8",
+			"æ•°é‡:9"};
 	private ImageView iv_current = null;
 	private ImageView iv_selectitem0 = null;
 	private ImageView iv_selectitem1 = null;
 	private ImageView iv_selectitem2 = null;
 	private ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
 	private boolean personSelected = false;
+	private int cur_selected_mission = 0;
+	private Bag bag = null;
+	private Item item_1,item_2,role_item;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectitem);
+		cur_selected_mission = getIntent().getIntExtra("cur_selected_mission", 0);
+		bag = new Bag(this);
+		item_1 = new Item();
+		item_1.setItem_id("item1");
+		item_2 = new Item();
+		item_2.setItem_id("item2");
+		role_item = new Item();
+		role_item.setItem_id("role_item");
+		bag.select(item_1, item_2, role_item);
+		bag.setMission(cur_selected_mission);
 		lv_selectitem = (ListView)findViewById(R.id.lv_selectitem);
 		iv_selectitem0 = (ImageView)findViewById(R.id.iv_selectitem0);
 		iv_selectitem1 = (ImageView)findViewById(R.id.iv_selectitem1);
@@ -87,7 +103,25 @@ public class SelectItemActivity extends Activity{
 			}
 			
 		});
+		btn_selectitem_confirm.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(SelectItemActivity.this,ChallengeActivity.class);
+				intent.putExtra("bag", bag);
+				startActivity(intent);
+			}
+		});
 		
+		btn_selectitem_cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		createAndShowListView(drawable, desc, amount);
 	}
 	
