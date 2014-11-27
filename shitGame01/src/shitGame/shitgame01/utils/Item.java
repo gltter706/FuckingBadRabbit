@@ -9,8 +9,7 @@ public class Item {
 	private String item_description;
 	private int coinInt = 0;
 	
-	public Item(String idString){
-		item_id = idString;
+	public Item(){
 		last_time = 1;//need to be solved
 		
 	}
