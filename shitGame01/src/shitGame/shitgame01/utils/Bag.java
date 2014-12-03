@@ -1,9 +1,11 @@
 package shitGame.shitgame01.utils;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 import android.R;
+import android.R.integer;
 import android.R.string;
 import android.app.Activity;
 import android.content.Context;
@@ -18,7 +20,7 @@ import android.view.MotionEvent;
 
 public class Bag implements Serializable{
 	
-	private Bundle item_to_num;
+	private Map<String,Integer> item_to_num;
 	private int coinInt;
 	private String coinString;
 	
@@ -48,7 +50,7 @@ public class Bag implements Serializable{
 		selected_1 = null;
 		selected_2 = null;
 		selected_role = null;
-		item_to_num = new Bundle();
+		item_to_num = new HashMap<String,Integer>();
 		sharedPreferences = context.getSharedPreferences("data",0);//read data of coin,item_to_num
 		
 		speedupString = context.getResources().getString(shitGame.shitgame01.R.string.speed_up);
@@ -69,14 +71,14 @@ public class Bag implements Serializable{
 		hexagonInt = sharedPreferences.getInt(hexagonString, 0);
 		coinInt = sharedPreferences.getInt("coin", 0);
 		
-		item_to_num.putInt(speedupString, speedupInt);
-		item_to_num.putInt(speeddownString, speeddownInt);
-		item_to_num.putInt(shieldString, shieldInt);
-		item_to_num.putInt(angelString, angelInt);
-		item_to_num.putInt(roundString, roundInt);
-		item_to_num.putInt(starString, starInt);
-		item_to_num.putInt(hexagonString, hexagonInt);
-		item_to_num.putInt(coinString, coinInt);
+		item_to_num.put(speedupString,new Integer(speedupInt));
+		item_to_num.put(speeddownString, speeddownInt);
+		item_to_num.put(shieldString, shieldInt);
+		item_to_num.put(angelString, angelInt);
+		item_to_num.put(roundString, roundInt);
+		item_to_num.put(starString, starInt);
+		item_to_num.put(hexagonString, hexagonInt);
+		item_to_num.put(coinString, coinInt);
 	}
 	
 	public void select(Item item_1,Item item_2,Item role_item){
@@ -94,28 +96,28 @@ public class Bag implements Serializable{
 	}
 	
 	public void sumItem(){
-		writeItem(speedupString, item_to_num.getInt(speedupString));
-		writeItem(speeddownString, item_to_num.getInt(speeddownString));
-		writeItem(shieldString, item_to_num.getInt(shieldString));
-		writeItem(coinString, item_to_num.getInt(coinString));
-		writeItem(roundString, item_to_num.getInt(roundString));
-		writeItem(starString, item_to_num.getInt(starString));
-		writeItem(hexagonString,item_to_num.getInt(hexagonString));
+		writeItem(speedupString, item_to_num.get(speedupString));
+		writeItem(speeddownString, item_to_num.get(speeddownString));
+		writeItem(shieldString, item_to_num.get(shieldString));
+		writeItem(coinString, item_to_num.get(coinString));
+		writeItem(roundString, item_to_num.get(roundString));
+		writeItem(starString, item_to_num.get(starString));
+		writeItem(hexagonString,item_to_num.get(hexagonString));
 	}
 	
 	public void useItem(Item used){
-		int tmp = item_to_num.getInt(used.getItem_id());
-		item_to_num.putInt(used.getItem_id(), tmp-1);
+		Integer tmp = item_to_num.get(used.getItem_id());
+		item_to_num.put(used.getItem_id(), tmp-1);
 	}
 
 	public boolean buyItem(Item item,int num){
-		int tmp = item_to_num.getInt(item.getItem_id());
+		int tmp = item_to_num.get(item.getItem_id());
 		if(item.getCoin() > coinInt){
 			return false;
 		}
 		coinInt -= item.getCoin();
-		item_to_num.putInt(item.getItem_id(), tmp+num);
-		item_to_num.putInt(coinString, coinInt);
+		item_to_num.put(item.getItem_id(), tmp+num);
+		item_to_num.put(coinString, coinInt);
 		writeItem(item.getItem_id(), tmp+num);
 		writeItem(coinString, coinInt);
 		return true;
@@ -129,11 +131,11 @@ public class Bag implements Serializable{
 		return mission;
 	}
 	
-	public Bundle getItem_to_num() {
+	public Map<String, Integer> getItem_to_num() {
 		return item_to_num;
 	}
 	
-	public void setItem_to_num(Bundle item_to_num) {
+	public void setItem_to_num(Map<String, Integer> item_to_num) {
 		this.item_to_num = item_to_num;
 	}
 
