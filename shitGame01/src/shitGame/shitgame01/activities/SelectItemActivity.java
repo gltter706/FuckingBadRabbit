@@ -50,7 +50,7 @@ public class SelectItemActivity extends Activity{
 	private boolean personSelected = false;
 	private int cur_selected_mission = 0;
 	private Bag bag = null;
-	private Item item_1,item_2,role_item;
+	private Item item_1 = null,item_2 = null,role_item = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,7 +59,6 @@ public class SelectItemActivity extends Activity{
 		cur_selected_mission = getIntent().getIntExtra("cur_selected_mission", 0);
 		initItems();
 		bag = new Bag(this);
-		bag.select(item_1, item_2, role_item);
 		bag.setMission(cur_selected_mission);
 		lv_selectitem = (ListView)findViewById(R.id.lv_selectitem);
 		iv_selectitem0 = (ImageView)findViewById(R.id.iv_selectitem0);
@@ -119,6 +118,7 @@ public class SelectItemActivity extends Activity{
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(SelectItemActivity.this,SelectMissionActivity.class);
 				startActivity(intent);
+				SelectItemActivity.this.finish();
 			}
 		});
 		createAndShowListView(drawable, desc, amount);
