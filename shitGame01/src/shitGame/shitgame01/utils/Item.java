@@ -16,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 public class Item {
 	private int last_time;
+	private int coinInt = 0;
 	private String item_id;
 	private String itemShortDesc;
 	private String itemLongDesc;
@@ -57,7 +58,15 @@ public class Item {
 			shitGame.shitgame01.R.string.star_long,
 			shitGame.shitgame01.R.string.hexagon_long,
 	  };
-
+	private int coinRef[] = {
+			10,
+			10,
+			50,
+			100,
+			1000,
+			2000,
+			3000,
+	};
 	public Item(Context context,String item_id){
 		String idResourceTmp;
 		int k = 0;
@@ -75,6 +84,7 @@ public class Item {
 		drawableId = drawableResource[k];
 		BitmapDrawable bitmapDrawable = (BitmapDrawable)context.getResources().getDrawable(drawableResource[k]);
 		bmp = bitmapDrawable.getBitmap();
+		coinInt = coinRef[k];
 		itemShortDesc = context.getResources().getString(shortResource[k]);
 		itemLongDesc = context.getResources().getString(longResource[k]);
 		last_time = 1;//need to be solved
@@ -112,6 +122,9 @@ public class Item {
 	}
 
 
+	public int getCoin(){
+		return coinInt;
+	}
 	public void bonus(){
 		//need to be solved
 	}
