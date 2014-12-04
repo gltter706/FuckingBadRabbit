@@ -22,31 +22,26 @@ public class SelectItemActivity extends Activity{
 	private ListView lv_selectitem = null;
 	private Button btn_selectitem_confirm = null;
 	private Button btn_selectitem_cancel = null;
-	public int[] drawable = new int[]{
-	R.drawable.bg_selectmissionactivity_1,
-	R.drawable.bg_selectmissionactivity_2,
-	R.drawable.bg_selectmissionactivity_3,
-	R.drawable.btn_selectmissionactivity_pic_lock,
-	R.drawable.btn_selectmissionactivity_pic1_1,
-	R.drawable.btn_selectmissionactivity_pic1_2,
-	R.drawable.btn_selectmissionactivity_pic1_3,
-	R.drawable.btn_selectmissionactivity_pic1_4,
-	R.drawable.btn_selectmissionactivity_pic1_5};
-	public int[] personDrawable = new int[]{
-			R.drawable.btn_selectmissionactivity_pic1_1,
-			R.drawable.btn_selectmissionactivity_pic1_2,
-			R.drawable.btn_selectmissionactivity_pic1_3,
-			R.drawable.btn_selectmissionactivity_pic1_4
-	};
-	public String[] desc = new String[]{"描述1","描述2","描述3",
-			"描述4","描述5","描述6","描述7","描述8","描述9"};
-	public String[] personDesc = new String[]{"角色描述1",
-			"角色描述2","角色描述3","角色描述4"};
+	public Item[] items = new Item[4];
+	public Item[] personItems = new Item[3];
+	public int[] drawable = new int[4];
+	public int[] personDrawable = new int[3];
+	public String[] desc = new String[4];
+	public String[] personDesc = new String[3];
 	public String[] boughtString = new String[]{"已购买",
-			"未购买","未购买","已购买"};
-	public String[] amount = new String[]{"数量:1","数量:2",
-			"数量:3","数量:4","数量:5","数量:6","数量:7","数量:8",
-			"数量:9"};
+			"未购买","未购买"};
+	public String[] amount = new String[]{
+			"数量:1","数量:2","数量:3","数量:4"
+	};
+	public int idResource[] = {
+			shitGame.shitgame01.R.string.speed_up,
+			shitGame.shitgame01.R.string.speed_down,
+			shitGame.shitgame01.R.string.shield,
+			shitGame.shitgame01.R.string.angel,
+			shitGame.shitgame01.R.string.round,
+			shitGame.shitgame01.R.string.star,
+			shitGame.shitgame01.R.string.hexagon,
+	};
 	private ImageView iv_current = null;
 	private ImageView iv_selectitem0 = null;
 	private ImageView iv_selectitem1 = null;
@@ -62,13 +57,8 @@ public class SelectItemActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectitem);
 		cur_selected_mission = getIntent().getIntExtra("cur_selected_mission", 0);
+		initItems();
 		bag = new Bag(this);
-		item_1 = new Item();
-		item_1.setItem_id("item1");
-		item_2 = new Item();
-		item_2.setItem_id("item2");
-		role_item = new Item();
-		role_item.setItem_id("role_item");
 		bag.select(item_1, item_2, role_item);
 		bag.setMission(cur_selected_mission);
 		lv_selectitem = (ListView)findViewById(R.id.lv_selectitem);
@@ -97,8 +87,15 @@ public class SelectItemActivity extends Activity{
 				// TODO Auto-generated method stub
 				if( false == personSelected){
 				iv_current.setImageResource(drawable[arg2]);
-				} else {
+					if(iv_current == iv_selectitem0){
+					   item_1 = items[arg2];
+					}else {
+					   item_2 = items[arg2];
+					}
+				}
+				else {
 				iv_current.setImageResource(personDrawable[arg2]);
+				role_item = personItems[arg2];
 				}
 			}
 			
@@ -109,6 +106,7 @@ public class SelectItemActivity extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(SelectItemActivity.this,ChallengeActivity.class);
+				bag.select(item_1, item_2, role_item);
 				intent.putExtra("bag", bag);
 				startActivity(intent);
 			}
@@ -119,11 +117,36 @@ public class SelectItemActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				Intent intent = new Intent(SelectItemActivity.this,SelectMissionActivity.class);
+				startActivity(intent);
 			}
 		});
 		createAndShowListView(drawable, desc, amount);
 	}
+	
+	
+	
+	public void initItems(){
+		for(int i = 0; i < 4; i++){
+			String ItemID = SelectItemActivity.this.
+			getResources().getString(idResource[i]);
+			Item item = new Item(SelectItemActivity.this,ItemID);
+			items[i] = item;
+			drawable[i] = item.getDrawableId();
+			desc[i] = item.getItemShort();
+		}
+		for(int i = 4; i < 7; i++){
+			String personItemID = SelectItemActivity.this.
+			getResources().getString(idResource[i]);
+			Item personItem = new Item(SelectItemActivity.this,
+			personItemID);
+			personItems[i-4] = personItem;
+			personDrawable[i-4] = personItem.getDrawableId();
+			personDesc[i-4] = personItem.getItemShort();
+		}
+		
+	}
+	
 	
 	public void createAndShowListView(int[] drawable,String[] desc,String[] extra){
 		data.clear();
@@ -149,5 +172,6 @@ public class SelectItemActivity extends Activity{
 		}
 		
 	}
+	
 }
 
