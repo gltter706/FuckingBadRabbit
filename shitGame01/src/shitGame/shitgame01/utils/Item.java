@@ -19,7 +19,6 @@ public class Item {
 	private String item_id;
 	private String itemShortDesc;
 	private String itemLongDesc;
-	private int coinInt = 0;
 	private Bitmap bmp;
 	private int drawableId;
 	private int drawableResource[] = {
@@ -30,7 +29,6 @@ public class Item {
 			shitGame.shitgame01.R.drawable.ic_circle,
 			shitGame.shitgame01.R.drawable.ic_star,
 			shitGame.shitgame01.R.drawable.ic_hexagon,
-			shitGame.shitgame01.R.drawable.ic_coin
 	 };
 	private int idResource[] = {
 			shitGame.shitgame01.R.string.speed_up,
@@ -40,7 +38,6 @@ public class Item {
 			shitGame.shitgame01.R.string.round,
 			shitGame.shitgame01.R.string.star,
 			shitGame.shitgame01.R.string.hexagon,
-			shitGame.shitgame01.R.string.coin
 	};
 	private int shortResource[] = {		
 			shitGame.shitgame01.R.string.speed_up_short,
@@ -50,7 +47,6 @@ public class Item {
 			shitGame.shitgame01.R.string.round_short,
 			shitGame.shitgame01.R.string.star_short,
 			shitGame.shitgame01.R.string.hexagon_short,
-			shitGame.shitgame01.R.string.coin_short
 		  };
 	private int longResource[] = {		
 			shitGame.shitgame01.R.string.speed_up_long,
@@ -60,7 +56,6 @@ public class Item {
 			shitGame.shitgame01.R.string.round_long,
 			shitGame.shitgame01.R.string.star_long,
 			shitGame.shitgame01.R.string.hexagon_long,
-			shitGame.shitgame01.R.string.coin_long
 	  };
 
 	public Item(Context context,String item_id){
@@ -90,9 +85,6 @@ public class Item {
 	}
 	public Bitmap getBmp(){
 		return bmp;
-	}
-	public int getCoin(){
-		return coinInt;
 	}
 	public String getItemShort(){
 		return itemShortDesc;
