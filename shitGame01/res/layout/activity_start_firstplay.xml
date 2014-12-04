@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
-        android:src="@drawable/anim_start_loading"/>
+        android:src="@anim/anim_start_loading"/>
 
 
 

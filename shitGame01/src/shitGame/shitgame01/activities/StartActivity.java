@@ -1,15 +1,22 @@
 package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
+import shitGame.shitgame01.services.PlayMusicService;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore.Audio.Media;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class StartActivity extends Activity {
 
@@ -17,26 +24,39 @@ public class StartActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_menu);
-//music initation
-		Media media = new Media();
-//ÉèÖÃbtn_start
-		Button bt_start=(Button)findViewById(R.id.btn_start);
+
+		//è®¾ç½®btn_start
+		Button bt_start=(Button)findViewById(R.id.btn_startmenu_play);
+	    AnimationDrawable animationDrawable;
+	    animationDrawable=(AnimationDrawable)bt_start.getBackground();
+	    animationDrawable.start();
 		bt_start.setOnClickListener(new OnClickListener(){
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/*
-				 * È±¶Á¼ÇÂ¼ÅĞ¶ÏÊÇ·ñµÚÒ»´Î½øÈëÓÎÏ·
-				 * */
+				/*åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è¿›å…¥æ¸¸æˆ */
+				SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+				boolean is_first_play=sharedPreferences.getBoolean("is_first_play", true);
+				
+				if(is_first_play==true){					
+				/*è®¾é¦–è¿›ä¸ºå‡ï¼Œæ’­æ”¾åŠ¨ç”»*/
+				SharedPreferences.Editor editor=sharedPreferences.edit();
+				editor.putBoolean("is_first_play", false);
+				editor.commit();
 				Intent intent=new Intent(StartActivity.this,FirstPlayDisplayActivity.class);
 				startActivity(intent);
-				
+				}
+				else{
+				/*ç›´æ¥è¿›å…¥é€‰å…³*/
+					Intent intent=new Intent(StartActivity.this,SelectMissionActivity.class);
+					startActivity(intent);
+				}
 			}
 		});
 		
-//ÉèÖÃbtn_shop
-		Button bt_shop=(Button)findViewById(R.id.btn_shop);
+		//è®¾ç½®btn_shop
+		Button bt_shop=(Button)findViewById(R.id.btn_startmenu_shop);
 		bt_shop.setOnClickListener(new OnClickListener(){
 			
 			@Override
@@ -46,8 +66,21 @@ public class StartActivity extends Activity {
 				startActivity(intent);				
 			}
 		});
-//ÉèÖÃbtn_exit
-		Button bt_exit=(Button)findViewById(R.id.btn_exit);
+		
+		//è®¾ç½®imageView
+		ImageView roler=(ImageView)findViewById(R.id.imgv_startmenu_role);
+		roler.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast toast=Toast.makeText(getApplicationContext(), "thanks for your support",Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 160, 40);
+				toast.show();
+			}
+		});
+		//è®¾ç½®btn_exit
+/*		Button bt_exit=(Button)findViewById(R.id.btn_exit);
 		bt_exit.setOnClickListener(new OnClickListener(){
 			
 			@Override
@@ -57,17 +90,32 @@ public class StartActivity extends Activity {
 				finish();				
 			}
 		});
-//ÉèÖÃbtn_music
+*/
+		
+		//è®¾ç½®btn_music
 				Button bt_music=(Button)findViewById(R.id.btn_music);
 				bt_music.setOnClickListener(new OnClickListener(){
 					
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
-
-						finish();	
-					}
+						SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+						/*è·å–å¹¶ç½®åéŸ³ä¹çŠ¶æ€*/
+						Boolean music_switch=!(sharedPreferences.getBoolean("is_music_on", false));	
+						Editor editor=sharedPreferences.edit();
+						editor.putBoolean("datat", music_switch);
+						editor.commit();
+		                Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
+		                intent.putExtra("playing", music_switch);
+		                startService(intent);
+		            }
 				});
+				
+		//åˆå§‹åŒ–éŸ³ä¹æ’­æ”¾
+                SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+				boolean is_music_on=sharedPreferences.getBoolean("is_music_on", true);
+                Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
+                intent.putExtra("playing", is_music_on);
+                startService(intent);
 	}
 
 	@Override
