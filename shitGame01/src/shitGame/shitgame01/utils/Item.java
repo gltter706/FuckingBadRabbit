@@ -1,5 +1,6 @@
 package shitGame.shitgame01.utils;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-public class Item {
+public class Item implements Serializable{
 	private int last_time;
 	private int coinInt = 0;
 	private String item_id;
