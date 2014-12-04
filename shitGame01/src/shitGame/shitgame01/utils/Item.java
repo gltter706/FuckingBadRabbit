@@ -21,7 +21,6 @@ public class Item implements Serializable{
 	private String item_id;
 	private String itemShortDesc;
 	private String itemLongDesc;
-	private Bitmap bmp;
 	private int drawableId;
 	private int drawableResource[] = {
 			shitGame.shitgame01.R.drawable.ic_up,
@@ -84,7 +83,6 @@ public class Item implements Serializable{
 		
 		drawableId = drawableResource[k];
 		BitmapDrawable bitmapDrawable = (BitmapDrawable)context.getResources().getDrawable(drawableResource[k]);
-		bmp = bitmapDrawable.getBitmap();
 		coinInt = coinRef[k];
 		itemShortDesc = context.getResources().getString(shortResource[k]);
 		itemLongDesc = context.getResources().getString(longResource[k]);
@@ -93,9 +91,6 @@ public class Item implements Serializable{
 	}
 	public int getDrawableId(){
 		return drawableId;
-	}
-	public Bitmap getBmp(){
-		return bmp;
 	}
 	public String getItemShort(){
 		return itemShortDesc;
