@@ -19,9 +19,9 @@ import android.widget.ImageView;
 public class FirstPlayDisplayActivity extends Activity {
 
 
-	long starttime=System.currentTimeMillis();//¼ÇÂ¼¶¯»­´´½¨Ê±¼ä
+	long starttime=System.currentTimeMillis();//è®°å½•åŠ¨ç”»åˆ›å»ºæ—¶é—´
 	/*
-	 * ×îºÃ²»ÓÃcurrnetTimeMillis()£¬Èç¹ûÓÃ»§ÐÞ¸ÄÏµÍ³Ê±¼ä»áÓ°Ïì½á¹û
+	 * æœ€å¥½ä¸ç”¨currnetTimeMillis()ï¼Œå¦‚æžœç”¨æˆ·ä¿®æ”¹ç³»ç»Ÿæ—¶é—´ä¼šå½±å“ç»“æžœ
 	 * 
 	 */
  
@@ -39,16 +39,16 @@ public class FirstPlayDisplayActivity extends Activity {
     
     private void init_pic(){
         ImageView loadingImageView=(ImageView)findViewById(R.id.imageView_loading);
-        loadingImageView.setImageResource(R.drawable.anim_start_loading);
+        loadingImageView.setImageResource(R.anim.anim_start_loading);
         
-       /*¼àÌýµã»÷£¬²¥·ÅÍê³ÉºóÏàÓ¦µã»÷·µ»ØSelectMissionActivity*/
+        /*ç›‘å¬ç‚¹å‡»ï¼Œæ’­æ”¾å®ŒæˆåŽç›¸åº”ç‚¹å‡»è¿”å›žSelectMissionActivity*/
         loadingImageView.setOnClickListener(new OnClickListener() {
         	
-        	ImageView loadingImageView=(ImageView)findViewById(R.drawable.anim_start_loading);
+        	ImageView loadingImageView=(ImageView)findViewById(R.anim.anim_start_loading);
 			@Override
 			public void onClick(View v) {
-				        /*Ðè¸üÐÂ¿ÉÎ¬»¤ÐÔ*/
-				        /*animationDrawableÖÂ±ÀÀ£*/
+				 /*éœ€æ›´æ–°å¯ç»´æŠ¤æ€§*/
+		        /*animationDrawableè‡´å´©æºƒ*/
 						if(System.currentTimeMillis()-starttime>6000){
 				        Intent intent=new Intent(FirstPlayDisplayActivity.this,SelectMissionActivity.class);
 						FirstPlayDisplayActivity.this.startActivity(intent);			
