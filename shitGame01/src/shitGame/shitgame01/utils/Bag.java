@@ -28,7 +28,6 @@ public class Bag implements Serializable{
 	private Item selected_2;
 	private Item selected_role;
 	private int  mission;
-	private SharedPreferences sharedPreferences;
 	
 	private String speedupString;
 	private String speeddownString;
@@ -47,6 +46,7 @@ public class Bag implements Serializable{
 	private int hexagonInt;
 	
 	public Bag(Context context){
+		SharedPreferences sharedPreferences;
 		selected_1 = null;
 		selected_2 = null;
 		selected_role = null;
@@ -87,7 +87,9 @@ public class Bag implements Serializable{
 		selected_role = role_item;
 	}
 	
-	public void writeItem(String key,int val){
+	public void writeItem(Context context,String key,int val){
+		SharedPreferences sharedPreferences;
+		sharedPreferences = context.getSharedPreferences("data",0);
 		SharedPreferences.Editor editor;
 		editor=sharedPreferences.edit(); 
 		
@@ -95,14 +97,14 @@ public class Bag implements Serializable{
 		editor.commit();  
 	}
 	
-	public void sumItem(){
-		writeItem(speedupString, item_to_num.get(speedupString));
-		writeItem(speeddownString, item_to_num.get(speeddownString));
-		writeItem(shieldString, item_to_num.get(shieldString));
-		writeItem(coinString, item_to_num.get(coinString));
-		writeItem(roundString, item_to_num.get(roundString));
-		writeItem(starString, item_to_num.get(starString));
-		writeItem(hexagonString,item_to_num.get(hexagonString));
+	public void sumItem(Context context){
+		writeItem(context,speedupString, item_to_num.get(speedupString));
+		writeItem(context,speeddownString, item_to_num.get(speeddownString));
+		writeItem(context,shieldString, item_to_num.get(shieldString));
+		writeItem(context,coinString, item_to_num.get(coinString));
+		writeItem(context,roundString, item_to_num.get(roundString));
+		writeItem(context,starString, item_to_num.get(starString));
+		writeItem(context,hexagonString,item_to_num.get(hexagonString));
 	}
 	
 	public void useItem(Item used){
@@ -110,7 +112,7 @@ public class Bag implements Serializable{
 		item_to_num.put(used.getItem_id(), tmp-1);
 	}
 
-	public boolean buyItem(Item item,int num){
+	public boolean buyItem(Context context,Item item,int num){
 		int tmp = item_to_num.get(item.getItem_id());
 		if(item.getCoin() > coinInt){
 			return false;
@@ -118,8 +120,8 @@ public class Bag implements Serializable{
 		coinInt -= item.getCoin();
 		item_to_num.put(item.getItem_id(), tmp+num);
 		item_to_num.put(coinString, coinInt);
-		writeItem(item.getItem_id(), tmp+num);
-		writeItem(coinString, coinInt);
+		writeItem(context,item.getItem_id(), tmp+num);
+		writeItem(context,coinString, coinInt);
 		return true;
 	}
 	
