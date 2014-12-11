@@ -13,6 +13,7 @@ public class MapInfo {
 	public MapInfo(int array[][],int wallnum[],int start,int end){
 		map_array=array;
 		change_wall_num=wallnum;
+		enemyvector=new Vector<EnemyInfo>();
 		start_wall_num=start;
 		end_wall_num=end;
 	}
