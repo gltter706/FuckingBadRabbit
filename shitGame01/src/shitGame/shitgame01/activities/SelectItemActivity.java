@@ -8,6 +8,7 @@ import shitGame.shitgame01.utils.Bag;
 import shitGame.shitgame01.utils.Item;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,6 +34,10 @@ public class SelectItemActivity extends Activity{
 	public String[] amount = new String[]{
 			"数量:1","数量:2","数量:3","数量:4"
 	};
+	public String[] needCoin = new String[]{
+			"100","200","300","400"
+	};
+	public int coin_draw_id;
 	public int idResource[] = {
 			shitGame.shitgame01.R.string.speed_up,
 			shitGame.shitgame01.R.string.speed_down,
@@ -56,6 +61,7 @@ public class SelectItemActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectitem);
+		coin_draw_id = R.drawable.ic_coin;
 		cur_selected_mission = getIntent().getIntExtra("cur_selected_mission", 0);
 		initItems();
 		bag = new Bag(this);
@@ -75,7 +81,7 @@ public class SelectItemActivity extends Activity{
 				// TODO Auto-generated method stub
 				iv_current = (ImageView)v;
 				personSelected = true;
-				createAndShowListView(personDrawable, personDesc, boughtString);
+				createAndShowListView(personDrawable, needCoin,personDesc, boughtString);
 			}
 		});
 		lv_selectitem.setOnItemClickListener(new OnItemClickListener(){
@@ -121,7 +127,7 @@ public class SelectItemActivity extends Activity{
 				SelectItemActivity.this.finish();
 			}
 		});
-		createAndShowListView(drawable, desc, amount);
+		createAndShowListView(drawable,needCoin,desc, amount);
 	}
 	
 	
@@ -148,16 +154,18 @@ public class SelectItemActivity extends Activity{
 	}
 	
 	
-	public void createAndShowListView(int[] drawable,String[] desc,String[] extra){
+	public void createAndShowListView(int[] drawable,String[] needCoin,String[] desc,String[] extra){
 		data.clear();
 		for(int i =0; i<desc.length; i++){
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("img", drawable[i]);
+			map.put("coin",coin_draw_id);
+			map.put("coin_amount", needCoin[i]);
 			map.put("desc", desc[i]);
 			map.put("extra", extra[i]);
 			data.add(map);
 		}
-		SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, R.layout.listitem_selectitem, new String[]{"img","desc","extra"}, new int[]{R.id.iv_listitem,R.id.tv_desc_listitem,R.id.tv_extra_listitem});
+		SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, R.layout.listitem_selectitem, new String[]{"img","coin","coin_amount","desc","extra"}, new int[]{R.id.iv_listitem,R.id.iv_coin,R.id.tv_coin,R.id.tv_desc_listitem,R.id.tv_extra_listitem});
 		lv_selectitem.setAdapter(simpleAdapter);
 	}
 	
@@ -168,7 +176,7 @@ public class SelectItemActivity extends Activity{
 			// TODO Auto-generated method stub
 			iv_current = (ImageView)v;
 			personSelected = false;
-			createAndShowListView(drawable, desc, amount);
+			createAndShowListView(drawable, needCoin, desc, amount);
 		}
 		
 	}
