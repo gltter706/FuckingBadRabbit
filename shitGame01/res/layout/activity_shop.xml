@@ -2,30 +2,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/bg_start_menu" >
     <LinearLayout 
-        android:layout_width="wrap_content"
+     	android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
+    <RelativeLayout 
+       	android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
         
         <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/iv_imagedesc"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/ic_up"
             />
         <TextView 
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/speed_up_long"
+            android:id="@+id/tv_longdesc"
+            android:layout_alignRight="@id/iv_imagedesc"
+            android:layout_below="@id/iv_imagedesc"
             />
+    </RelativeLayout>
+    
     </LinearLayout>
     <LinearLayout 
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ListView 
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+    	<LinearLayout 
+    	    android:layout_gravity="right"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:orientation="horizontal"
+    	    >
+      		 <TextView 
+    	        android:fontFamily="sans-serif-light"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:id="@+id/tv_bagcoin"/>
+      		 
+    	    <ImageView 
+    	        android:src="@drawable/ic_coin"
+    	        android:layout_width="20dp"
+    	        android:layout_height="20dp"
+    	        />
+    	</LinearLayout>
+    	<LinearLayout 
+    	    android:orientation="horizontal"
+    	    android:layout_gravity = "center"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    >
+    	  	<ImageButton 
+    	  	    android:id="@+id/btn_itemblock"
+    	  	    android:src="@drawable/ic_up"
+           	 	android:layout_width="50dp"
+           	    android:layout_height="50dp"
+           	    android:scaleType="fitXY"
+           	    android:background="#0000"
+    	  	    />
+    	  	<ImageButton 
+				android:id="@+id/btn_roleblock"
+    	  	    android:src="@drawable/ic_role"
+           	 	android:layout_width="50dp"
+           	    android:layout_height="50dp"
+           	    android:scaleType="fitXY"
+           	    android:background="#0000"
+    	  	    />
+    	</LinearLayout>
+        <ListView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/lv_shop"
             />
+       
     </LinearLayout>
     
 

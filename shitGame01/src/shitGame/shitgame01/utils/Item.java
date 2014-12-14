@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 
 public class Item implements Serializable{
 	private int last_time;
@@ -72,15 +73,13 @@ public class Item implements Serializable{
 		int k = 0;
 		
 		this.item_id = item_id;
-		
 		for(int i = 0;i != idResource.length;i ++){
 			idResourceTmp = context.getResources().getString(idResource[i]);
-			if(item_id.equals(idResourceTmp)){
+			if(this.item_id.equals(idResourceTmp)){
 				k = i;
 				break;
 			}
 		}
-		
 		drawableId = drawableResource[k];
 		BitmapDrawable bitmapDrawable = (BitmapDrawable)context.getResources().getDrawable(drawableResource[k]);
 		coinInt = coinRef[k];

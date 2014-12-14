@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <string name="app_name">ShitGame01</string>
@@ -33,5 +34,6 @@
     <string name="coin_long">金币</string>
     <string name="title_activity_first_play_display">FirstPlayDisplayActivity</string>
     
-    
+    <string name="roleblock">角色</string>
+    <string name="itemblock">道具</string>
 </resources>
