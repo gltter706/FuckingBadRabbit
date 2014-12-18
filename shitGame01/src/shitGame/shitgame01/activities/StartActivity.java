@@ -108,23 +108,29 @@ public class StartActivity extends Activity {
 						/*获取并置反音乐状态*/
 						Boolean music_switch=!(sharedPreferences.getBoolean("is_music_on", false));	
 						Editor editor=sharedPreferences.edit();
-						editor.putBoolean("data", music_switch);
+						editor.putBoolean("is_music_on", music_switch);
 						editor.commit();
 		                Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
-		                intent.putExtra("msc_playing", music_switch);
-		                startService(intent);
+		                /*开始音乐 */
+		                if(music_switch){
+		                	intent.putExtra("msc_playing", true);
+		                	startService(intent);
+		                }
+		                /*暂停音乐*/
+		                else{
+		                	stopService(intent);
+		                }
+		                
 		            }
 				});
 				
 		//初始化音乐播放
-               /* SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+                SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
 				boolean is_music_on=sharedPreferences.getBoolean("is_music_on", true);
-				*/
                 Intent intent = new Intent(StartActivity.this,shitGame.shitgame01.services.PlayMusicService.class);
              
-				intent.putExtra("msc_playing", true);
+				intent.putExtra("msc_playing", is_music_on);
                 startService(intent);
-                Log.i("hi world","oncreate");
 	}
 
 	@Override
