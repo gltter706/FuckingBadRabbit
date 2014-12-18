@@ -146,7 +146,7 @@ public class SelectMissionActivity extends Activity{
 					btns[i].setEnabled(false);
 				}
 				else {
-					btns[i].setImageResource(R.drawable.btn_selectmissionactivity_pic1_1+i);
+					btns[i].setImageResource(R.drawable.btn_selectmission_pic_selector1_1+i);
 					btns[i].setEnabled(true);
 				}
 				
@@ -163,7 +163,7 @@ public class SelectMissionActivity extends Activity{
 					btns[i].setEnabled(false);
 				}
 				else {
-					btns[i].setImageResource(R.drawable.btn_selectmissionactivity_pic2_1+i);
+					btns[i].setImageResource(R.drawable.btn_selectmission_pic_selector2_1+i);
 					btns[i].setEnabled(true);
 				}
 				
@@ -180,7 +180,7 @@ public class SelectMissionActivity extends Activity{
 					btns[i].setEnabled(false);
 				}
 				else {
-					btns[i].setImageResource(R.drawable.btn_selectmissionactivity_pic3_1+i);
+					btns[i].setImageResource(R.drawable.btn_selectmission_pic_selector3_1+i);
 					btns[i].setEnabled(true);
 				}
 				

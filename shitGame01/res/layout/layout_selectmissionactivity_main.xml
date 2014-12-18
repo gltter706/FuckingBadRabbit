@@ -11,38 +11,43 @@
         android:orientation="horizontal"
         android:gravity="center">
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn0"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn1"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn2"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn3"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn4"
             android:onClick="selectmission_btn_OnClick"/>
     </LinearLayout>
@@ -53,38 +58,43 @@
         android:gravity="center"
         android:orientation="horizontal">
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn5"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn6"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn7"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn8"
             android:onClick="selectmission_btn_OnClick"/>
         <ImageButton 
-            android:layout_width="96px"
-            android:layout_height="96px"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="fitCenter"
             android:layout_margin="30px"
+            android:background="#0000"
             android:id="@+id/selectmission_btn9"
             android:onClick="selectmission_btn_OnClick"/>
     </LinearLayout>
