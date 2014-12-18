@@ -33,7 +33,7 @@ public class Global {
 	
 	public static Vector<MapInfo> ALL_MAP=new Vector<MapInfo>();
 	public Global(){
-	int map_array1[][]=new int[][]{{0,1,0,1,0,1,0,1,0,0},
+	int map_array1[][]=new int[][]{{0,1,0,1,0,1,0,1,0,1},
 				{0,0,0,1,0,0,0,0,0,1},
 				{1,0,0,0,1,0,0,0,0,1},
 				{0,0,1,0,0,0,0,0,1,0},

@@ -51,7 +51,7 @@ public class Map
 					canvas.restore();
 					rectF_list.add(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
 				}
-				else if(i==0 && j==9)//draw menu
+				if(i==0 && j==9)//draw menu
 				{
 					canvas.save();
 					canvas.clipRect(new RectF(9*wallW, 0*wallH, 9*wallW+wallW, 0*wallH+wallH));
