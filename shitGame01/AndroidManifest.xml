@@ -10,10 +10,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_role"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:launchMode="singleTask"
             android:name=".activities.StartActivity"
             android:label="@string/app_name" 
             android:screenOrientation="landscape"
@@ -29,6 +30,7 @@
              android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
+             android:launchMode="singleTask"
             android:name=".activities.SelectMissionActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
