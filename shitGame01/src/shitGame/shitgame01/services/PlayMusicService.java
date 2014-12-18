@@ -1,9 +1,14 @@
 package shitGame.shitgame01.services;
+import java.io.IOException;
+
 import shitGame.shitgame01.R;
+import shitGame.shitgame01.activities.StartActivity;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.util.Log;
+import android.util.LogPrinter;
  
 public class PlayMusicService extends Service {
     private MediaPlayer mp;
@@ -11,7 +16,7 @@ public class PlayMusicService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        mp = MediaPlayer.create(this,R.raw.msc_startmenu);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.msc_startmenu);
     }
  
     @Override
@@ -22,15 +27,24 @@ public class PlayMusicService extends Service {
     }
  
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        boolean playing = intent.getBooleanExtra("playing", false);
+    public void onStart(Intent intent, int startId) {
+        boolean playing = intent.getBooleanExtra("msc_playing",true);
         if (playing) {
+        	try {
+				mp.prepare();
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             mp.start();
         } else {
             mp.pause();
         }
-        return super.onStartCommand(intent, flags, startId);
-    }
+        Log.i("error","onmusic");
+  }
  
     @Override
     public IBinder onBind(Intent intent) {

@@ -50,6 +50,11 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
+        <service android:name="shitGame.shitgame01.services.PlayMusicService">
+            <intent-filter >
+                <action android:name="shitGame.shitgame01.activities.StartActivity"/>
+            </intent-filter>
+        </service>"
     </application>
 
 </manifest>

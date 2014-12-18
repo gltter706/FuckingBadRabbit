@@ -26,12 +26,13 @@
         android:layout_width="147dp"
         android:layout_height="86dp"
         android:layout_gravity="center_horizontal"
-        android:background="@anim/anim_startmenu_play" />
+        android:background="@drawable/btn_start"
+     />
 
     <Button
         android:id="@+id/btn_startmenu_shop"
-        android:layout_width="98dp"
-        android:layout_height="50dp"
+        android:layout_width="77dp"
+        android:layout_height="55dp"
         android:background="@drawable/btn_startmenu_shop"
         android:gravity="left" />
 

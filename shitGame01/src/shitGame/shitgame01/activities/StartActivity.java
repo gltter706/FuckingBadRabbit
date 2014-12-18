@@ -1,15 +1,21 @@
 package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
+import shitGame.shitgame01.R.string;
 import shitGame.shitgame01.services.PlayMusicService;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Service;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore.Audio.Media;
+import android.telephony.ServiceState;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +29,14 @@ public class StartActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        Log.i("hi world","oncreate");
 		setContentView(R.layout.activity_start_menu);
 
 		//设置btn_start
 		Button bt_start=(Button)findViewById(R.id.btn_startmenu_play);
-	    AnimationDrawable animationDrawable;
-	    animationDrawable=(AnimationDrawable)bt_start.getBackground();
-	    animationDrawable.start();
+//	    AnimationDrawable animationDrawable;
+//	    animationDrawable=(AnimationDrawable)bt_start.getBackground();
+//	    animationDrawable.start();
 		bt_start.setOnClickListener(new OnClickListener(){
 			
 			@Override
@@ -38,9 +45,8 @@ public class StartActivity extends Activity {
 				/*判断是否第一次进入游戏 */
 				SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
 				boolean is_first_play=sharedPreferences.getBoolean("is_first_play", true);
-				
-				if(is_first_play==true){					
-				/*设首进为假，播放动画*/
+				/*设首进为真，播放动画*/				
+				if(is_first_play){					
 				SharedPreferences.Editor editor=sharedPreferences.edit();
 				editor.putBoolean("is_first_play", false);
 				editor.commit();
@@ -102,20 +108,23 @@ public class StartActivity extends Activity {
 						/*获取并置反音乐状态*/
 						Boolean music_switch=!(sharedPreferences.getBoolean("is_music_on", false));	
 						Editor editor=sharedPreferences.edit();
-						editor.putBoolean("datat", music_switch);
+						editor.putBoolean("data", music_switch);
 						editor.commit();
 		                Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
-		                intent.putExtra("playing", music_switch);
+		                intent.putExtra("msc_playing", music_switch);
 		                startService(intent);
 		            }
 				});
 				
 		//初始化音乐播放
-                SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+               /* SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
 				boolean is_music_on=sharedPreferences.getBoolean("is_music_on", true);
-                Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
-                intent.putExtra("playing", is_music_on);
+				*/
+                Intent intent = new Intent(StartActivity.this,shitGame.shitgame01.services.PlayMusicService.class);
+             
+				intent.putExtra("msc_playing", true);
                 startService(intent);
+                Log.i("hi world","oncreate");
 	}
 
 	@Override
@@ -123,6 +132,30 @@ public class StartActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		return false;
 	}
-
-
+    
+//	 public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		  // TODO Auto-generated method stub
+//		  if(keyCode == KeyEvent.KEYCODE_BACK){
+//			new AlertDialog.Builder(this)
+//			.setMessage("确定退出?")
+//			.setNegativeButton(R.string.dlg_exit_cancel, new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(DialogInterface arg0, int arg1) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//		   return true;
+//		  }
+//		  return super.onKeyDown(keyCode, event);
+//		 }
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+        Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
+		stopService(intent);
+	}
+    
 }

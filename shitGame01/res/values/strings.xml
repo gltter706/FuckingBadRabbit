@@ -36,4 +36,6 @@
     
     <string name="roleblock">角色</string>
     <string name="itemblock">道具</string>
+    <string name="dlg_exit_sure">确定</string>
+    <string name="dlg_exit_cancel">取消</string>
 </resources>
