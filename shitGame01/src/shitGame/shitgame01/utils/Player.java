@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class Player
 {
-	public Bitmap bitmap;
+	public Bitmap bitmap,bitmapforleft;
 	public float x,y;
 	public int w,h;
 	public int speed;
@@ -34,13 +34,20 @@ public class Player
 		Matrix matrix=new Matrix();
 		matrix.postScale(((float)w)/bmp.getWidth(), ((float)h)/bmp.getHeight());
 		this.bitmap=Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+		Matrix matrix2=new Matrix();
+		matrix2.postScale(-1, 1);
+		this.bitmapforleft=Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix2, true);
 	}
 	
 	public void drawPlayer(Canvas canvas, Paint paint)
 	{
 		canvas.save();
 		canvas.clipRect(new RectF(x, y, x+w, y+h));
-		canvas.drawBitmap(bitmap, x, y, paint);
+		if(this.right)
+			canvas.drawBitmap(bitmap, x, y, paint);
+		else {
+			canvas.drawBitmap(bitmapforleft, x, y, paint);
+		}
 		canvas.restore();
 	}
 	

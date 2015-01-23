@@ -7,8 +7,14 @@ import com.example.map2.EnemyInfo;
 import com.example.map2.Global;
 
 import shitGame.shitgame01.R;
+import shitGame.shitgame01.activities.LoseActivity;
+import shitGame.shitgame01.activities.StartActivity;
+import shitGame.shitgame01.activities.WinActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -45,6 +51,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	private Bitmap dist_bmp;
 	private Matrix matrix;
 	//thread
+	private MyThread myThread;
 	private boolean flag=true;
 	private int counter=0;
 	
@@ -79,7 +86,8 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		wallW=getWidth()/10;
 		rectFlist=new ArrayList<RectF>();
 		init();
-		new MyThread().start();
+		myThread=new MyThread();
+		myThread.start();
 	}
 
 	@Override
@@ -179,12 +187,17 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		if(player.bumpWithRect(player_rectF, dist_rectF))
 		{
 			Log.e("Output", "WIN");
+			Intent intent=new Intent(context, WinActivity.class);
+			context.startActivity(intent);
+			flag=false;
 		}
 		for(int i=0;i<rectFlist.size();i++)
 		{
 			if(player.bumpWithRect(player_rectF, rectFlist.get(i)))
 			{
-				Log.e("Output", "LOSE");
+				Intent intent=new Intent(context, LoseActivity.class);
+				context.startActivity(intent);
+				flag=false;
 			}
 		}
 		
@@ -243,6 +256,30 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		if(touch_x>=9*wallW && touch_x<=screenW && touch_y>=0 && touch_y<=wallH)
 		{
 			Toast.makeText(context, "pause menu", Toast.LENGTH_SHORT).show();
+			
+			AlertDialog.Builder builder=new AlertDialog.Builder(context);
+			builder.setMessage("Pause");
+			builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener()
+			{
+				
+				@Override
+				public void onClick(DialogInterface arg0, int arg1)
+				{
+					// TODO Auto-generated method stub
+					flag=true;
+					myThread=new MyThread();
+					myThread.start();
+				}
+			});
+			AlertDialog dlg=builder.create();
+			dlg.setCanceledOnTouchOutside(false);
+			dlg.show();
+			
+			
+			flag=false;
+			
+				
+			
 			return super.onTouchEvent(event);
 		}
 		else{
