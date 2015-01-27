@@ -23,10 +23,13 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class ChallengeSurfaceView extends SurfaceView implements Callback
@@ -34,6 +37,13 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	//Activity gives the context and bag
 	private Context context;
 	private Bag bag;
+	//selected items
+	private Item item1,item1_copy;
+	private Item item2,item2_copy;
+	private boolean item1_ON;
+	private int item1_counter;
+	private boolean item2_ON;
+	private int item2_counter;
 	//init the map,player and enemies
 	private Map map;
 	private Player player;
@@ -64,6 +74,12 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		this.context=context;
 		this.bag=bag;
 		cur_selected_mission_num=bag.getMission();
+		item1_copy=item1=bag.getSelected_1();
+		item2_copy=item2=bag.getSelected_2();
+		item1_ON=false;
+		item1_counter=0;
+		item2_ON=false;
+		item2_counter=0;
 		
 		sfd=getHolder();
 		sfd.addCallback(this);
@@ -202,7 +218,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		}
 		
 		//map logic to change wall
-		if(counter==19)//2s change wall once
+		if(counter==39)//2s change wall once
 			map.logic();
 		//enemies logic to change the position of enemies
 		for(int i=0;i<enemies.size();i++)
@@ -210,6 +226,56 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			enemies.get(i).logic();
 		}
 		//player logic to change the position of player
+		if(item1_ON)
+		{
+			if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+			{
+				if(item1_counter==0)
+					player.speed+=1;
+				item1_counter++;
+			}
+			if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+			{
+				if(item1_counter==0)
+					player.speed-=1;
+				item1_counter++;
+			}
+		}
+		if(item1_counter==59)//持续3s之后
+		{
+			item1_counter=0;
+			item1_ON=false;
+			if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+				player.speed-=1;
+			if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+				player.speed+=1;
+					
+		}
+		if(item2_ON)
+		{
+			if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+			{
+				if(item2_counter==0)
+					player.speed+=1;
+				item2_counter++;
+			}
+			if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+			{
+				if(item2_counter==0)
+					player.speed-=1;
+				item2_counter++;
+			}
+		}
+		if(item2_counter==59)//持续3s之后
+		{
+			item2_counter=0;
+			item2_ON=false;
+			if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+				player.speed-=1;
+			if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+				player.speed+=1;
+					
+		}
 		player.logic();
 	}
 	
@@ -259,7 +325,56 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			
 			AlertDialog.Builder builder=new AlertDialog.Builder(context);
 			builder.setMessage("Pause");
-			builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener()
+			View view=LayoutInflater.from(context).inflate(R.layout.pause_dlg_main, null);
+			final ImageButton pause_btn0=(ImageButton) view.findViewById(R.id.pause_dlg_btn0);
+			final ImageButton pause_btn1=(ImageButton) view.findViewById(R.id.pause_dlg_btn1);
+			if(item1!=null)
+			{
+				pause_btn0.setImageResource(item1.getDrawableId());
+			}else {
+				pause_btn0.setImageResource(R.drawable.nullitem);
+				pause_btn0.setEnabled(false);
+			}
+			if(item2!=null)
+			{
+				pause_btn1.setImageResource(item2.getDrawableId());
+			}else {
+				pause_btn1.setImageResource(R.drawable.nullitem);
+				pause_btn1.setEnabled(false);
+			}
+			pause_btn0.setOnClickListener(new OnClickListener()
+			{
+				
+				@Override
+				public void onClick(View arg0)
+				{
+					// TODO Auto-generated method stub
+						item1_ON=true;
+						item1_counter=0;
+						item1=null;
+						pause_btn0.setImageResource(R.drawable.nullitem);
+						Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
+						pause_btn0.setEnabled(false);
+				}
+			});
+			pause_btn1.setOnClickListener(new OnClickListener()
+			{
+				
+				@Override
+				public void onClick(View arg0)
+				{
+					// TODO Auto-generated method stub
+					item2_ON=true;
+					item2_counter=0;
+					item2=null;
+					pause_btn1.setImageResource(R.drawable.nullitem);
+					Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
+					pause_btn1.setEnabled(false);
+				}
+			});
+			
+			builder.setView(view);
+			builder.setNegativeButton("回到游戏", new DialogInterface.OnClickListener()
 			{
 				
 				@Override
@@ -275,11 +390,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			dlg.setCanceledOnTouchOutside(false);
 			dlg.show();
 			
-			
 			flag=false;
-			
-				
-			
 			return super.onTouchEvent(event);
 		}
 		else{
