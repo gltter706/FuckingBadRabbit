@@ -158,14 +158,26 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		if(bag.getSelected_role()==null)
 		{
 			Bitmap role_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.square);
-			player=new Player(start_x,start_y,15,15,screenW,screenH,role_bmp);//player is 20px*20px
+			player=new Player(start_x,start_y,15,15,screenW,screenH,role_bmp,
+					BitmapFactory.decodeResource(getResources(), R.drawable.square_in_speedup),
+					BitmapFactory.decodeResource(getResources(), R.drawable.square_in_speeddown),
+					BitmapFactory.decodeResource(getResources(), R.drawable.square_in_shield));//player is 20px*20px
 		}else {
 			if(bag.getSelected_role().getItem_id().equals(R.string.round))
-				player=new Player(start_x, start_y, 20, 20, screenW,screenH,BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()));
+				player=new Player(start_x, start_y, 20, 20, screenW,screenH,BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()));
 			else if(bag.getSelected_role().getItem_id().equals(R.string.star))
-				player=new Player(start_x, start_y, 20, 20, screenW,screenH,BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()));
+				player=new Player(start_x, start_y, 20, 20, screenW,screenH,BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()));
 			else if(bag.getSelected_role().getItem_id().equals(R.string.hexagon))
-				player=new Player(start_x, start_y, 20, 20, screenW,screenH,BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()));	
+				player=new Player(start_x, start_y, 20, 20, screenW,screenH,BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()),
+						BitmapFactory.decodeResource(getResources(), bag.getSelected_role().getDrawableId()));	
 			
 		}
 	}
@@ -191,7 +203,33 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		}
 		
 		//draw player
-		player.drawPlayer(canvas, paint);
+		if(item1_ON || item2_ON)
+		{
+			if(item1_ON)
+			{
+				if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+				{
+					player.drawPlayer_In_speedup(canvas, paint);
+				}
+				if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+				{
+					player.drawPlayer_In_speeddown(canvas, paint);
+				}
+			}
+			if(item2_ON)
+			{
+				if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+				{
+					player.drawPlayer_In_speedup(canvas, paint);
+				}
+				if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+				{
+					player.drawPlayer_In_speeddown(canvas, paint);
+				}
+			}
+		}else {
+			player.drawPlayer(canvas, paint);
+		}
 		
 		sfd.unlockCanvasAndPost(canvas);
 	}
@@ -310,7 +348,6 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		
 	}
 
-	
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
