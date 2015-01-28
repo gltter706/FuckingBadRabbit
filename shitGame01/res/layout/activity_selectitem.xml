@@ -13,34 +13,34 @@
     <LinearLayout
         android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:orientation="vertical"
+	    android:orientation="horizontal"
 	    android:layout_weight="1"
         >
     <LinearLayout
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:orientation="horizontal"
+	    android:orientation="vertical"
 	    >
 	<ImageView
 	    android:layout_width="85dp"
 	    android:layout_height="85dp"
 	    android:layout_margin="3dp"
 	    android:id="@+id/iv_selectitem0"
-	    android:src="@drawable/bg_selectmissionactivity_1"
+	    android:src="@drawable/ic_originalitems"
 	    />
 	<ImageView
 	    android:layout_width="85dp"
 	    android:layout_height="85dp"
 	    android:layout_margin="3dp"
 	    android:id="@+id/iv_selectitem1"
-	      android:src="@drawable/bg_selectmissionactivity_2"
+	      android:src="@drawable/ic_originalitems"
 	    />
 	<ImageView
 	    android:layout_width="85dp"
 	    android:layout_height="85dp"
 	    android:layout_margin="3dp"
 	    android:id="@+id/iv_selectitem2"
-	    android:src="@drawable/bg_selectmissionactivity_3"
+	    android:src="@drawable/ic_bear_originalperson"
 	    />
 	</LinearLayout>
 	
@@ -48,21 +48,21 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
-	    android:layout_marginTop="7dp"
+	    android:layout_gravity="center_vertical"
 	    >
-	<Button 
+	<ImageButton 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:gravity="center"
 	    android:id="@+id/btn_selectitem_confirm"
-	    android:text="@string/confirm"
+	    android:src="@drawable/btn_ok"
 	    />
-	<Button 
+	<ImageButton 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:gravity="center"
 	    android:id="@+id/btn_selectitem_cancel"
-	    android:text="@string/cancel"
+	    android:src="@drawable/btn_cancel"
 	    />
 	</LinearLayout>
 	</LinearLayout>

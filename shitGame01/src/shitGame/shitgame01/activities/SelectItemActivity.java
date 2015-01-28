@@ -15,14 +15,15 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class SelectItemActivity extends Activity{
 	private ListView lv_selectitem = null;
-	private Button btn_selectitem_confirm = null;
-	private Button btn_selectitem_cancel = null;
+	private ImageButton btn_selectitem_confirm = null;
+	private ImageButton btn_selectitem_cancel = null;
 	public Item[] items = new Item[4];
 	public Item[] personItems = new Item[3];
 	public int[] drawable = new int[4];
@@ -34,9 +35,7 @@ public class SelectItemActivity extends Activity{
 	public String[] amount = new String[]{
 			"数量:1","数量:2","数量:3","数量:4"
 	};
-	public String[] needCoin = new String[]{
-			"100","200","300","400"
-	};
+	public String[] needCoin = new String[7];
 	public int coin_draw_id;
 	public int idResource[] = {
 			shitGame.shitgame01.R.string.speed_up,
@@ -70,8 +69,8 @@ public class SelectItemActivity extends Activity{
 		iv_selectitem0 = (ImageView)findViewById(R.id.iv_selectitem0);
 		iv_selectitem1 = (ImageView)findViewById(R.id.iv_selectitem1);
 		iv_selectitem2 = (ImageView)findViewById(R.id.iv_selectitem2);
-		btn_selectitem_confirm = (Button)findViewById(R.id.btn_selectitem_confirm);
-		btn_selectitem_cancel = (Button)findViewById(R.id.btn_selectitem_cancel);
+		btn_selectitem_confirm = (ImageButton)findViewById(R.id.btn_selectitem_confirm);
+		btn_selectitem_cancel = (ImageButton)findViewById(R.id.btn_selectitem_cancel);
 		iv_current = iv_selectitem0;
 		iv_selectitem0.setOnClickListener(new ImageViewListener());
 		iv_selectitem1.setOnClickListener(new ImageViewListener());
@@ -140,6 +139,7 @@ public class SelectItemActivity extends Activity{
 			items[i] = item;
 			drawable[i] = item.getDrawableId();
 			desc[i] = item.getItemShort();
+			needCoin[i] = String.valueOf(item.getCoin());
 		}
 		for(int i = 4; i < 7; i++){
 			String personItemID = SelectItemActivity.this.
@@ -149,6 +149,7 @@ public class SelectItemActivity extends Activity{
 			personItems[i-4] = personItem;
 			personDrawable[i-4] = personItem.getDrawableId();
 			personDesc[i-4] = personItem.getItemShort();
+			needCoin[i] = String.valueOf(personItem.getCoin());
 		}
 		
 	}
@@ -160,7 +161,10 @@ public class SelectItemActivity extends Activity{
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("img", drawable[i]);
 			map.put("coin",coin_draw_id);
-			map.put("coin_amount", needCoin[i]);
+			if(false == personSelected)
+				map.put("coin_amount", needCoin[i]);
+			else
+				map.put("coin_amount", needCoin[i+4]);
 			map.put("desc", desc[i]);
 			map.put("extra", extra[i]);
 			data.add(map);
