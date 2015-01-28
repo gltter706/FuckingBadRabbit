@@ -257,24 +257,12 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		{
 			if(player.bumpWithRect(player_rectF, rectFlist.get(i)))
 			{
-				if(item1_ON || item2_ON)
+				if( (item1_ON && item1_copy.getItem_id().equals(getResources().getString(R.string.shield))) || 
+					(item2_ON && item2_copy.getItem_id().equals(getResources().getString(R.string.shield))) )
 				{
-					if(item1_ON)
-					{
-						if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
-						{
-							player.right=!player.right;
-							player.up=!player.up;
-						}
-					}
-					if(item2_ON)
-					{
-						if(item2_copy.getItem_id().equals(getResources().getString(R.string.shield)))
-						{
-							player.right=!player.right;
-							player.up=!player.up;
-						}
-					}
+						player.right=!player.right;
+						player.up=!player.up;
+						
 				}else {
 					Intent intent=new Intent(context, LoseActivity.class);
 					context.startActivity(intent);
