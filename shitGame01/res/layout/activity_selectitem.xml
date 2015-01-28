@@ -51,18 +51,20 @@
 	    android:layout_gravity="center_vertical"
 	    >
 	<ImageButton 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
+	    android:layout_width="65dp"
+	    android:layout_height="65dp"
 	    android:gravity="center"
 	    android:id="@+id/btn_selectitem_confirm"
 	    android:src="@drawable/btn_ok"
+	    android:scaleType="centerInside"
 	    />
 	<ImageButton 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
+	    android:layout_width="65dp"
+	    android:layout_height="65dp"
 	    android:gravity="center"
 	    android:id="@+id/btn_selectitem_cancel"
 	    android:src="@drawable/btn_cancel"
+	    android:scaleType="fitCenter"
 	    />
 	</LinearLayout>
 	</LinearLayout>
