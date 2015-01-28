@@ -215,6 +215,10 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				{
 					player.drawPlayer_In_speeddown(canvas, paint);
 				}
+				if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+				{
+					player.drawPlayer_In_shield(canvas, paint);
+				}
 			}
 			if(item2_ON)
 			{
@@ -225,6 +229,10 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
 				{
 					player.drawPlayer_In_speeddown(canvas, paint);
+				}
+				if(item2_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+				{
+					player.drawPlayer_In_shield(canvas, paint);
 				}
 			}
 		}else {
@@ -249,9 +257,30 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		{
 			if(player.bumpWithRect(player_rectF, rectFlist.get(i)))
 			{
-				Intent intent=new Intent(context, LoseActivity.class);
-				context.startActivity(intent);
-				flag=false;
+				if(item1_ON || item2_ON)
+				{
+					if(item1_ON)
+					{
+						if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+						{
+							player.right=!player.right;
+							player.up=!player.up;
+						}
+					}
+					if(item2_ON)
+					{
+						if(item2_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+						{
+							player.right=!player.right;
+							player.up=!player.up;
+						}
+					}
+				}else {
+					Intent intent=new Intent(context, LoseActivity.class);
+					context.startActivity(intent);
+					flag=false;
+				}
+				
 			}
 		}
 		
@@ -278,6 +307,10 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					player.speed-=1;
 				item1_counter++;
 			}
+			if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+			{
+				item1_counter++;
+			}
 		}
 		if(item1_counter==59)//持续3s之后
 		{
@@ -301,6 +334,10 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			{
 				if(item2_counter==0)
 					player.speed-=1;
+				item2_counter++;
+			}
+			if(item2_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+			{
 				item2_counter++;
 			}
 		}
