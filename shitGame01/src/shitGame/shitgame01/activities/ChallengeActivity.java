@@ -5,6 +5,8 @@ import shitGame.shitgame01.utils.ChallengeSurfaceView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.TextView;
 
 public class ChallengeActivity extends Activity
@@ -12,6 +14,7 @@ public class ChallengeActivity extends Activity
 	private TextView tv;
 	private Bag bag;
 	private ChallengeSurfaceView challengeSurfaceView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -37,6 +40,12 @@ public class ChallengeActivity extends Activity
 		challengeSurfaceView=new ChallengeSurfaceView(ChallengeActivity.this, bag);
 		setContentView(challengeSurfaceView);
 		
+	}
+	@Override
+	public void onBackPressed()
+	{
+		// TODO Auto-generated method stub
+		//super.onBackPressed();
 	}
 
 }

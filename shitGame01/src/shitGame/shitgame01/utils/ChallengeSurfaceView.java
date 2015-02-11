@@ -11,6 +11,7 @@ import shitGame.shitgame01.activities.LoseActivity;
 import shitGame.shitgame01.activities.StartActivity;
 import shitGame.shitgame01.activities.WinActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -64,10 +65,12 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	private MyThread myThread;
 	private boolean flag=true;
 	private int counter=0;
+	//game time
+	private long start_time,end_time,spend_time;
 	
 	
 	
-	public ChallengeSurfaceView(Context context,Bag bag)
+ 	public ChallengeSurfaceView(Context context,Bag bag)
 	{
 		super(context);
 		// TODO Auto-generated constructor stub
@@ -80,6 +83,8 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		item1_counter=0;
 		item2_ON=false;
 		item2_counter=0;
+		
+		start_time=System.currentTimeMillis();
 		
 		sfd=getHolder();
 		sfd.addCallback(this);
@@ -249,7 +254,15 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		if(player.bumpWithRect(player_rectF, dist_rectF))
 		{
 			Log.e("Output", "WIN");
+			if(item1==null)
+				bag.setSelected_1(null);
+			if(item2==null)
+				bag.setSelected_2(null);
+			end_time=System.currentTimeMillis();
+			spend_time=end_time-start_time;
 			Intent intent=new Intent(context, WinActivity.class);
+			intent.putExtra("spend_time", spend_time);
+			intent.putExtra("bag", bag);
 			context.startActivity(intent);
 			flag=false;
 		}
@@ -264,7 +277,15 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 						player.up=!player.up;
 						
 				}else {
+					if(item1==null)
+						bag.setSelected_1(null);
+					if(item2==null)
+						bag.setSelected_2(null);
+					end_time=System.currentTimeMillis();
+					spend_time=end_time-start_time;
 					Intent intent=new Intent(context, LoseActivity.class);
+					intent.putExtra("spend_time", spend_time);
+					intent.putExtra("bag", bag);
 					context.startActivity(intent);
 					flag=false;
 				}
@@ -446,6 +467,16 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					flag=true;
 					myThread=new MyThread();
 					myThread.start();
+				}
+			});
+			builder.setPositiveButton("退出游戏", new DialogInterface.OnClickListener()
+			{
+				
+				@Override
+				public void onClick(DialogInterface arg0, int arg1)
+				{
+					// TODO Auto-generated method stub
+					((Activity)context).finish();
 				}
 			});
 			AlertDialog dlg=builder.create();
