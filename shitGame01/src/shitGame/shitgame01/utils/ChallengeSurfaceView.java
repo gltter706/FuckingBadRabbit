@@ -66,7 +66,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	private boolean flag=true;
 	private int counter=0;
 	//game time
-	private long start_time,end_time,spend_time;
+	private long start_time,end_time,spend_time,pause_time,pause_start_time,pause_end_time;
 	
 	
 	
@@ -85,6 +85,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		item2_counter=0;
 		
 		start_time=System.currentTimeMillis();
+		pause_time=0;
 		
 		sfd=getHolder();
 		sfd.addCallback(this);
@@ -259,7 +260,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			if(item2==null)
 				bag.setSelected_2(null);
 			end_time=System.currentTimeMillis();
-			spend_time=end_time-start_time;
+			spend_time=end_time-start_time-pause_time;
 			Intent intent=new Intent(context, WinActivity.class);
 			intent.putExtra("spend_time", spend_time);
 			intent.putExtra("bag", bag);
@@ -282,7 +283,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					if(item2==null)
 						bag.setSelected_2(null);
 					end_time=System.currentTimeMillis();
-					spend_time=end_time-start_time;
+					spend_time=end_time-start_time-pause_time;
 					Intent intent=new Intent(context, LoseActivity.class);
 					intent.putExtra("spend_time", spend_time);
 					intent.putExtra("bag", bag);
@@ -464,6 +465,9 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				public void onClick(DialogInterface arg0, int arg1)
 				{
 					// TODO Auto-generated method stub
+					pause_end_time=System.currentTimeMillis();
+					pause_time+=pause_end_time-pause_start_time;
+					
 					flag=true;
 					myThread=new MyThread();
 					myThread.start();
@@ -482,7 +486,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			AlertDialog dlg=builder.create();
 			dlg.setCanceledOnTouchOutside(false);
 			dlg.show();
-			
+			pause_start_time=System.currentTimeMillis();
 			flag=false;
 			return super.onTouchEvent(event);
 		}
