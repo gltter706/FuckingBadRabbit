@@ -8,6 +8,7 @@ import shitGame.shitgame01.R;
 import shitGame.shitgame01.utils.Bag;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,7 +73,7 @@ public class LoseActivity extends Activity
 		setContentView(R.layout.activity_lose_main);
 		final Button btn_back = (Button) findViewById(R.id.btn_loseback);
 		final Button btn_replayButton = (Button) findViewById(R.id.btn_losecontinue);
-		
+
 		Intent data = getIntent();
 		bag = (Bag)data.getSerializableExtra("bag");
 		timeCost = data.getLongExtra("spend_time", 0xffffff);

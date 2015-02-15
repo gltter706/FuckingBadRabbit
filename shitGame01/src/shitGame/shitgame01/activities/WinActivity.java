@@ -6,18 +6,22 @@ import shitGame.shitgame01.R;
 import shitGame.shitgame01.utils.Bag;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewDebug.FlagToString;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class WinActivity extends Activity
 {
 	Calendar date;
+	boolean unlock = false;
 	private MyHandler myHandler;
 	private Bag bag;
 	private int coinBonus = 0;
@@ -74,7 +78,22 @@ public class WinActivity extends Activity
 		timeCost = date.get(Calendar.SECOND);
 
 		final int cur_selected_mission = bag.getMission();
-		
+		final int unlock_mission_num ;
+		SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+//		SharedPreferences.Editor editor;
+//		editor=sharedPreferences.edit(); 
+//		editor.putInt("cur_mission_num", 0);  
+//		editor.commit();  
+		unlock_mission_num = sharedPreferences.getInt("cur_mission_num", 0);
+		if(unlock_mission_num == cur_selected_mission){
+			SharedPreferences.Editor editor;
+			editor=sharedPreferences.edit(); 
+			editor.putInt("cur_mission_num", unlock_mission_num+1);  
+			editor.commit();  
+			unlock = true;
+		}
+		Log.e("unlock", unlock_mission_num+"");
+		Log.e("cur", cur_selected_mission+"");
 		btn_back.setOnClickListener(new OnClickListener() {
 			
 			@Override
