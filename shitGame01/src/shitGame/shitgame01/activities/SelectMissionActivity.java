@@ -195,4 +195,16 @@ public class SelectMissionActivity extends Activity{
 		intent.putExtra("cur_selected_mission", cur_selected_mission);
 		startActivity(intent);
 	}
+
+
+
+	@Override
+	protected void onResume()
+	{
+		// TODO Auto-generated method stub
+		SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
+		unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 24);
+		load_Btn(unlock_mission_num);
+		super.onResume();
+	}
 }
