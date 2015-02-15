@@ -405,7 +405,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		//if touch pause menu
 		if(touch_x>=9*wallW && touch_x<=screenW && touch_y>=0 && touch_y<=wallH)
 		{
-			Toast.makeText(context, "pause menu", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "pause menu", Toast.LENGTH_SHORT).show();
 			
 			AlertDialog.Builder builder=new AlertDialog.Builder(context);
 			builder.setMessage("Pause");
@@ -435,6 +435,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					// TODO Auto-generated method stub
 						item1_ON=true;
 						item1_counter=0;
+						bag.useItem(item1);
 						item1=null;
 						pause_btn0.setImageResource(R.drawable.nullitem);
 						Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
@@ -450,6 +451,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					// TODO Auto-generated method stub
 					item2_ON=true;
 					item2_counter=0;
+					bag.useItem(item2);
 					item2=null;
 					pause_btn1.setImageResource(R.drawable.nullitem);
 					Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
