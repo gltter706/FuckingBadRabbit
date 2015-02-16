@@ -26,14 +26,25 @@ public class SelectItemActivity extends Activity{
 	private ImageButton btn_selectitem_cancel = null;
 	public Item[] items = new Item[4];
 	public Item[] personItems = new Item[3];
+	//4个道具
 	public int[] drawable = new int[4];
+	//带指纹的4个道具
+	public int[] drawableWithFingerPrints = new int[]{
+			R.drawable.ic_up_withfingerprint,
+			R.drawable.ic_down_withfingerprint,
+			R.drawable.ic_shield_withfingerprint,
+			R.drawable.ic_angel_withfingerprint
+	};
+	//3个角色
 	public int[] personDrawable = new int[3];
+	//4个道具描述
 	public String[] desc = new String[4];
+	//3个角色描述
 	public String[] personDesc = new String[3];
 	public String[] boughtString = new String[]{"已购买",
 			"未购买","未购买"};
 	public String[] amount = new String[]{
-			"数量:1","数量:2","数量:3","数量:4"
+			"数量:","数量:","数量:","数量:"
 	};
 	public String[] needCoin = new String[7];
 	public int coin_draw_id;
@@ -53,6 +64,10 @@ public class SelectItemActivity extends Activity{
 	private ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
 	private boolean personSelected = false;
 	private int cur_selected_mission = 0;
+	//第一个道具框选中的道具编号
+	private int cur_selected_item0 = -1;
+	//第二个道具框选中的道具编号
+	private int cur_selected_item1 = -1;
 	private Bag bag = null;
 	private Item item_1 = null,item_2 = null,role_item = null;
 	@Override
@@ -60,11 +75,11 @@ public class SelectItemActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectitem);
+		bag = new Bag(this);
+		bag.setMission(cur_selected_mission);
 		coin_draw_id = R.drawable.ic_coin;
 		cur_selected_mission = getIntent().getIntExtra("cur_selected_mission", 0);
 		initItems();
-		bag = new Bag(this);
-		bag.setMission(cur_selected_mission);
 		lv_selectitem = (ListView)findViewById(R.id.lv_selectitem);
 		iv_selectitem0 = (ImageView)findViewById(R.id.iv_selectitem0);
 		iv_selectitem1 = (ImageView)findViewById(R.id.iv_selectitem1);
@@ -89,12 +104,15 @@ public class SelectItemActivity extends Activity{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				
 				if( false == personSelected){
 				iv_current.setImageResource(drawable[arg2]);
 					if(iv_current == iv_selectitem0){
 					   item_1 = items[arg2];
+					   cur_selected_item0 = arg2;
 					}else {
 					   item_2 = items[arg2];
+					   cur_selected_item1 = arg2;
 					}
 				}
 				else {
@@ -140,6 +158,7 @@ public class SelectItemActivity extends Activity{
 			drawable[i] = item.getDrawableId();
 			desc[i] = item.getItemShort();
 			needCoin[i] = String.valueOf(item.getCoin());
+			amount[i] += Integer.toString(bag.getItem_to_num().get(items[i].getItem_id()));
 		}
 		for(int i = 4; i < 7; i++){
 			String personItemID = SelectItemActivity.this.
@@ -181,9 +200,45 @@ public class SelectItemActivity extends Activity{
 			iv_current = (ImageView)v;
 			personSelected = false;
 			createAndShowListView(drawable, needCoin, desc, amount);
-		}
+			//如果当前点击的是第一个道具框
+				if(iv_current == iv_selectitem0){
+					//第一个道具框未选过道具而第二个也未选过
+					if(-1 == cur_selected_item0 && -1 == cur_selected_item1){
+					iv_selectitem1.setImageResource(R.drawable.ic_originalitems);
+					iv_selectitem0.setImageResource(R.drawable.ic_originalitems_withfingerprint);
+					}
+					//第一个道具框未选过而第二个选过
+				else if(-1 == cur_selected_item0 && -1 != cur_selected_item1){
+					iv_selectitem0.setImageResource(R.drawable.ic_originalitems_withfingerprint);
+					iv_selectitem1.setImageResource(drawable[cur_selected_item1]);
+					//第一个道具框选过而第二个未选过
+			   }else if(-1 != cur_selected_item0 && -1 == cur_selected_item1){
+				   iv_selectitem0.setImageResource(drawableWithFingerPrints[cur_selected_item0]);
+				   iv_selectitem1.setImageResource(R.drawable.ic_originalitems);
+				   //第一个道具框选过而第二个道具框也选过
+			 }else if(-1 != cur_selected_item0 && -1 != cur_selected_item1){
+				   iv_selectitem0.setImageResource(drawableWithFingerPrints[cur_selected_item0]);
+				   iv_selectitem1.setImageResource(drawable[cur_selected_item1]);
+				 }
+					//当前点击的是第二个道具框,同上
+			}else if(iv_current == iv_selectitem1){
+				if(-1 == cur_selected_item1 && -1 == cur_selected_item0){
+					iv_selectitem0.setImageResource(R.drawable.ic_originalitems);
+					iv_selectitem1.setImageResource(R.drawable.ic_originalitems_withfingerprint);
+					}
+				else if(-1 == cur_selected_item1 && -1 != cur_selected_item0){
+					iv_selectitem1.setImageResource(R.drawable.ic_originalitems_withfingerprint);
+					iv_selectitem0.setImageResource(drawable[cur_selected_item0]);
+			   }else if(-1 != cur_selected_item1 && -1 == cur_selected_item0){
+				   iv_selectitem1.setImageResource(drawableWithFingerPrints[cur_selected_item1]);
+				   iv_selectitem0.setImageResource(R.drawable.ic_originalitems);
+			 }else if(-1 != cur_selected_item1 && -1 != cur_selected_item0){
+				   iv_selectitem1.setImageResource(drawableWithFingerPrints[cur_selected_item1]);
+				   iv_selectitem0.setImageResource(drawable[cur_selected_item0]);
+				 }
+			}
 		
-	}
+		}
 	
+	}
 }
-
