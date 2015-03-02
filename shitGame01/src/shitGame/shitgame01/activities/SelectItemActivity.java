@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class SelectItemActivity extends Activity{
 	private ListView lv_selectitem = null;
@@ -46,6 +47,7 @@ public class SelectItemActivity extends Activity{
 	public String[] amount = new String[]{
 			"数量:","数量:","数量:","数量:"
 	};
+	public int[] itemAmounts = new int[4];
 	public String[] needCoin = new String[7];
 	public int coin_draw_id;
 	public int idResource[] = {
@@ -75,10 +77,11 @@ public class SelectItemActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectitem);
-		bag = new Bag(this);
-		bag.setMission(cur_selected_mission);
 		coin_draw_id = R.drawable.ic_coin;
 		cur_selected_mission = getIntent().getIntExtra("cur_selected_mission", 0);
+		bag = new Bag(this);
+		bag.setMission(cur_selected_mission);
+		
 		initItems();
 		lv_selectitem = (ListView)findViewById(R.id.lv_selectitem);
 		iv_selectitem0 = (ImageView)findViewById(R.id.iv_selectitem0);
@@ -86,6 +89,7 @@ public class SelectItemActivity extends Activity{
 		iv_selectitem2 = (ImageView)findViewById(R.id.iv_selectitem2);
 		btn_selectitem_confirm = (ImageButton)findViewById(R.id.btn_selectitem_confirm);
 		btn_selectitem_cancel = (ImageButton)findViewById(R.id.btn_selectitem_cancel);
+		
 		iv_current = iv_selectitem0;
 		iv_selectitem0.setOnClickListener(new ImageViewListener());
 		iv_selectitem1.setOnClickListener(new ImageViewListener());
@@ -98,13 +102,16 @@ public class SelectItemActivity extends Activity{
 				createAndShowListView(personDrawable, needCoin,personDesc, boughtString);
 			}
 		});
+		
 		lv_selectitem.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				if(0 == itemAmounts[arg2]){
+					Toast.makeText(SelectItemActivity.this, "此道具数目为0!", Toast.LENGTH_LONG).show();
+				}else{
 				if( false == personSelected){
 				iv_current.setImageResource(drawable[arg2]);
 					if(iv_current == iv_selectitem0){
@@ -119,9 +126,11 @@ public class SelectItemActivity extends Activity{
 				iv_current.setImageResource(personDrawable[arg2]);
 				role_item = personItems[arg2];
 				}
-			}
+			  }
+		   }
 			
 		});
+		
 		btn_selectitem_confirm.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -158,7 +167,8 @@ public class SelectItemActivity extends Activity{
 			drawable[i] = item.getDrawableId();
 			desc[i] = item.getItemShort();
 			needCoin[i] = String.valueOf(item.getCoin());
-			amount[i] += Integer.toString(bag.getItem_to_num().get(items[i].getItem_id()));
+			itemAmounts[i] = bag.getItem_to_num().get(items[i].getItem_id());
+			amount[i] += Integer.toString(itemAmounts[i]);
 		}
 		for(int i = 4; i < 7; i++){
 			String personItemID = SelectItemActivity.this.
