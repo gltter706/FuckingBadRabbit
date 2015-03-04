@@ -15,7 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewDebug.FlagToString;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class WinActivity extends Activity
@@ -67,8 +71,11 @@ public class WinActivity extends Activity
 		super.onCreate(savedInstanceState);
 		myHandler = new MyHandler();
 		setContentView(R.layout.activity_win_main);
+		final ImageView iv_win = (ImageView) findViewById(R.id.iv_win);
 		final Button btn_back = (Button) findViewById(R.id.btn_winback);
 		final Button btn_continueButton = (Button) findViewById(R.id.btn_wincontinue);
+		final Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_win);
+		iv_win.startAnimation(animation);
 		
 		Intent data = getIntent();
 		bag = (Bag)data.getSerializableExtra("bag");
@@ -135,8 +142,8 @@ public class WinActivity extends Activity
 			coinBonus =(int) (Weight*( timeCost)+SolidBonus);
 		}
 		
-		//tbag.sumItem(WinActivity.this);
-		//tbag.writeItem(WinActivity.this,coinNum ,tbag.getCoinInt()+coinBonus);
+		tbag.sumItem(WinActivity.this);
+		tbag.writeItem(WinActivity.this,coinNum ,tbag.getCoinInt()+coinBonus);
 		Bundle bundle = new Bundle();
 		Message msg = new Message();
 		bundle.putString("coin_bonus", ""+coinBonus);

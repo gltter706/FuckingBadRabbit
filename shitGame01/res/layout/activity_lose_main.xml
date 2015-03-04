@@ -1,49 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="20dp"
-    android:background="@drawable/bg_lose"
-  >
- 
-  <LinearLayout 
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:orientation="vertical">
-    <TextView
-        android:id="@+id/tv_costtime"
-        android:background="#0000"
-        android:text="通过时间:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-  	<TextView 
-  	   android:id="@+id/tv_displaybonus"
-       android:background="#0000"
-   	   android:text="获得金币:"
-   	   android:layout_width="wrap_content"
-       android:layout_height="wrap_content"/>
-  	</LinearLayout>
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <Button
-            android:layout_margin="10dp"
-            android:background="#0FFF"
-            android:id="@+id/btn_losecontinue"
-            android:text="重玩"
+    android:layout_height="match_parent" >
+
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_lose"
+        android:id="@+id/iv_lose"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-             android:background="#00FF"
-            android:id="@+id/btn_loseback" 
-            android:text="返回选关"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_costtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:text="通过时间:" />
+
+            <TextView
+                android:id="@+id/tv_displaybonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:text="获得金币:" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-            
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_losecontinue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#0FFF"
+                android:text="重玩" />
+
+            <Button
+                android:id="@+id/btn_loseback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FF"
+                android:text="返回选关" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

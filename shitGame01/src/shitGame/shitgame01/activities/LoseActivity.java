@@ -6,6 +6,7 @@ import java.util.Date;
 
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.utils.Bag;
+import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,12 +14,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoseActivity extends Activity
@@ -69,11 +77,14 @@ public class LoseActivity extends Activity
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		//Animation raoteA = new RotateAnimation(0.0f,360.0f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
 		myHandler = new MyHandler();
 		setContentView(R.layout.activity_lose_main);
+		final ImageView iv_lose = (ImageView) findViewById(R.id.iv_lose);
 		final Button btn_back = (Button) findViewById(R.id.btn_loseback);
 		final Button btn_replayButton = (Button) findViewById(R.id.btn_losecontinue);
-
+		final Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_lose);
+		iv_lose.startAnimation(animation);
 		Intent data = getIntent();
 		bag = (Bag)data.getSerializableExtra("bag");
 		timeCost = data.getLongExtra("spend_time", 0xffffff);
