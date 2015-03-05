@@ -22,12 +22,16 @@
 
             <TextView
                 android:id="@+id/tv_costtime"
+                android:textSize="15dp"
+                android:textColor="#00AA11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#0000"
                 android:text="通过时间:" />
 
             <TextView
+                android:textSize="15dp"
+                android:textColor="#00AA11"
                 android:id="@+id/tv_displaybonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,15 +48,19 @@
                 android:id="@+id/btn_losecontinue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="15dp"
                 android:layout_margin="10dp"
                 android:background="#0FFF"
+                android:textColor="@drawable/btn_shop_color_selector1_1"
                 android:text="重玩" />
 
             <Button
                 android:id="@+id/btn_loseback"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FF"
+                android:textColor="@drawable/btn_shop_color_selector1_1"
                 android:text="返回选关" />
         </LinearLayout>
     </LinearLayout>

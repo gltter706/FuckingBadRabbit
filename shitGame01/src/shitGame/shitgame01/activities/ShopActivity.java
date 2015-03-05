@@ -16,6 +16,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -128,8 +130,9 @@ public class ShopActivity extends Activity{
 			
 			View v = super.getView(position, convertView, parent);
 			ImageButton lv_btnBuy = (ImageButton)v.findViewById(R.id.btn_buyitem);
+			final Button btn_btnBuy = (Button)v.findViewById(R.id.btn_buybtn);
 			final TextView lv_bagStore= (TextView)v.findViewById(R.id.tv_bagstore);
-			lv_btnBuy.setOnClickListener(new Button.OnClickListener(){
+			btn_btnBuy.setOnClickListener(new Button.OnClickListener(){
 
 				@Override
 				public void onClick(View v) {		

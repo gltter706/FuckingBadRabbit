@@ -25,13 +25,17 @@
                 android:id="@+id/tv_wincosttime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="15dp"
+                 android:textColor="#00AA11"
                 android:background="#0000"
                 android:text="通过时间:" />
 
             <TextView
+                android:textSize="15dp"
                 android:id="@+id/tv_windisplaybonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                 android:textColor="#00AA11"
                 android:background="#0000"
                 android:text="获得金币:" />
         </LinearLayout>
@@ -47,9 +51,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="#0FFF"
+                android:textSize="15dp"
+                android:textColor="@drawable/btn_shop_color_selector1_1"
                 android:text="下一关" />
 
             <Button
+                android:textSize="15dp"
+                android:textColor="@drawable/btn_shop_color_selector1_1"
                 android:id="@+id/btn_winback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

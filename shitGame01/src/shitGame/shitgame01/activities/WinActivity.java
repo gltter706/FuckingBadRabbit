@@ -106,7 +106,6 @@ public class WinActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				btn_back.setBackgroundColor(Color.YELLOW);
 				Intent intent = new Intent(WinActivity.this,SelectMissionActivity.class);
 				WinActivity.this.startActivity(intent);
 				WinActivity.this.finish();
@@ -117,7 +116,6 @@ public class WinActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				btn_continueButton.setBackgroundColor(Color.YELLOW);
 				Intent intent = new Intent(WinActivity.this,SelectItemActivity.class);
 				intent.putExtra("cur_selected_mission", cur_selected_mission+1);
 				WinActivity.this.startActivity(intent);

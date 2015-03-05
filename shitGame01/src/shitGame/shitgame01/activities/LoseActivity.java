@@ -99,7 +99,6 @@ public class LoseActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				btn_back.setBackgroundColor(Color.YELLOW);
 				Intent intent = new Intent(LoseActivity.this,SelectMissionActivity.class);
 				LoseActivity.this.startActivity(intent);
 				LoseActivity.this.finish();
@@ -110,7 +109,6 @@ public class LoseActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				btn_replayButton.setBackgroundColor(Color.YELLOW);
 				Intent intent = new Intent(LoseActivity.this,SelectItemActivity.class);
 				intent.putExtra("cur_selected_mission", cur_selected_mission);
 				LoseActivity.this.startActivity(intent);
