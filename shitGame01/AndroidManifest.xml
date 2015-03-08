@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:launchMode="singleTask"
-            android:name=".activities.StartActivity"
+            android:name=".activities.InitialActivity"
             android:label="@string/app_name" 
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -25,9 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.StartActivity"
+                  android:screenOrientation="landscape"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
         <activity android:name=".activities.ShopActivity"
-            android:screenOrientation="landscape"
-             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+                  android:screenOrientation="landscape"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
              android:launchMode="singleTask"
@@ -62,11 +66,7 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
-        <service android:name="shitGame.shitgame01.services.PlayMusicService">
-            <intent-filter >
-                <action android:name="shitGame.shitgame01.activities.StartActivity"/>
-            </intent-filter>
-        </service>"
+        <service android:name="shitGame.shitgame01.services.PlayMusicService" />"
     </application>
 
 </manifest>

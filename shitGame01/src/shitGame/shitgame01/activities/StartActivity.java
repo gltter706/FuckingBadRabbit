@@ -2,6 +2,8 @@ package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.R.string;
+import shitGame.shitgame01.constant.AppConstant;
+import shitGame.shitgame01.interfaces.MusicController;
 import shitGame.shitgame01.services.PlayMusicService;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,6 +13,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore.Audio.Media;
 import android.telephony.ServiceState;
 import android.util.Log;
@@ -25,11 +29,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class StartActivity extends Activity {
-
+	  private final String TAG="activity.StartActivity";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
-        Log.i("hi world","oncreate");
 		setContentView(R.layout.activity_start_menu);
 
 		//设置btn_start
@@ -60,7 +65,7 @@ public class StartActivity extends Activity {
 				}
 			}
 		});
-		
+		Log.d(TAG, "start_btn");
 		//设置btn_shop
 		Button bt_shop=(Button)findViewById(R.id.btn_startmenu_shop);
 		bt_shop.setOnClickListener(new OnClickListener(){
@@ -85,6 +90,7 @@ public class StartActivity extends Activity {
 				toast.show();
 			}
 		});
+		Log.d(TAG, "imageView");
 		//设置btn_exit
 /*		Button bt_exit=(Button)findViewById(R.id.btn_exit);
 		bt_exit.setOnClickListener(new OnClickListener(){
@@ -100,38 +106,36 @@ public class StartActivity extends Activity {
 		
 		//设置btn_music
 				Button bt_music=(Button)findViewById(R.id.btn_music);
-				bt_music.setOnClickListener(new OnClickListener(){
+				bt_music.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
-						SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
-						/*获取并置反音乐状态*/
-						Boolean music_switch=!(sharedPreferences.getBoolean("is_music_on", false));	
-						Editor editor=sharedPreferences.edit();
-						editor.putBoolean("is_music_on", music_switch);
-						editor.commit();
-		                Intent intent = new Intent(StartActivity.this,PlayMusicService.class);
-		                /*开始音乐 */
-		                if(music_switch){
-		                	intent.putExtra("msc_playing", true);
-		                	startService(intent);
-		                }
-		                /*暂停音乐*/
-		                else{
-		                	stopService(intent);
-		                }
-		                
-		            }
+						// TODO Auto-generated method stub
+						MusicController musicController=new MusicController();
+						musicController.onAttach(StartActivity.this);
+						if(AppConstant.MusicPlayState.CURRENT_PLAY_STATE==AppConstant.MusicPlayState.PLAY_STATE_PAUSE){
+							musicController.playMusic(AppConstant.MusicPlayState.PLAY_STATE_PLAYING,AppConstant.MusicPlayState.SCENE_NOT_BATTLING);
+						}
+						else {
+							musicController.playMusic(AppConstant.MusicPlayState.PLAY_STATE_PAUSE, AppConstant.MusicPlayState.SCENE_NOT_BATTLING);
+						}
+					}
 				});
+				Log.d(TAG, "music_btn");
 				
 		//初始化音乐播放
+//				this.startService(new Intent(this,PlayMusicService.class));
                 SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
-				boolean is_music_on=sharedPreferences.getBoolean("is_music_on", true);
-                Intent intent = new Intent(StartActivity.this,shitGame.shitgame01.services.PlayMusicService.class);
-             
-				intent.putExtra("msc_playing", is_music_on);
-                startService(intent);
+                int is_music_on=sharedPreferences.getInt("is_music_on", AppConstant.MusicPlayState.PLAY_STATE_PLAYING);
+        		Log.d(TAG, "share");
+                int curScene=AppConstant.MusicPlayState.SCENE_NOT_BATTLING;
+                MusicController musicController=new MusicController();
+           		Log.d(TAG, "new msctl");
+                musicController.onAttach(StartActivity.this);
+                musicController.playMusic(is_music_on,curScene);
+        		Log.d(TAG, "create_finish");
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
