@@ -13,6 +13,7 @@ public class Map
 {
 	public Bitmap wall_bmp;
 	public Bitmap menu_bmp;
+	public Bitmap door1,door2;
 	public float wallW,wallH;
 	public int map_array[][];
 	public int change_wall_num[];
@@ -45,11 +46,33 @@ public class Map
 			{
 				if(map_array[i][j]==1)//draw  wall
 				{
+					if(i==0 && j==9){}
+					else{
 					canvas.save();
 					canvas.clipRect(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
 					canvas.drawBitmap(wall_bmp, j*wallW, i*wallH, paint);
 					canvas.restore();
 					rectF_list.add(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
+					}
+					
+				}
+				if(map_array[i][j]>1)
+				{
+					if(map_array[i][j]==2)
+					{
+						canvas.save();
+						canvas.clipRect(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
+						canvas.drawBitmap(door1, j*wallW, i*wallH, paint);
+						canvas.restore();
+					}
+					if(map_array[i][j]==3)
+					{
+						canvas.save();
+						canvas.clipRect(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
+						canvas.drawBitmap(door2, j*wallW, i*wallH, paint);
+						canvas.restore();
+					}
+						
 				}
 				if(i==0 && j==9)//draw menu
 				{
