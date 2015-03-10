@@ -292,6 +292,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			intent.putExtra("bag", bag);
 			context.startActivity(intent);
 			flag=false;
+			((Activity)context).finish();
 		}
 		//测试主角与墙与怪物的矩形碰撞
 		for(int i=0;i<rectFlist.size();i++)
@@ -318,6 +319,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					intent.putExtra("bag", bag);
 					context.startActivity(intent);
 					flag=false;
+					((Activity)context).finish();
 				}
 				
 			}
