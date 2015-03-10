@@ -39,7 +39,7 @@ public class SelectMissionActivity extends Activity{
 		bgLayout=(LinearLayout) findViewById(R.id.selectmission_bg);
 		
 		SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
-		unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 24);
+		//unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 0);
 		cur_theme_first_mission_num=((int)(unlock_mission_num/10))*10;
 		
 		gestureDetector=new GestureDetector(SelectMissionActivity.this, new GestureDetector.OnGestureListener()
@@ -203,7 +203,7 @@ public class SelectMissionActivity extends Activity{
 	{
 		// TODO Auto-generated method stub
 		SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
-		unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 24);
+		unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 0);
 		load_Btn(unlock_mission_num);
 		super.onResume();
 	}

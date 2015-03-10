@@ -6,38 +6,15 @@ import java.util.*;
 
 public class Global {
 
-	/*Vector<MapInfo>v=new Vector<MapInfo>();
-	public Global(int[][] array, int[] wallnum, int start, int end) {
-		super(array, wallnum, start, end);
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	MapInfo v0 = new MapInfo(map_array, change_wall_num, end_wall_num, end_wall_num);
-	
-	
-	
-	public void v0()
-	{
-		super.map_array=new int[][] {};
-		super.change_wall_num=new;
-		super.enemyvector=new Vector<EnemyInfo>();
-		int e[]={50,51};               //50 51���õ���
-		EnemyInfo a=new EnemyInfo(e,1);
-	    super.add_vector(a);	    
-		super.start_wall_num=1;
-		super.end_wall_num=100;
-		
-		
-	}*/
 	
 	public static Vector<MapInfo> ALL_MAP=new Vector<MapInfo>();
 	public Global(){
-	int map_array1[][]=new int[][]{{0,1,0,1,0,1,0,1,0,1},
+	int map_array1[][]=new int[][]{
+				{0,1,0,1,0,1,0,1,0,1},
 				{0,0,0,1,0,0,0,0,0,1},
-				{1,0,0,0,1,0,0,0,0,1},
+				{1,0,2,0,1,0,0,0,0,1},
 				{0,0,1,0,0,0,0,0,1,0},
-				{0,0,0,0,1,0,0,0,1,0},
+				{0,0,2,0,1,0,0,0,1,0},
 				{0,0,0,0,0,0,1,0,0,1},//5,6��5,7��
 				{0,1,0,0,1,1,1,0,1,0},
 				{0,0,1,0,0,0,1,0,0,1},
@@ -67,7 +44,7 @@ public class Global {
 	ALL_MAP.add(mapinfo2);
 	
 	int map_array3[][]=new int[][]{{0,0,0,1,1,1,1,1,1,1},
-			{0,1,1,1,1,0,0,0,0,0},
+			{0,1,0,1,1,0,0,0,0,0},
 			{0,1,0,0,0,0,1,0,1,0},
 			{0,1,1,1,1,1,1,0,0,0},
 			{0,0,0,0,1,1,1,1,1,0},
