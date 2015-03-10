@@ -6,6 +6,7 @@ import java.util.List;
 import shitGame.shitgame01.R;
 import android.R.integer;
 import android.R.string;
+import android.util.Log;
 import android.widget.RemoteViews.RemoteView;
 
 public interface AppConstant {
@@ -40,7 +41,7 @@ public interface AppConstant {
 		//not battling
 		public static final int[]MUSIC_LIST_NOT_BATTLE=new int[]{
 			R.raw.notbattle1,
-			R.raw.notbattle2,
+
 		};
 		//battling
 		public static final int[]MUSIC_LIST_BATTLE=new int[]{
@@ -61,6 +62,7 @@ public interface AppConstant {
 		//
 		public static final int MUSIC_STATE_CHANGE=0;
 		public static final int MUSIC_SCENE_CHANGE=1;
+		public static final int MUSIC_CHECK_HEALTH=3;
 		public static String MUSIC_CONTROL_STR ="controll_str";
 	}
 

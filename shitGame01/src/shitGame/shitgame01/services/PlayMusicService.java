@@ -23,6 +23,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
     private final String TAG="services.PlayMusicService";
 	private MediaPlayer mMediaPlayer=null;
     private MyReceiver serviceReceiver;
+    private HomeKeyEventBroadCastReceiver homeKeyReceiver;
 
  
     @Override
@@ -40,6 +41,10 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
         intentFilter.addAction(AppConstant.MusicPlayVariate.CTL_ACTION);
         registerReceiver(serviceReceiver, intentFilter);
        	  Log.d(TAG,"hasRegist");
+       	  Log.d(TAG,""+AppConstant.MusicPlayState.CURRENT_MISIC_SCENE);
+       	 homeKeyReceiver = new HomeKeyEventBroadCastReceiver();  
+         registerReceiver(homeKeyReceiver, new IntentFilter(  
+                       Intent. ACTION_CLOSE_SYSTEM_DIALOGS));    
 		
 		
     }
@@ -52,7 +57,8 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 		Editor editor=sharedPreferences.edit();
 		editor.putInt("is_music_on", AppConstant.MusicPlayState.CURRENT_PLAY_STATE);
 		editor.commit();
-		
+		unregisterReceiver(serviceReceiver);
+	    AppConstant.MusicPlayState.CURRENT_MISIC_SCENE=AppConstant.MusicPlayState.SCENE_BATTLING;
 		if (mMediaPlayer != null) {
 			mMediaPlayer.stop();
 			mMediaPlayer.release();
@@ -76,67 +82,88 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 			case AppConstant.MusicPlayController.MUSIC_STATE_CHANGE:
 				Log.d(TAG,"onReceive3");
 				changeMusicStates();
+			case AppConstant.MusicPlayController.MUSIC_CHECK_HEALTH:
+				Log.d(TAG, "OnHealthCheck");
+				musicHealthCheck();
 			default:
 				break;
 			}
 		}
     }
 
+    private  class HomeKeyEventBroadCastReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			mMediaPlayer.pause();
+		}
+    	
+    	
+    }
   
      
 	private void changeMusicStates() {
-		//before this method,the state has already change in MusicController
-		Log.d(TAG,"changeMusicStates");
+		// before this method,the state has already change in MusicController
+		Log.d(TAG, "changeMusicStates");
+		// comfirm:change null into whether resource is set,maybe isLooping()
+		// can be used 3/9
 		switch (AppConstant.MusicPlayState.CURRENT_PLAY_STATE) {
-		case AppConstant.MusicPlayState.PLAY_STATE_PLAYING:
-		
-		    mMediaPlayer.start();
-			break;
+		case AppConstant.MusicPlayState.PLAY_STATE_PLAYING: {
+			try {
+				mMediaPlayer.start();
+				break;
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				mMediaPlayer = MediaPlayer
+						.create(this,
+								AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
+				mMediaPlayer.start();
+				break;
+			}
+		}
 		case AppConstant.MusicPlayState.PLAY_STATE_PAUSE:
-			mMediaPlayer.pause();
+			try {
+				mMediaPlayer.pause();
+				break;
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				mMediaPlayer = MediaPlayer
+						.create(this,
+								AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
+				mMediaPlayer.pause();
+				break;
+			}
 		default:
 			break;
 		}
 	}
 
+	
+
 	private void changeMusicScene() {
 		mMediaPlayer.reset();
 		switch (AppConstant.MusicPlayState.CURRENT_MISIC_SCENE) {
 		case AppConstant.MusicPlayState.SCENE_NOT_BATTLING:
-		{
-
-			AppConstant.MusicPlayData.CURRENT_MISIC_LIST=AppConstant.MusicList.MUSIC_LIST_NOT_BATTLE;
-			AppConstant.MusicPlayData.CURRENT_MISIC_INDEX=0;
-			mMediaPlayer=MediaPlayer.create(this, AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
-			Log.d(TAG,"changingMusicScene");
-			
+			AppConstant.MusicPlayData.CURRENT_MISIC_LIST=AppConstant.MusicList.MUSIC_LIST_NOT_BATTLE;			
 			break;
 
-		}
 		case AppConstant.MusicPlayState.SCENE_BATTLING:
-		{
 			AppConstant.MusicPlayData.CURRENT_MISIC_LIST=AppConstant.MusicList.MUSIC_LIST_BATTLE;
-			AppConstant.MusicPlayData.CURRENT_MISIC_INDEX=0;
-			mMediaPlayer=MediaPlayer.create(this, AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
-			break;
-		}
+            break;
+
 		case AppConstant.MusicPlayState.SCENE_WON:
-		{
 			AppConstant.MusicPlayData.CURRENT_MISIC_LIST=AppConstant.MusicList.MUSIC_LIST_WON;
-			AppConstant.MusicPlayData.CURRENT_MISIC_INDEX=0;
-			mMediaPlayer=MediaPlayer.create(this, AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
 			break;
-		}
 		case AppConstant.MusicPlayState.SCENE_LOSED:
-		{
 			AppConstant.MusicPlayData.CURRENT_MISIC_LIST=AppConstant.MusicList.MUSIC_LIST_LOSED;
-			AppConstant.MusicPlayData.CURRENT_MISIC_INDEX=0;
-			mMediaPlayer=MediaPlayer.create(this, AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
-			break;
-		}
+	        break;
 		default:
 			break;
 		}
+	     AppConstant.MusicPlayData.CURRENT_MISIC_INDEX=0;
+		 mMediaPlayer=MediaPlayer.create(this, AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
+		 Log.d(TAG,"changingMusicScene");
 		mMediaPlayer.setOnCompletionListener(new MyOnCompletionListener());
 		//检查是否静音
 		Log.d(TAG,"onCompletionListener");
@@ -147,8 +174,11 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 		
 	}
 	  
-
-
+	private void musicHealthCheck(){
+		if((!mMediaPlayer.isPlaying()&&AppConstant.MusicPlayState.CURRENT_PLAY_STATE==AppConstant.MusicPlayState.PLAY_STATE_PLAYING)||
+				(mMediaPlayer.isPlaying()&&AppConstant.MusicPlayState.CURRENT_PLAY_STATE==AppConstant.MusicPlayState.PLAY_STATE_PAUSE))
+			changeMusicStates();
+	}
  
     @Override
     public IBinder onBind(Intent intent) {
@@ -172,6 +202,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
             mMediaPlayer.setOnCompletionListener(new MyOnCompletionListener());
             mMediaPlayer.start();
 		}
+		
 	 }
     
 
