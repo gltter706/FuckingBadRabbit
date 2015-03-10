@@ -44,7 +44,8 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
        	  Log.d(TAG,""+AppConstant.MusicPlayState.CURRENT_MISIC_SCENE);
        	 homeKeyReceiver = new HomeKeyEventBroadCastReceiver();  
          registerReceiver(homeKeyReceiver, new IntentFilter(  
-                       Intent. ACTION_CLOSE_SYSTEM_DIALOGS));    
+                       Intent. ACTION_CLOSE_SYSTEM_DIALOGS));  
+
 		
 		
     }
@@ -58,6 +59,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 		editor.putInt("is_music_on", AppConstant.MusicPlayState.CURRENT_PLAY_STATE);
 		editor.commit();
 		unregisterReceiver(serviceReceiver);
+		unregisterReceiver(homeKeyReceiver);
 	    AppConstant.MusicPlayState.CURRENT_MISIC_SCENE=AppConstant.MusicPlayState.SCENE_BATTLING;
 		if (mMediaPlayer != null) {
 			mMediaPlayer.stop();
