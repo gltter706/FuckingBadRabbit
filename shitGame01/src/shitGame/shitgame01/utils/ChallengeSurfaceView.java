@@ -51,6 +51,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	private Map map;
 	private Player player;
 	private ArrayList<Enemy> enemies;
+	private Vector<Key> keys;
 	//use to test the bump
 	private ArrayList<RectF> rectFlist;//only wall,not include dist
 	private RectF dist_rectF;
@@ -61,6 +62,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	private int cur_selected_mission_num;
 	//bitmap
 	private Bitmap enemy_bmp;
+	private Bitmap key_bmp;
 	private Bitmap dist_bmp;
 	private Bitmap backgroundBitmap;
 	//thread
@@ -120,19 +122,25 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		init();
 		myThread=new MyThread();
 		myThread.start();
+		Log.e("Lin", "surface Create");
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0)
 	{
 		// TODO Auto-generated method stub
+		map=null;
+		player=null;
+		enemies=null;
+		keys=null;
 		flag=false;
+		Log.e("Lin", "surface Destroy");
 	}
 
 	private void init()
 	{
 		Global global=new Global();
-		
+		Log.e("Lin", "init global_map:"+global.ALL_MAP.elementAt(cur_selected_mission_num).map_array[6][7]);
 		//init map
 		map=new Map(wallW,wallH);
 		//初始化map的墙位图
@@ -140,9 +148,9 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		Matrix wall_matrix=CalHelper.getScaleMatrix(wallW, map.wall_bmp.getWidth(), wallH, map.wall_bmp.getHeight());
 		map.wall_bmp=Bitmap.createBitmap(map.wall_bmp,0,0,map.wall_bmp.getWidth(),map.wall_bmp.getHeight(),wall_matrix,true);
 		//初始化map的菜单位图
-		map.menu_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.pause_menu);
-		Matrix menu_matrix=CalHelper.getScaleMatrix(wallW, map.menu_bmp.getWidth(), wallH, map.menu_bmp.getHeight());
-		map.menu_bmp=Bitmap.createBitmap(map.menu_bmp,0,0,map.menu_bmp.getWidth(),map.menu_bmp.getHeight(),menu_matrix,true);
+//		map.menu_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.pause_menu);
+//		Matrix menu_matrix=CalHelper.getScaleMatrix(wallW, map.menu_bmp.getWidth(), wallH, map.menu_bmp.getHeight());
+//		map.menu_bmp=Bitmap.createBitmap(map.menu_bmp,0,0,map.menu_bmp.getWidth(),map.menu_bmp.getHeight(),menu_matrix,true);
 		//初始化map的传送门位图
 		map.door1=BitmapFactory.decodeResource(getResources(), R.drawable.door1);
 		Matrix door_matrix=CalHelper.getScaleMatrix(wallW, map.door1.getWidth(), wallH, map.door1.getHeight());
@@ -150,7 +158,15 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		map.door2=BitmapFactory.decodeResource(getResources(), R.drawable.door2);
 		map.door2=Bitmap.createBitmap(map.door2,0,0,map.door2.getWidth(),map.door2.getHeight(),door_matrix,true);
 		//初始化map的地图数组
-		map.map_array=global.ALL_MAP.elementAt(cur_selected_mission_num).map_array;
+		//这里要用global的副本，改变副本的值，不能影响到原来global的值
+		map.map_array=new int[10][10];
+		for(int i=0;i<10;i++)
+		{
+			for(int j=0;j<10;j++)
+			{
+				map.map_array[i][j]=global.ALL_MAP.elementAt(cur_selected_mission_num).map_array[i][j];
+			}
+		}
 		//初始化map的变化墙号
 		map.change_wall_num=global.ALL_MAP.elementAt(cur_selected_mission_num).change_wall_num;
 		//初始化目的地的位图和矩形
@@ -173,8 +189,21 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		for(int i=0;i<enemyinfo_vector.size();i++)
 		{
 			EnemyInfo info=enemyinfo_vector.elementAt(i);
-			Enemy enemy=new Enemy(info.wall,info.type,wallW,wallH,enemy_bmp);
+			Enemy enemy=new Enemy(info.wall,info.enemy_run_num,info.type,wallW,wallH,enemy_bmp);
 			enemies.add(enemy);
+		}
+		
+		//init keys
+		//加载key的位图
+		key_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.key);
+		Matrix key_matrix=CalHelper.getScaleMatrix(wallW, key_bmp.getWidth(), wallH, key_bmp.getHeight());
+		key_bmp=Bitmap.createBitmap(key_bmp, 0, 0, key_bmp.getWidth(), key_bmp.getHeight(),key_matrix,true);
+		//初始化当前地图的key列表信息
+		keys=new Vector<Key>();
+		//keys= global.ALL_MAP.elementAt(cur_selected_mission_num).keyvector;
+		for(int i=0;i<global.ALL_MAP.elementAt(cur_selected_mission_num).keyvector.size();i++)
+		{
+			keys.add(Key.copy(global.ALL_MAP.elementAt(cur_selected_mission_num).keyvector.elementAt(i)));
 		}
 		
 		//init player
@@ -230,6 +259,12 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		for(int i=0;i<enemies.size();i++)
 		{
 			enemies.get(i).drawEnemy(canvas, paint, rectFlist);
+		}
+		
+		//draw keys
+		for(int i=0;i<keys.size();i++)
+		{
+			keys.get(i).drawKey(canvas, paint, key_bmp, wallW, wallH);
 		}
 		
 		//draw player
@@ -326,6 +361,8 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		}
 		//传送门的逻辑，负责判断传送门的碰撞检测
 		doorLogic();
+		//钥匙的逻辑，负责钥匙的碰撞检测
+		keyLogic();
 		//map logic to change wall
 		if(counter==39)//2s change wall once
 			map.logic();
@@ -379,97 +416,14 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		float touch_x=event.getX();
 		float touch_y=event.getY();
 		//if touch pause menu
-		if(touch_x>=9*wallW && touch_x<=screenW && touch_y>=0 && touch_y<=wallH)
-		{
-			//Toast.makeText(context, "pause menu", Toast.LENGTH_SHORT).show();
-			
-			AlertDialog.Builder builder=new AlertDialog.Builder(context);
-			builder.setMessage("Pause");
-			View view=LayoutInflater.from(context).inflate(R.layout.pause_dlg_main, null);
-			final ImageButton pause_btn0=(ImageButton) view.findViewById(R.id.pause_dlg_btn0);
-			final ImageButton pause_btn1=(ImageButton) view.findViewById(R.id.pause_dlg_btn1);
-			if(item1!=null)
-			{
-				pause_btn0.setImageResource(item1.getDrawableId());
-			}else {
-				pause_btn0.setImageResource(R.drawable.nullitem);
-				pause_btn0.setEnabled(false);
-			}
-			if(item2!=null)
-			{
-				pause_btn1.setImageResource(item2.getDrawableId());
-			}else {
-				pause_btn1.setImageResource(R.drawable.nullitem);
-				pause_btn1.setEnabled(false);
-			}
-			pause_btn0.setOnClickListener(new OnClickListener()
-			{
-				
-				@Override
-				public void onClick(View arg0)
-				{
-					// TODO Auto-generated method stub
-						item1_ON=true;
-						item1_counter=0;
-						bag.useItem(item1);
-						item1=null;
-						pause_btn0.setImageResource(R.drawable.nullitem);
-						Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
-						pause_btn0.setEnabled(false);
-				}
-			});
-			pause_btn1.setOnClickListener(new OnClickListener()
-			{
-				
-				@Override
-				public void onClick(View arg0)
-				{
-					// TODO Auto-generated method stub
-					item2_ON=true;
-					item2_counter=0;
-					bag.useItem(item2);
-					item2=null;
-					pause_btn1.setImageResource(R.drawable.nullitem);
-					Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
-					pause_btn1.setEnabled(false);
-				}
-			});
-			
-			builder.setView(view);
-			builder.setNegativeButton("回到游戏", new DialogInterface.OnClickListener()
-			{
-				
-				@Override
-				public void onClick(DialogInterface arg0, int arg1)
-				{
-					// TODO Auto-generated method stub
-					pause_end_time=System.currentTimeMillis();
-					pause_time+=pause_end_time-pause_start_time;
-					
-					flag=true;
-					myThread=new MyThread();
-					myThread.start();
-				}
-			});
-			builder.setPositiveButton("退出游戏", new DialogInterface.OnClickListener()
-			{
-				
-				@Override
-				public void onClick(DialogInterface arg0, int arg1)
-				{
-					// TODO Auto-generated method stub
-					((Activity)context).finish();
-				}
-			});
-			AlertDialog dlg=builder.create();
-			dlg.setCanceledOnTouchOutside(false);
-			dlg.setCancelable(false);
-			dlg.show();
-			pause_start_time=System.currentTimeMillis();
-			flag=false;
-			return super.onTouchEvent(event);
-		}
-		else{
+//		if(touch_x>=9*wallW && touch_x<=screenW && touch_y>=0 && touch_y<=wallH)
+//		{
+//			//Toast.makeText(context, "pause menu", Toast.LENGTH_SHORT).show();
+//			
+//			show_pause_Dlg();
+//			return super.onTouchEvent(event);
+//		}
+//		else{
 			if(touch_x<getWidth()/2)
 				player.right=false;
 			else {
@@ -482,7 +436,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				player.up=false;
 			}
 			return super.onTouchEvent(event);
-		}
+		//}
 		
 	}
 
@@ -553,14 +507,15 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	{
 		int col=CalHelper.getCurCol(player.x, wallW);
 		int row=CalHelper.getCurRow(player.y, wallH);
-		if(map.map_array[row][col]==2)
+		if(map.map_array[row][col]>1)
 		{
 			boolean for_flag=false;
+			int value=map.map_array[row][col];
 			for(int i=0;i<10;i++)
 			{
 				for(int j=0;j<10;j++)
 				{
-					if(map.map_array[i][j]==2)
+					if(map.map_array[i][j]==value)
 					{
 						if(i==row && j==col){}
 						else{
@@ -580,5 +535,122 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			}
 		}
 	}
+	
+	private void keyLogic()
+	{
+		int col=CalHelper.getCurCol(player.x, wallW);
+		int row=CalHelper.getCurRow(player.y, wallH);
+		if(map.map_array[row][col]<0)
+		{
+			keys.elementAt(-map.map_array[row][col]-1).get_flag=true;
+			Key cur_key=keys.elementAt(-map.map_array[row][col]-1);
+			if(cur_key.real_flag)//钥匙是真的
+			{
+				for(int i=0;i<cur_key.key_wall_list.length;i++)
+				{
+					int x=cur_key.key_wall_list[i]/10;
+					int y=cur_key.key_wall_list[i]-x*10;
+					map.map_array[x][y]=0;
+				}
+			}else {
+				for(int i=0;i<cur_key.key_wall_list.length;i++)
+				{
+					int x=cur_key.key_wall_list[i]/10;
+					int y=cur_key.key_wall_list[i]-x*10;
+					map.map_array[x][y]=1;
+				}
+			}
+			
+		}
+	}
 
+	public void show_pause_Dlg()
+	{
+		AlertDialog.Builder builder=new AlertDialog.Builder(context);
+		builder.setMessage("Pause");
+		View view=LayoutInflater.from(context).inflate(R.layout.pause_dlg_main, null);
+		final ImageButton pause_btn0=(ImageButton) view.findViewById(R.id.pause_dlg_btn0);
+		final ImageButton pause_btn1=(ImageButton) view.findViewById(R.id.pause_dlg_btn1);
+		if(item1!=null)
+		{
+			pause_btn0.setImageResource(item1.getDrawableId());
+		}else {
+			pause_btn0.setImageResource(R.drawable.nullitem);
+			pause_btn0.setEnabled(false);
+		}
+		if(item2!=null)
+		{
+			pause_btn1.setImageResource(item2.getDrawableId());
+		}else {
+			pause_btn1.setImageResource(R.drawable.nullitem);
+			pause_btn1.setEnabled(false);
+		}
+		pause_btn0.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View arg0)
+			{
+				// TODO Auto-generated method stub
+					item1_ON=true;
+					item1_counter=0;
+					bag.useItem(item1);
+					item1=null;
+					pause_btn0.setImageResource(R.drawable.nullitem);
+					Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
+					pause_btn0.setEnabled(false);
+			}
+		});
+		pause_btn1.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View arg0)
+			{
+				// TODO Auto-generated method stub
+				item2_ON=true;
+				item2_counter=0;
+				bag.useItem(item2);
+				item2=null;
+				pause_btn1.setImageResource(R.drawable.nullitem);
+				Toast.makeText(context, "道具已投入使用", Toast.LENGTH_SHORT).show();
+				pause_btn1.setEnabled(false);
+			}
+		});
+		
+		builder.setView(view);
+		builder.setNegativeButton("回到游戏", new DialogInterface.OnClickListener()
+		{
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1)
+			{
+				// TODO Auto-generated method stub
+				pause_end_time=System.currentTimeMillis();
+				pause_time+=pause_end_time-pause_start_time;
+				
+				flag=true;
+				myThread=new MyThread();
+				myThread.start();
+			}
+		});
+		builder.setPositiveButton("退出游戏", new DialogInterface.OnClickListener()
+		{
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1)
+			{
+				// TODO Auto-generated method stub
+				((Activity)context).finish();
+			}
+		});
+		AlertDialog dlg=builder.create();
+		dlg.setCanceledOnTouchOutside(false);
+		dlg.setCancelable(false);
+		dlg.show();
+		pause_start_time=System.currentTimeMillis();
+		flag=false;
+		
+	}
+	
 }

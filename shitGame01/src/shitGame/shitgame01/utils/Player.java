@@ -31,7 +31,7 @@ public class Player
 		this.h=h;
 		this.right=true;
 		this.up=false;
-		this.speed=2;
+		this.speed=3;
 		this.screenW=screenW;
 		this.screenH=screenH;
 		

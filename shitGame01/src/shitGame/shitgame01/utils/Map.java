@@ -46,14 +46,13 @@ public class Map
 			{
 				if(map_array[i][j]==1)//draw  wall
 				{
-					if(i==0 && j==9){}
-					else{
+					
 					canvas.save();
 					canvas.clipRect(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
 					canvas.drawBitmap(wall_bmp, j*wallW, i*wallH, paint);
 					canvas.restore();
 					rectF_list.add(new RectF(j*wallW, i*wallH, j*wallW+wallW, i*wallH+wallH));
-					}
+					
 					
 				}
 				if(map_array[i][j]>1)
@@ -74,13 +73,13 @@ public class Map
 					}
 						
 				}
-				if(i==0 && j==9)//draw menu
-				{
-					canvas.save();
-					canvas.clipRect(new RectF(9*wallW, 0*wallH, 9*wallW+wallW, 0*wallH+wallH));
-					canvas.drawBitmap(menu_bmp, 9*wallW, 0*wallH, paint);
-					canvas.restore();
-				}
+//				if(i==0 && j==9)//draw menu
+//				{
+//					canvas.save();
+//					canvas.clipRect(new RectF(9*wallW, 0*wallH, 9*wallW+wallW, 0*wallH+wallH));
+//					canvas.drawBitmap(menu_bmp, 9*wallW, 0*wallH, paint);
+//					canvas.restore();
+//				}
 			}
 		}
 	}

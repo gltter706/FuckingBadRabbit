@@ -2,45 +2,55 @@ package com.example.map2;
 
 import java.util.*;
 
+import shitGame.shitgame01.utils.Key;
+
 
 
 public class Global {
 
-	
+	//地图数组，0表示可走的格子，1表示墙，大于1表示传送门，小于0表示钥匙
+	//传送门2传到2,3传到3
+	//钥匙-1号表示mapinfo.keyvector[1]这条钥匙，-2则表示mapinfo.keyvector[2]，便于快速查找对应钥匙
+	//右上角一定是0，用于放暂停按钮
+	//起点和终点一定为0
 	public static Vector<MapInfo> ALL_MAP=new Vector<MapInfo>();
 	public Global(){
 	int map_array1[][]=new int[][]{
-				{0,1,0,1,0,1,0,1,0,1},
+				{0,1,0,1,0,1,0,1,0,0},
 				{0,0,0,1,0,0,0,0,0,1},
 				{1,0,2,0,1,0,0,0,0,1},
 				{0,0,1,0,0,0,0,0,1,0},
 				{0,0,2,0,1,0,0,0,1,0},
-				{0,0,0,0,0,0,1,0,0,1},//5,6��5,7��
-				{0,1,0,0,1,1,1,0,1,0},
-				{0,0,1,0,0,0,1,0,0,1},
+				{0,0,0,0,0,0,1,0,0,1},
+				{0,1,0,0,1,1,1,1,1,0},
+				{0,0,1,0,0,0,1,0,3,1},
 				{1,0,0,0,0,1,1,0,0,0},
-				{0,0,0,1,0,1,0,1,0,0}};
+				{3,-1,0,1,0,1,0,1,0,0}};
 	int change_wall_num1[]=new int[]{5,6,7};
 	
 	MapInfo mapinfo1=new MapInfo(map_array1,change_wall_num1,0,99);
-	mapinfo1.add_vector(new EnemyInfo(34,1));
-	mapinfo1.add_vector(new EnemyInfo(78,2));
+	mapinfo1.add_enemy(new EnemyInfo(77,2,2));
+	mapinfo1.add_enemy(new EnemyInfo(23, 7, 1));
+	mapinfo1.add_key(new Key(91, true, new int[]{67}));
 	ALL_MAP.add(mapinfo1);
 		
-	int map_array2[][]=new int[][]{{0,0,0,1,0,0,1,1,1,1},
-			{1,1,0,1,0,0,1,0,0,0},
-			{0,0,1,1,1,1,1,0,1,0},
-			{0,0,0,0,0,0,0,0,1,0},
-			{1,0,1,1,1,1,1,1,0,0},
-			{1,0,1,0,0,0,0,0,0,0},
-			{1,0,1,1,1,1,1,1,1,0},
-			{1,0,1,0,0,0,0,0,1,0},
-			{1,0,1,1,0,1,1,0,1,0},
-			{0,0,0,0,0,1,1,0,0,0}};
-	int change_wall_num2[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
+	int map_array2[][]=new int[][]{
+			{0,0,0,1,0,0,0,0,0,-1},
+			{0,0,0,1,0,0,1,1,1,1},
+			{1,0,0,1,0,0,1,0,0,0},
+			{1,0,1,1,0,0,0,0,2,0},
+			{1,0,1,0,0,1,1,1,0,0},
+			{1,0,1,1,1,0,0,1,1,1},
+			{1,0,1,-2,1,0,0,0,0,0},
+			{0,0,1,1,1,0,0,0,1,1},
+			{0,0,0,0,1,0,1,0,1,0},
+			{0,0,0,2,1,0,1,0,1,0}};
+	int change_wall_num2[]=new int[]{};
 	
 	MapInfo mapinfo2=new MapInfo(map_array2,change_wall_num2,0,99);
-	//mapinfo2.add_vector(null);
+	mapinfo2.add_enemy(new EnemyInfo(81, 2, 1));
+	mapinfo2.add_key(new Key(9, true, new int[]{53,64}));
+	mapinfo2.add_key(new Key(63, true, new int[]{88,98}));
 	ALL_MAP.add(mapinfo2);
 	
 	int map_array3[][]=new int[][]{{0,0,0,1,1,1,1,1,1,1},

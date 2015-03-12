@@ -17,16 +17,18 @@ public class Enemy
 	public int speed=3;//set by myself
 	public int type;
 	public int wallNum;
+	public int run_num;
 	public int dir=1;
 	//use to cal 
 	public float wallW,wallH;
 	public int row,col;
 	
-	public Enemy(int wallNum,int type,float wallW,float wallH,Bitmap bitmap)
+	public Enemy(int wallNum,int run_num,int type,float wallW,float wallH,Bitmap bitmap)
 	{
 		// TODO Auto-generated constructor stub
 		this.bitmap=bitmap;
 		this.wallNum=wallNum;
+		this.run_num=run_num;
 		this.type=type;
 		this.wallW=wallW;
 		this.wallH=wallH;
@@ -64,7 +66,7 @@ public class Enemy
 		if(type==1)//vert to run
 		{
 			y=y+dir*speed;
-			if(y>=wallH*(row+1)-h || y<=wallH*row)
+			if(y>=wallH*(row+run_num)-h || y<=wallH*row)
 			{
 				dir=dir*-1;
 			}
@@ -72,7 +74,7 @@ public class Enemy
 		else if(type==2)//horz to run
 		{
 			x=x+dir*speed;
-			if(x>=wallW*(col+1)-w || x<=wallW*col)
+			if(x>=wallW*(col+run_num)-w || x<=wallW*col)
 			{
 				dir=dir*-1;
 			}
