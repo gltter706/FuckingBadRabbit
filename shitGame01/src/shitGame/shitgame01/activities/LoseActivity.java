@@ -39,7 +39,7 @@ public class LoseActivity extends Activity
 	private long timeCost;
 	private final int TIME_LIMIT = 15;
 	private final int SolidBonus = 1;
-	private final double Weight = 0.005;
+	private final double Weight = 0.05;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onBackPressed()
 	 */

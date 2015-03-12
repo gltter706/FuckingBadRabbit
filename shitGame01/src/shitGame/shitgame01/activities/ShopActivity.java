@@ -76,9 +76,12 @@ public class ShopActivity extends Activity{
 		public void onItemClick(AdapterView<?> parent, View view,
 				int position, long id) {
 			// TODO Auto-generated method stub
-			iv_desc.setImageResource(item[position].getDrawableId());
-			
-			tv_desc.setText(item[position].getItemLong());
+			Message msg = new Message();
+			Bundle bundle = new Bundle();
+			bundle.putInt("position", position);
+			msg.what = 0x132;
+			msg.setData(bundle);
+			handler.sendMessage(msg);
 		}
 		
 	};
@@ -87,9 +90,7 @@ public class ShopActivity extends Activity{
 		public void onItemClick(AdapterView<?> parent, View view,
 				int position, long id) {
 			// TODO Auto-generated method stub
-			iv_desc.setImageResource(role[position].getDrawableId());
-			
-			tv_desc.setText(role[position].getItemLong());
+			handler.sendEmptyMessage(0x133);
 		}
 		
 	};
@@ -107,13 +108,27 @@ public class ShopActivity extends Activity{
 			if(0x110 == msg.what){
 				lv_shopitem.setAdapter(role_shopAdapter);
 				lv_shopitem.setOnItemClickListener(roleClickListener);
+				iv_desc.setImageResource(R.drawable.ic_role);
+				tv_desc.setText("新角色！新力量！敬请期待!");
 			}
 			if(0x111 == msg.what){
 				lv_shopitem.setAdapter(item_shopAdapter);
 				lv_shopitem.setOnItemClickListener(itemClickListener);
+				iv_desc.setImageResource(item[0].getDrawableId());
+				tv_desc.setText(item[0].getItemLong());
+				
 			}
 			if(0x112 == msg.what){
 				tv_bagcoin.setText(""+bag.getCoinInt());
+			}
+			if(0x132 == msg.what){
+				int position = msg.getData().getInt("position");
+				iv_desc.setImageResource(item[position].getDrawableId());
+				tv_desc.setText(item[position].getItemLong());
+			}
+			if(0x133 == msg.what){
+				iv_desc.setImageResource(R.drawable.ic_role);
+				tv_desc.setText("新角色！新力量！敬请期待!");
 			}
 		}
 		
@@ -250,20 +265,20 @@ public class ShopActivity extends Activity{
 			map.put("price", ""+item[i].getCoin());
 			item_data.add(map);
 		}
-		for(int i = 0;i < role_num;i ++){
-			role[i] = new Item(context,roleIdList[i]);
-		}
-		for(int i = 0;i < role_num;i ++){
-			HashMap<String, Object> map = new HashMap<String,Object>();
-			map.put("img", role[i].getDrawableId());
-			map.put("desc", "\t\t"+role[i].getItemShort());
-			map.put("exist_num",bag_exist+bag.getItem_to_num().get(role[i].getItem_id()) );
-			map.put("price", ""+role[i].getCoin());
-			role_data.add(map);
-		}
+//		for(int i = 0;i < role_num;i ++){
+//			role[i] = new Item(context,roleIdList[i]);
+//		}
+//		for(int i = 0;i < role_num;i ++){
+//			HashMap<String, Object> map = new HashMap<String,Object>();
+//			map.put("img", role[i].getDrawableId());
+//			map.put("desc", "\t\t"+role[i].getItemShort());
+//			map.put("exist_num",bag_exist+bag.getItem_to_num().get(role[i].getItem_id()) );
+//			map.put("price", ""+role[i].getCoin());
+//			role_data.add(map);
+//		}
 		//SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, R.layout.listitem_shop, new String[]{"img","desc"}, new int[]{R.id.iv_listshop,R.id.tv_desc_listshop});
 		item_shopAdapter = new ShopAdapter(this, item_data, R.layout.layout_itemlist, new String[]{"img","desc","exist_num","price"}, new int[]{R.id.iv_imagedesc,R.id.tv_shortdesc,R.id.tv_bagstore,R.id.tv_price});
-		role_shopAdapter = new ShopAdapter(this, role_data, R.layout.layout_itemlist, new String[]{"img","desc","exist_num","price"}, new int[]{R.id.iv_imagedesc,R.id.tv_shortdesc,R.id.tv_bagstore,R.id.tv_price});
+//		role_shopAdapter = new ShopAdapter(this, role_data, R.layout.layout_itemlist, new String[]{"img","desc","exist_num","price"}, new int[]{R.id.iv_imagedesc,R.id.tv_shortdesc,R.id.tv_bagstore,R.id.tv_price});
 		handler.sendEmptyMessage(0x111);
 	}
 
