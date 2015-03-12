@@ -10,10 +10,11 @@
         android:src="@drawable/bg_win"
         android:id="@+id/iv_win"/>
     <LinearLayout
+        android:paddingRight="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:gravity="center"
+        android:gravity="bottom|right"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -25,44 +26,55 @@
                 android:id="@+id/tv_wincosttime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                 android:textColor="#00AA11"
+                android:textSize="21dp"
+                 android:textColor="#e7AA11"
                 android:background="#0000"
                 android:text="通过时间:" />
 
             <TextView
-                android:textSize="15dp"
+                android:textSize="21dp"
                 android:id="@+id/tv_windisplaybonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 android:textColor="#00AA11"
+                 android:textColor="#e7AA11"
                 android:background="#0000"
                 android:text="获得金币:" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+       <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
             <Button
+                android:gravity="center|bottom"
                 android:id="@+id/btn_wincontinue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#0FFF"
-                android:textSize="15dp"
-                android:textColor="@drawable/btn_shop_color_selector1_1"
-                android:text="下一关" />
+                android:textSize="22dp"
+                android:background="@drawable/btn_sum_color_selector1_2"
+                android:textColor="#fff"
+                android:layout_weight="1"
+                android:text="继续" />
 
+            <TextView 
+                android:gravity="center|bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
             <Button
-                android:textSize="15dp"
-                android:textColor="@drawable/btn_shop_color_selector1_1"
+                android:layout_marginRight="10dp"
+                android:gravity="center|bottom"
+                android:layout_weight="1"
                 android:id="@+id/btn_winback"
+                android:textSize="22dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00FF"
-                android:text="返回选关" />
+                android:background="@drawable/btn_sum_color_selector1_2"
+                android:textColor="#fff"
+                android:text="选关" />
         </LinearLayout>
     </LinearLayout>
 

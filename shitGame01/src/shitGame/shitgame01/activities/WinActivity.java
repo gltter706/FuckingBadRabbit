@@ -30,9 +30,9 @@ public class WinActivity extends Activity
 	private Bag bag;
 	private int coinBonus = 0;
 	private long timeCost;
-	private final int TIME_LIMIT = 15;
+	private final int TIME_LIMIT = 30;
 	private final int SolidBonus = 3;
-	private final double Weight = 0.005;
+	private final double Weight = 0.6;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onBackPressed()
 	 */
@@ -133,13 +133,8 @@ public class WinActivity extends Activity
 	}
 	private void GenBonus(Bag tbag){
 		String coinNum = getResources().getString(R.string.coin);
-		if(timeCost < TIME_LIMIT){
-			coinBonus = 0;
-		}
-		else{
-			coinBonus =(int) (Weight*( timeCost)+SolidBonus);
-		}
-		
+		int timeextra =(int) (1.5*Weight*(TIME_LIMIT+bag.getMission()*Weight-(int)timeCost));
+		coinBonus =(int) (Weight*( bag.getMission())+SolidBonus)+timeextra;		
 		tbag.sumItem(WinActivity.this);
 		tbag.writeItem(WinActivity.this,coinNum ,tbag.getCoinInt()+coinBonus);
 		Bundle bundle = new Bundle();
