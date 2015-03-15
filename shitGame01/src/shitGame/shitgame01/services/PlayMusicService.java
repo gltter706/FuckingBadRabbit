@@ -1,9 +1,5 @@
 package shitGame.shitgame01.services;
-import java.io.IOException;
 
-
-import shitGame.shitgame01.R;
-import shitGame.shitgame01.activities.StartActivity;
 import shitGame.shitgame01.constant.AppConstant;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -16,7 +12,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.IBinder;
 import android.util.Log;
-import android.util.LogPrinter;
+
  
 public class PlayMusicService extends Service implements Runnable,MediaPlayer.OnCompletionListener  {
  

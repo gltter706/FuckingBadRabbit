@@ -1,13 +1,8 @@
 package shitGame.shitgame01.constant;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import shitGame.shitgame01.R;
-import android.R.integer;
-import android.R.string;
-import android.util.Log;
-import android.widget.RemoteViews.RemoteView;
+
 
 public interface AppConstant {
 	

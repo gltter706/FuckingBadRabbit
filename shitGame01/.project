@@ -30,4 +30,11 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/shitGame/shitgame01/services/PlayMusicService.class</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/bin/classes/shitGame/shitgame01/services/PlayMusicService.class</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

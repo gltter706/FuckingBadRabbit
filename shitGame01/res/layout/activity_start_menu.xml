@@ -5,12 +5,13 @@
     android:background="@drawable/bg_start_menu"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_music"
+    <ImageButton
+        android:id="@+id/btn_popWindow"
         android:layout_width="49dp"
         android:layout_height="36dp"
+        android:layout_marginRight="10dp"
         android:layout_gravity="right"
-        android:background="@drawable/btn_music"
+        android:src="@drawable/btn_popwindow"
         android:gravity="right" />
 
     <ImageView
