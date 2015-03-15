@@ -462,7 +462,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item1_counter++;
 			}
 		}
-		if(item1_counter==59)//持续3s之后
+		if(item1_counter==119)//持续3s之后
 		{
 			item1_counter=0;
 			item1_ON=false;

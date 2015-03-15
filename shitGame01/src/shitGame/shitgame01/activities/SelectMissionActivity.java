@@ -39,7 +39,7 @@ public class SelectMissionActivity extends Activity{
 		bgLayout=(LinearLayout) findViewById(R.id.selectmission_bg);
 		
 		SharedPreferences sharedPreferences=getSharedPreferences("data", MODE_PRIVATE);
-		//unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 0);
+		unlock_mission_num=sharedPreferences.getInt("cur_mission_num", 0);
 		cur_theme_first_mission_num=((int)(unlock_mission_num/10))*10;
 		
 		gestureDetector=new GestureDetector(SelectMissionActivity.this, new GestureDetector.OnGestureListener()
@@ -84,7 +84,7 @@ public class SelectMissionActivity extends Activity{
 					//左邊滑動
 					System.out.println("LEFT   ---------->");
 					//加载后面关卡
-					if(cur_theme_first_mission_num+10<unlock_mission_num)
+					if(cur_theme_first_mission_num+10<=unlock_mission_num)
 					{
 						if(unlock_mission_num-(cur_theme_first_mission_num+10)<10)
 						{
