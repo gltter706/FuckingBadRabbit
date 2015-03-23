@@ -140,6 +140,7 @@ public class SelectItemActivity extends Activity{
 				bag.select(item_1, item_2, role_item);
 				intent.putExtra("bag", bag);
 				startActivity(intent);
+				SelectItemActivity.this.finish();
 			}
 		});
 		
