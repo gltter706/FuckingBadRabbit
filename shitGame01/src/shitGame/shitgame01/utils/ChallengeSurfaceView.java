@@ -144,7 +144,18 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		//init map
 		map=new Map(wallW,wallH);
 		//初始化map的墙位图
-		map.wall_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.wall);
+		if(cur_selected_mission_num>=0 && cur_selected_mission_num<10)
+		{
+			map.wall_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.wall1);
+		}
+		else if(cur_selected_mission_num>=10 && cur_selected_mission_num<20)
+		{
+			map.wall_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.wall2);
+		}
+		else if(cur_selected_mission_num>=20 && cur_selected_mission_num<30)
+		{
+			map.wall_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.wall3);
+		}
 		Matrix wall_matrix=CalHelper.getScaleMatrix(wallW, map.wall_bmp.getWidth(), wallH, map.wall_bmp.getHeight());
 		map.wall_bmp=Bitmap.createBitmap(map.wall_bmp,0,0,map.wall_bmp.getWidth(),map.wall_bmp.getHeight(),wall_matrix,true);
 		//初始化map的菜单位图
@@ -157,6 +168,10 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		map.door1=Bitmap.createBitmap(map.door1,0,0,map.door1.getWidth(),map.door1.getHeight(),door_matrix,true);
 		map.door2=BitmapFactory.decodeResource(getResources(), R.drawable.door2);
 		map.door2=Bitmap.createBitmap(map.door2,0,0,map.door2.getWidth(),map.door2.getHeight(),door_matrix,true);
+		map.door3=BitmapFactory.decodeResource(getResources(), R.drawable.door3);
+		map.door3=Bitmap.createBitmap(map.door3,0,0,map.door3.getWidth(),map.door3.getHeight(),door_matrix,true);
+		map.door4=BitmapFactory.decodeResource(getResources(), R.drawable.door4);
+		map.door4=Bitmap.createBitmap(map.door4,0,0,map.door4.getWidth(),map.door4.getHeight(),door_matrix,true);
 		//初始化map的地图数组
 		//这里要用global的副本，改变副本的值，不能影响到原来global的值
 		map.map_array=new int[10][10];

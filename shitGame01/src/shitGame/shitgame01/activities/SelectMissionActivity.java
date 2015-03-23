@@ -194,6 +194,7 @@ public class SelectMissionActivity extends Activity{
 		Intent intent=new Intent(SelectMissionActivity.this, SelectItemActivity.class);
 		intent.putExtra("cur_selected_mission", cur_selected_mission);
 		startActivity(intent);
+		finish();
 	}
 
 

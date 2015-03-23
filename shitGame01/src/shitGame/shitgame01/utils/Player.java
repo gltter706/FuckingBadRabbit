@@ -110,11 +110,26 @@ public class Player
 		else {
 			x-=speed;
 		}
-		
-		if(y<0 || y>=screenH-h)
+		if(y<0)
+		{
 			up=!up;
-		if(x<0 || x>=screenW-w)
+			y=0;
+		}
+		if(y>=screenH-h)
+		{
+			up=!up;
+			y=screenH-h;
+		}
+		if(x<0)
+		{
 			right=!right;
+			x=0;
+		}
+		if(x>=screenW-w)
+		{
+			right=!right;
+			x=screenW-w;
+		}
 	}
 	
 	public boolean bumpWithRect(RectF rect1,RectF rect2)

@@ -27,10 +27,12 @@
         </activity>
         <activity android:name=".activities.StartActivity"
                   android:screenOrientation="landscape"
+                  android:launchMode="singleTask"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity android:name=".activities.ShopActivity"
                   android:screenOrientation="landscape"
+                  android:launchMode="singleTask"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
@@ -42,12 +44,13 @@
         <activity
             android:name=".activities.SelectItemActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name=".activities.FirstPlayDisplayActivity"
             android:label="@string/title_activity_first_play_display" 
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
@@ -60,11 +63,13 @@
         <activity 
             android:name=".activities.WinActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity 
             android:name=".activities.LoseActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <service android:name="shitGame.shitgame01.services.PlayMusicService" />"
