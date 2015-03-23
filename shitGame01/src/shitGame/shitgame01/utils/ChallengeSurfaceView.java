@@ -355,6 +355,32 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				{
 						player.right=!player.right;
 						player.up=!player.up;
+						float nextX,nextY;
+						RectF nextRectF;
+						if(player.right)
+							nextX=player.x+player.speed;
+						else 
+							nextX=player.x-player.speed;
+						if(player.up)
+							nextY=player.y-player.speed;
+						else
+							nextY=player.y+player.speed;
+						nextRectF=new RectF(nextX, nextY, nextX+player.w, nextY+player.h);
+						for(int j=0;j<rectFlist.size();j++)
+						{
+							if(player.bumpWithRect(nextRectF, rectFlist.get(j)))
+							{
+								if(player.right)
+									player.x-=player.speed;
+								else 
+									player.x+=player.speed;
+								if(player.up)
+									player.y+=player.speed;
+								else
+									player.y-=player.speed;
+								break;
+							}
+						}
 						
 				}else {
 					//整理bag并且进入失败画面
@@ -371,7 +397,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 					flag=false;
 					((Activity)context).finish();
 				}
-				
+				break;
 			}
 		}
 		//传送门的逻辑，负责判断传送门的碰撞检测
@@ -477,7 +503,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item1_counter++;
 			}
 		}
-		if(item1_counter==119)//持续3s之后
+		if(item1_counter==1190)//持续3s之后
 		{
 			item1_counter=0;
 			item1_ON=false;
@@ -506,7 +532,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item2_counter++;
 			}
 		}
-		if(item2_counter==59)//持续3s之后
+		if(item2_counter==1190)//持续3s之后
 		{
 			item2_counter=0;
 			item2_ON=false;

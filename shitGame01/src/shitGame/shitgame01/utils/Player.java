@@ -136,14 +136,19 @@ public class Player
 	{
 		float x1=rect1.left,y1=rect1.top,w1=rect1.width(),h1=rect1.height();
 		float x2=rect2.left,y2=rect2.top,w2=rect2.width(),h2=rect2.height();
-		if(x1>=x2 && x1>=x2+w2)
+		/*if(x1>x2 && x1>x2+w2)
 			return false;
-		else if(x1<=x2 && x1+w1<=x2)
+		else if(x1<x2 && x1+w1<x2)
 			return false;
-		else if(y1>=y2 && y1>=y2+h2)
+		else if(y1>y2 && y1>y2+h2)
 			return false;
-		else if(y1<=y2 && y2>=y1+h1)
+		else if(y1<y2 && y2>y1+h1)
 			return false;
-		return true;
+		return true;*/
+		if(rect2.contains(x1, y1))return true;
+		else if(rect2.contains(x1, y1+h1))return true;
+		else if(rect2.contains(x1+w1, y1))return true;
+		else if(rect2.contains(x1+w1, y1+h1))return true;
+		else return false;
 	}
 }
