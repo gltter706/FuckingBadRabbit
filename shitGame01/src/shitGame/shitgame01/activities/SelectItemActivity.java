@@ -25,16 +25,16 @@ public class SelectItemActivity extends Activity{
 	private ListView lv_selectitem = null;
 	private ImageButton btn_selectitem_confirm = null;
 	private ImageButton btn_selectitem_cancel = null;
-	public Item[] items = new Item[4];
+	public Item[] items = new Item[3];
 	public Item[] personItems = new Item[3];
 	//4个道具
 	public int[] drawable = new int[4];
 	//带指纹的4个道具
 	public int[] drawableWithFingerPrints = new int[]{
+			R.drawable.ic_originalitems_withfingerprint,
 			R.drawable.ic_up_withfingerprint,
 			R.drawable.ic_down_withfingerprint,
 			R.drawable.ic_shield_withfingerprint,
-			R.drawable.ic_angel_withfingerprint
 	};
 	//3个角色
 	public int[] personDrawable = new int[3];
@@ -54,7 +54,6 @@ public class SelectItemActivity extends Activity{
 			shitGame.shitgame01.R.string.speed_up,
 			shitGame.shitgame01.R.string.speed_down,
 			shitGame.shitgame01.R.string.shield,
-			shitGame.shitgame01.R.string.angel,
 			shitGame.shitgame01.R.string.round,
 			shitGame.shitgame01.R.string.star,
 			shitGame.shitgame01.R.string.hexagon,
@@ -87,6 +86,7 @@ public class SelectItemActivity extends Activity{
 		iv_selectitem0 = (ImageView)findViewById(R.id.iv_selectitem0);
 		iv_selectitem1 = (ImageView)findViewById(R.id.iv_selectitem1);
 		iv_selectitem2 = (ImageView)findViewById(R.id.iv_selectitem2);
+		iv_selectitem2.setImageResource(R.drawable.ic_role);
 		btn_selectitem_confirm = (ImageButton)findViewById(R.id.btn_selectitem_confirm);
 		btn_selectitem_cancel = (ImageButton)findViewById(R.id.btn_selectitem_cancel);
 		
@@ -99,7 +99,7 @@ public class SelectItemActivity extends Activity{
 				// TODO Auto-generated method stub
 				iv_current = (ImageView)v;
 				personSelected = true;
-				createAndShowListView(personDrawable, needCoin,personDesc, boughtString);
+				//createAndShowListView(personDrawable, needCoin,personDesc, boughtString);
 			}
 		});
 		
@@ -113,6 +113,13 @@ public class SelectItemActivity extends Activity{
 					Toast.makeText(SelectItemActivity.this, "此道具数目为0!", Toast.LENGTH_LONG).show();
 				}else{
 				if( false == personSelected){
+					if(0 == arg2 && iv_current == iv_selectitem0){
+						iv_current.setImageResource(R.drawable.ic_originalitems);
+						cur_selected_item0 = -1;
+					}else if(0 == arg2 && iv_current == iv_selectitem1){
+						iv_current.setImageResource(R.drawable.ic_originalitems);
+						cur_selected_item1 = -1;
+					}else{
 				iv_current.setImageResource(drawable[arg2]);
 					if(iv_current == iv_selectitem0){
 					   item_1 = items[arg2];
@@ -121,10 +128,13 @@ public class SelectItemActivity extends Activity{
 					   item_2 = items[arg2];
 					   cur_selected_item1 = arg2;
 					}
+				  }
 				}
 				else {
+					
 				iv_current.setImageResource(personDrawable[arg2]);
 				role_item = personItems[arg2];
+				 
 				}
 			  }
 		   }
@@ -160,18 +170,23 @@ public class SelectItemActivity extends Activity{
 	
 	
 	public void initItems(){
-		for(int i = 0; i < 4; i++){
+			drawable[0] = R.drawable.ic_null;
+			desc[0] = "取消选择道具/角色";
+			needCoin[0] = "0";
+			itemAmounts[0] = 999999;
+			amount[0] += itemAmounts[0];
+		for(int i = 0; i < 3; i++){
 			String ItemID = SelectItemActivity.this.
 			getResources().getString(idResource[i]);
 			Item item = new Item(SelectItemActivity.this,ItemID);
 			items[i] = item;
-			drawable[i] = item.getDrawableId();
-			desc[i] = item.getItemShort();
-			needCoin[i] = String.valueOf(item.getCoin());
-			itemAmounts[i] = bag.getItem_to_num().get(items[i].getItem_id());
-			amount[i] += Integer.toString(itemAmounts[i]);
+			drawable[i+1] = item.getDrawableId();
+			desc[i+1] = item.getItemShort();
+			needCoin[i+1] = String.valueOf(item.getCoin());
+			itemAmounts[i+1] = bag.getItem_to_num().get(items[i].getItem_id());
+			amount[i+1] += Integer.toString(itemAmounts[i+1]);
 		}
-		for(int i = 4; i < 7; i++){
+		for(int i = 4; i < 6; i++){
 			String personItemID = SelectItemActivity.this.
 			getResources().getString(idResource[i]);
 			Item personItem = new Item(SelectItemActivity.this,
