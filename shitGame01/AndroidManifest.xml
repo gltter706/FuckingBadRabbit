@@ -72,6 +72,12 @@
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
+         <activity
+            android:name=".BossPlaneActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation = "landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+          </activity>
         <service android:name="shitGame.shitgame01.services.PlayMusicService" />"
     </application>
 

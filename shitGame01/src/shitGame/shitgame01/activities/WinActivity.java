@@ -31,8 +31,8 @@ public class WinActivity extends Activity
 	private int coinBonus = 0;
 	private long timeCost;
 	private final int TIME_LIMIT = 30;
-	private final int SolidBonus = 3;
-	private final double Weight = 0.6;
+	private final int SolidBonus = 1;
+	private final double Weight = 1.2;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onBackPressed()
 	 */
@@ -99,8 +99,6 @@ public class WinActivity extends Activity
 			editor.commit();  
 			unlock = true;
 		}
-		Log.e("unlock", unlock_mission_num+"");
-		Log.e("cur", cur_selected_mission+"");
 		btn_back.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -133,8 +131,8 @@ public class WinActivity extends Activity
 	}
 	private void GenBonus(Bag tbag){
 		String coinNum = getResources().getString(R.string.coin);
-		int timeextra =(int) (1.5*Weight*(TIME_LIMIT+bag.getMission()*Weight-(int)timeCost));
-		coinBonus =(int) (Weight*( bag.getMission())+SolidBonus)+timeextra;		
+		int timeextra =(int) (Weight*(bag.getMission()+1)*(TIME_LIMIT-(int)timeCost));
+		coinBonus = (timeextra > 0) ?(int) (Weight*( bag.getMission())+SolidBonus)+timeextra : (int) (Weight*( bag.getMission())+SolidBonus);	
 		tbag.sumItem(WinActivity.this);
 		tbag.writeItem(WinActivity.this,coinNum ,tbag.getCoinInt()+coinBonus);
 		Bundle bundle = new Bundle();
