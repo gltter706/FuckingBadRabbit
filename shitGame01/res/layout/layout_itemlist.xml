@@ -60,7 +60,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="+"
-	    android:textSize="21dp"
+	    android:textSize="25dp"
 	    android:textColor="@drawable/btn_shop_color_selector1_1"
 	    android:id="@+id/btn_buybtn"/>
 </RelativeLayout>

@@ -45,7 +45,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ShopActivity extends Activity{
 	final String bag_exist = new String("背包里还剩:");
 	final String tipString = new String("没钱请到别处去晃悠行吗");
-	private final int item_num = 4;
+	private final int item_num = 3;
 	private final int role_num = 3;
 	private String speedupString;
 	private String speeddownString;
@@ -245,7 +245,6 @@ public class ShopActivity extends Activity{
 					speedupString,
 					speeddownString,
 					shieldString,
-					angelString,
 					
 				};
 		 String[] roleIdList = new String[]{
