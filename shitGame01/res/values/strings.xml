@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <resources>
 
     <string name="app_name">ShitGame01</string>
@@ -23,7 +22,6 @@
     <string name="star_short">五角星</string>
     <string name="hexagon_short">六边形</string>
     <string name="coin_short">金币</string>
-    
     <string name="speed_up_long">注射鸡血，短时间内大幅提升速度</string>
     <string name="speed_down_long">背后吓一跳，精神萎靡速度大幅降低</string>
     <string name="shield_long">几何人的防御工具，看起来挺像盾牌的</string>
@@ -33,14 +31,11 @@
     <string name="hexagon_long">六边形,***</string>
     <string name="coin_long">金币</string>
     <string name="title_activity_first_play_display">FirstPlayDisplayActivity</string>
-    
     <string name="roleblock">角色</string>
     <string name="itemblock">道具</string>
     <string name="dlg_exit_sure">确定</string>
     <string name="dlg_exit_cancel">取消</string>
-
-
-   <string name="weibo_oauth_regiseter">应用授权</string>
+    <string name="weibo_oauth_regiseter">应用授权</string>
     <string name="website">http://www.mob.com</string>
     <string name="weibo_upload_content">分享图片</string>
     <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
@@ -54,58 +49,62 @@
     <string name="kakaostory_client_inavailable">目前您的KakaoStory版本过低或未安装，需要安装KakaoStory才能使用</string>
     <string name="whatsapp_client_inavailable">目前您的WhatsApp版本过低或未安装，需要安装WhatsApp才能使用</string>
     <string name="baidutieba_client_inavailable">目前您的百度贴吧版本过低或未安装，需要安装百度贴吧才能使用</string>
-    
-	<string name="sinaweibo">新浪微博</string>
-	<string name="tencentweibo">腾讯微博</string>
-	<string name="qzone">QQ空间</string>
-	<string name="wechat">微信好友</string>
-	<string name="wechatmoments">微信朋友圈</string>
-	<string name="wechatfavorite">微信收藏</string>
-	<string name="facebook">Facebook</string>
-	<string name="twitter">Twitter</string>
-	<string name="renren">人人网</string>
-	<string name="kaixin">开心网</string>
-	<string name="email">邮件</string>
-	<string name="shortmessage">信息</string>
-	<string name="sohumicroblog">搜狐微博</string>
-	<string name="sohusuishenkan">搜狐随身看</string>
-	<string name="neteasemicroblog">网易微博</string>
-	<string name="douban">豆瓣</string>
-	<string name="youdao">有道云笔记</string>
-	<string name="evernote">印象笔记</string>
-	<string name="linkedin">领英</string>
-	<string name="googleplus">Google+</string>
-	<string name="foursquare">FourSquare</string>
-	<string name="qq">QQ</string>
-	<string name="pinterest">Pinterest</string>
-	<string name="flickr">Flickr</string>
-	<string name="tumblr">Tumblr</string>
-	<string name="dropbox">Dropbox</string>
-	<string name="vkontakte">VK</string>
-	<string name="instagram">Instagram</string>
-	<string name="yixin">易信</string>
-	<string name="yixinmoments">易信朋友圈</string>
-	<string name="mingdao">明道</string>
-	<string name="kakaotalk">KakaoTalk</string>
-	<string name="kakaostory">KakaoStory</string>
-	<string name="line">Line</string>
-	<string name="bluetooth">蓝牙</string>
-	<string name="whatsapp">WhatsApp</string>
-	<string name="pocket">Pocket</string>
-	<string name="instapaper">Instapaper</string>
-	<string name="instapaper_email">邮箱</string>
-	<string name="instapaper_pwd">密码</string>
-	<string name="instapaper_login">登录</string>
-	<string name="instapaper_logining">登录中…</string>
-	<string name="instapager_email_or_password_incorrect">Email或密码不正确</string>
+    <string name="sinaweibo">新浪微博</string>
+    <string name="tencentweibo">腾讯微博</string>
+    <string name="qzone">QQ空间</string>
+    <string name="wechat">微信好友</string>
+    <string name="wechatmoments">微信朋友圈</string>
+    <string name="wechatfavorite">微信收藏</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="renren">人人网</string>
+    <string name="kaixin">开心网</string>
+    <string name="email">邮件</string>
+    <string name="shortmessage">信息</string>
+    <string name="sohumicroblog">搜狐微博</string>
+    <string name="sohusuishenkan">搜狐随身看</string>
+    <string name="neteasemicroblog">网易微博</string>
+    <string name="douban">豆瓣</string>
+    <string name="youdao">有道云笔记</string>
+    <string name="evernote">印象笔记</string>
+    <string name="linkedin">领英</string>
+    <string name="googleplus">Google+</string>
+    <string name="foursquare">FourSquare</string>
+    <string name="qq">QQ</string>
+    <string name="pinterest">Pinterest</string>
+    <string name="flickr">Flickr</string>
+    <string name="tumblr">Tumblr</string>
+    <string name="dropbox">Dropbox</string>
+    <string name="vkontakte">VK</string>
+    <string name="instagram">Instagram</string>
+    <string name="yixin">易信</string>
+    <string name="yixinmoments">易信朋友圈</string>
+    <string name="mingdao">明道</string>
+    <string name="kakaotalk">KakaoTalk</string>
+    <string name="kakaostory">KakaoStory</string>
+    <string name="line">Line</string>
+    <string name="bluetooth">蓝牙</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="pocket">Pocket</string>
+    <string name="instapaper">Instapaper</string>
+    <string name="instapaper_email">邮箱</string>
+    <string name="instapaper_pwd">密码</string>
+    <string name="instapaper_login">登录</string>
+    <string name="instapaper_logining">登录中…</string>
+    <string name="instapager_email_or_password_incorrect">Email或密码不正确</string>
     <string name="facebookmessenger">Facebook Messenger</string>
     <string name="baidutieba">百度贴吧</string>
+    <string name="share_to_baidutieba">分享到百度贴吧</string>
+    <string name="share_to_qzone">分享到QQ空间</string>
+    <string name="share_to_qq">分享到QQ</string>
+    <string name="mingdao_share_content">网页分享</string>
+    <string name="share_to_mingdao">分享到明道</string>
+    <string name="share_to_qzone_default">来自%s的分享</string>
+    <string name="use_login_button">请改用“登录”按钮</string>
+    <string name="share_title">不同平台分享不同内容,</string>
+    <string name="share_to_wechatmoment">分享到微信朋友圈</string>
+    <string name="share_to_sina">分享到新浪微博</string>
+    <string name="share_to_tencent">分享到腾讯微博</string>
+    <string name="share_to_sms">用短信分享</string>
 
-	<string name="share_to_baidutieba">分享到百度贴吧</string>
-	<string name="share_to_qzone">分享到QQ空间</string>
-	<string name="share_to_qq">分享到QQ</string>
-	<string name="mingdao_share_content">网页分享</string>
-	<string name="share_to_mingdao">分享到明道</string>
-	<string name="share_to_qzone_default">来自%s的分享</string>
-	<string name="use_login_button">请改用“登录”按钮</string>
 </resources>

@@ -2,7 +2,6 @@ package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
