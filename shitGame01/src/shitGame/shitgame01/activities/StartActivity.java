@@ -1,5 +1,9 @@
 package shitGame.shitgame01.activities;
 
+
+import shitGame.shitgame01.onekeyshare.OnekeyShare;
+import shitGame.shitgame01.onekeyshare.ShareContentCustomizeDemo;
+import cn.sharesdk.wechat.moments.WechatMoments;
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.constant.AppConstant;
 import shitGame.shitgame01.interfaces.MusicController;
@@ -7,7 +11,6 @@ import shitGame.shitgame01.services.PlayMusicService;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -21,7 +24,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class StartActivity extends Activity {
@@ -33,7 +35,6 @@ public class StartActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_menu);
 
@@ -157,7 +158,25 @@ public class StartActivity extends Activity {
 		dlg.setCancelable(false);
 		dlg.show();
 		}
-	
+	private void showShare(boolean silent, String platform){
+		final OnekeyShare oks = new OnekeyShare();
+		oks.setNotification(R.drawable.ic_launcher, this.getString(R.string.app_name));
+		//不同平台的分享参数，请看文档
+		//http://wiki.mob.com/Android_%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9%E7%9A%84%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E
+		String text = this.getString(R.string.share_title) + "http://www.mob.com";
+		oks.setTitle("share title");		
+		oks.setText(text);
+		//oks.setSilent(silent);
+		oks.setDialogMode();
+		oks.disableSSOWhenAuthorize();
+		if (platform != null) {
+			oks.setPlatform(platform);
+		}
+		// 去自定义不同平台的字段内容
+		// http://wiki.mob.com/Android_%E5%BF%AB%E6%8D%B7%E5%88%86%E4%BA%AB#.E4.B8.BA.E4.B8.8D.E5.90.8C.E5.B9.B3.E5.8F.B0.E5.AE.9A.E4.B9.89.E5.B7.AE.E5.88.AB.E5.8C.96.E5.88.86.E4.BA.AB.E5.86.85.E5.AE.B9
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeDemo());
+		oks.show(this);
+	}
 	//call when popWindow is not shown
 
 	//below are Listener classes
@@ -244,10 +263,13 @@ public class StartActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					String url = "http://mm.10086.cn/mm2011"; // web address
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(url));
-					startActivity(intent);
+					/*打开网页*/
+//					String url = "http://mm.10086.cn/mm2011"; // web address
+//					Intent intent = new Intent(Intent.ACTION_VIEW);
+//					intent.setData(Uri.parse(url));
+//					startActivity(intent);
+					/*分享朋友圈*/
+					showShare(true, WechatMoments.NAME);	
 				}
 			});
 			btn_vote_cancel.setOnClickListener(new OnClickListener() {
