@@ -2,33 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_start_menu"
+    android:background="@drawable/bg_start_menu2"
     android:orientation="vertical" >
 
     <ImageButton
         android:id="@+id/btn_popWindow"
         android:layout_width="49dp"
         android:layout_height="36dp"
-        android:layout_marginRight="10dp"
         android:layout_gravity="right"
-        android:src="@drawable/btn_popwindow"
-        android:gravity="right" />
+        android:layout_marginRight="10dp"
+        android:gravity="right"
+        android:src="@drawable/btn_popwindow" />
 
     <ImageView
         android:id="@+id/imgv_startmenu_role"
-        android:layout_width="166dp"
+        android:layout_width="205dp"
         android:layout_height="200dp"
         android:layout_gravity="center|center_horizontal"
         android:layout_weight="1.10"
+        android:alpha="0"
         android:background="@drawable/ic_role" />
 
     <Button
         android:id="@+id/btn_startmenu_play"
-        android:layout_width="147dp"
-        android:layout_height="86dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_start"
-     />
+        android:background="@drawable/btn_start" />
 
     <Button
         android:id="@+id/btn_startmenu_shop"
