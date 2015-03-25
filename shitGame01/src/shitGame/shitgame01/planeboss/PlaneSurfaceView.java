@@ -9,7 +9,9 @@ import shitGame.shitgame01.R.string;
 import shitGame.shitgame01.activities.LoseActivity;
 import shitGame.shitgame01.activities.StartActivity;
 import shitGame.shitgame01.activities.WinActivity;
+import shitGame.shitgame01.utils.Bag;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -361,13 +363,17 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 					kill = end;
 					if(kill - start > TIMEOUT){
 						flag = false;
+						Intent data = ((Activity) context).getIntent();
+						Bag t_bag = (Bag)data.getSerializableExtra("bag");
 						if(bonus >= TARGET){
 							Intent intent = new Intent(context,WinActivity.class);
+							intent.putExtra("bag", t_bag);
 							intent.putExtra("superBonus", bonus);
 							context.startActivity(intent);
 						}
 						else{
 							Intent intent = new Intent(context,LoseActivity.class);
+							intent.putExtra("bag", t_bag);
 							intent.putExtra("superBonus", bonus);
 							context.startActivity(intent);
 						}
