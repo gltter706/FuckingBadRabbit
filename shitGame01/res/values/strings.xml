@@ -102,7 +102,7 @@
     <string name="share_to_qzone_default">来自%s的分享</string>
     <string name="use_login_button">请改用“登录”按钮</string>
     <string name="share_title">不同平台分享不同内容,</string>
-    <string name="share_to_wechatmoment">分享到微信朋友圈</string>
+    <string name="share_to_wechatmoment">测试朋友圈分享</string>
     <string name="share_to_sina">分享到新浪微博</string>
     <string name="share_to_tencent">分享到腾讯微博</string>
     <string name="share_to_sms">用短信分享</string>
