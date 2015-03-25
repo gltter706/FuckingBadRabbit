@@ -45,9 +45,9 @@ public class SelectItemActivity extends Activity{
 	public String[] boughtString = new String[]{"已购买",
 			"未购买","未购买"};
 	public String[] amount = new String[]{
-			"数量:","数量:","数量:","数量:"
+			"","数量:","数量:","数量:"
 	};
-	public int[] itemAmounts = new int[4];
+	public String[] itemAmounts = new String[4];
 	public String[] needCoin = new String[7];
 	public int coin_draw_id;
 	public int idResource[] = {
@@ -109,7 +109,7 @@ public class SelectItemActivity extends Activity{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				if(0 == itemAmounts[arg2]){
+				if(arg2 != 0 && 0 == Integer.valueOf(itemAmounts[arg2])){
 					Toast.makeText(SelectItemActivity.this, "此道具数目为0!", Toast.LENGTH_LONG).show();
 				}else{
 				if( false == personSelected){
@@ -122,10 +122,10 @@ public class SelectItemActivity extends Activity{
 					}else{
 				iv_current.setImageResource(drawable[arg2]);
 					if(iv_current == iv_selectitem0){
-					   item_1 = items[arg2];
+					   item_1 = items[arg2-1];
 					   cur_selected_item0 = arg2;
 					}else {
-					   item_2 = items[arg2];
+					   item_2 = items[arg2-1];
 					   cur_selected_item1 = arg2;
 					}
 				  }
@@ -171,9 +171,9 @@ public class SelectItemActivity extends Activity{
 	
 	public void initItems(){
 			drawable[0] = R.drawable.ic_null;
-			desc[0] = "取消选择道具/角色";
-			needCoin[0] = "0";
-			itemAmounts[0] = 999999;
+			desc[0] = "取消选择";
+			needCoin[0] = "";
+			itemAmounts[0] = "";
 			amount[0] += itemAmounts[0];
 		for(int i = 0; i < 3; i++){
 			String ItemID = SelectItemActivity.this.
@@ -183,8 +183,8 @@ public class SelectItemActivity extends Activity{
 			drawable[i+1] = item.getDrawableId();
 			desc[i+1] = item.getItemShort();
 			needCoin[i+1] = String.valueOf(item.getCoin());
-			itemAmounts[i+1] = bag.getItem_to_num().get(items[i].getItem_id());
-			amount[i+1] += Integer.toString(itemAmounts[i+1]);
+			itemAmounts[i+1] = String.valueOf(bag.getItem_to_num().get(items[i].getItem_id()));
+			amount[i+1] += itemAmounts[i+1];
 		}
 		for(int i = 4; i < 6; i++){
 			String personItemID = SelectItemActivity.this.
