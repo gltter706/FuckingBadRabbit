@@ -164,7 +164,7 @@ public class SelectItemActivity extends Activity{
 				SelectItemActivity.this.finish();
 			}
 		});
-		createAndShowListView(drawable,needCoin,desc, amount);
+		createAndShowListView(drawable,desc, amount);
 	}
 	
 	
@@ -200,21 +200,17 @@ public class SelectItemActivity extends Activity{
 	}
 	
 	
-	public void createAndShowListView(int[] drawable,String[] needCoin,String[] desc,String[] extra){
+	public void createAndShowListView(int[] drawable,String[] desc,String[] extra){
 		data.clear();
 		for(int i =0; i<desc.length; i++){
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("img", drawable[i]);
-			map.put("coin",coin_draw_id);
-			if(false == personSelected)
-				map.put("coin_amount", needCoin[i]);
-			else
-				map.put("coin_amount", needCoin[i+4]);
+			//map.put("coin",coin_draw_id);
 			map.put("desc", desc[i]);
 			map.put("extra", extra[i]);
 			data.add(map);
 		}
-		SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, R.layout.listitem_selectitem, new String[]{"img","coin","coin_amount","desc","extra"}, new int[]{R.id.iv_listitem,R.id.iv_coin,R.id.tv_coin,R.id.tv_desc_listitem,R.id.tv_extra_listitem});
+		SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, R.layout.listitem_selectitem, new String[]{"img","desc","extra"}, new int[]{R.id.iv_listitem,R.id.tv_desc_listitem,R.id.tv_extra_listitem});
 		lv_selectitem.setAdapter(simpleAdapter);
 	}
 	
@@ -225,7 +221,7 @@ public class SelectItemActivity extends Activity{
 			// TODO Auto-generated method stub
 			iv_current = (ImageView)v;
 			personSelected = false;
-			createAndShowListView(drawable, needCoin, desc, amount);
+			createAndShowListView(drawable,  desc, amount);
 			//如果当前点击的是第一个道具框
 				if(iv_current == iv_selectitem0){
 					//第一个道具框未选过道具而第二个也未选过

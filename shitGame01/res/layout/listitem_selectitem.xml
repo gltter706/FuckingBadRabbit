@@ -12,21 +12,7 @@
         android:layout_alignParentTop="true"
         android:id="@+id/iv_listitem"
         />
-    <ImageView
-        android:id="@+id/iv_coin"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_below="@id/iv_listitem"
-        android:layout_alignLeft="@id/iv_listitem"
-        />
-    <TextView 
-        android:id="@+id/tv_coin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_coin"
-        android:layout_below="@id/iv_listitem"
-        android:layout_alignRight="@id/iv_listitem"
-        />
+   
     </RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
