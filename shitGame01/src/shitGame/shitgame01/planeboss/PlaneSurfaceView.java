@@ -192,7 +192,7 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 				(int) background.getWidth(), (int) background.getHeight(),
 				backgroundMatrix, true));
 		region_launcherBitmap = BitmapFactory.decodeResource(context.getResources(),
-					R.drawable.lic_auncher);
+					R.drawable.paotai);
 		shootBitmap = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_shoot);
 		launcherMatrix = new Matrix();
