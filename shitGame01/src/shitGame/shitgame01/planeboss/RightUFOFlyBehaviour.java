@@ -6,7 +6,7 @@ import shitGame.shitgame01.planeboss.FlyBehaviour;
 public class RightUFOFlyBehaviour implements FlyBehaviour{
 
 	boolean flag = false;
-	double SHAKE = 1;
+	double SHAKE = 1.5;
 	@Override
 	public void fly(double speed, Coordinate cord, double angle,double height) {
 		throw new UnsupportedOperationException();

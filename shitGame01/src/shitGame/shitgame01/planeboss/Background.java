@@ -10,6 +10,7 @@ public class Background {
 	private Matrix matrix;
 	private float height;
 	private float width;
+	private int shake = 0;
 	
 	public Background(Bitmap backBitmap,float loc_x,float loc_y){
 		this.backgrpBitmap = backBitmap;
@@ -20,6 +21,26 @@ public class Background {
 		matrix = new Matrix();
 	}
 
+	public void Shake(){
+		loc_x += 8;
+		loc_y += 4;
+		shake = 17;
+	}
+	public void Reset(){
+		if(0 == shake){
+			return;
+		}
+		if(0 == shake%2){
+			loc_x += 8;
+			loc_y += 4;
+			shake--;
+		}
+		else {
+			loc_x -= 8;
+			loc_y -= 4;
+			shake--;
+		}
+	}
 	public Bitmap getBackgrpBitmap() {
 		return backgrpBitmap;
 	}
@@ -52,16 +73,10 @@ public class Background {
 		this.matrix = matrix;
 	}
 
-	/**
-	 * @return the height
-	 */
 	public float getHeight() {
 		return height;
 	}
 
-	/**
-	 * @param height the height to set
-	 */
 	public void setHeight(float height) {
 		this.height = height;
 	}

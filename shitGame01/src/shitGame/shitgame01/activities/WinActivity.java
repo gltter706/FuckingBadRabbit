@@ -30,12 +30,12 @@ public class WinActivity extends Activity
 	private Bag bag;
 	private int coinBonus = 0;
 	private long timeCost;
-	private final int TIME_LIMIT = 30;
+	private final int TIME_LIMIT = 45;
 	private final int SolidBonus = 1;
-	private final double Weight = 1.2;
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onBackPressed()
-	 */
+	private final double Weight = 1.5;
+	private TextView tv_superBonus;
+	private int boosBonus = -1;
+	private Intent data;
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
@@ -77,7 +77,13 @@ public class WinActivity extends Activity
 		final Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_win);
 		iv_win.startAnimation(animation);
 		
-		Intent data = getIntent();
+		data = getIntent();
+		boosBonus = data.getIntExtra("superBonus", -1);
+		if(boosBonus != -1){
+			tv_superBonus = (TextView)findViewById(R.id.tv_boosBonus);
+			tv_superBonus.setText(shitGame.shitgame01.R.string.boosBonus);
+			tv_superBonus.setText(tv_superBonus.getText().toString() +": "+boosBonus+"!!!");
+		}
 		bag = (Bag)data.getSerializableExtra("bag");
 		timeCost = data.getLongExtra("spend_time", 0xffffff);
 		date = Calendar.getInstance();
@@ -131,9 +137,12 @@ public class WinActivity extends Activity
 	}
 	private void GenBonus(Bag tbag){
 		String coinNum = getResources().getString(R.string.coin);
-		int timeextra =(int) (Weight*(bag.getMission()+1)*(TIME_LIMIT-(int)timeCost));
+		int timeextra = (int)(0.9*(Weight/20*bag.getMission()*TIME_LIMIT-(int)timeCost));
+		timeextra = timeextra > 50 ? 50:timeextra;
 		coinBonus = (timeextra > 0) ?(int) (Weight*( bag.getMission())+SolidBonus)+timeextra : (int) (Weight*( bag.getMission())+SolidBonus);	
 		tbag.sumItem(WinActivity.this);
+		if(boosBonus != -1)
+			coinBonus += boosBonus;
 		tbag.writeItem(WinActivity.this,coinNum ,tbag.getCoinInt()+coinBonus);
 		Bundle bundle = new Bundle();
 		Message msg = new Message();

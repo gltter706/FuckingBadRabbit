@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import shitGame.shitgame01.R;
-import shitGame.shitgame01.R.string;
 import shitGame.shitgame01.activities.LoseActivity;
-import shitGame.shitgame01.activities.StartActivity;
 import shitGame.shitgame01.activities.WinActivity;
 import shitGame.shitgame01.utils.Bag;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +33,8 @@ import android.view.SurfaceView;
 public class PlaneSurfaceView extends SurfaceView implements Callback {
 	private final float ROLEH = 20;
 	private final float ROLEW = 20;
+	private float fly_initX;
+	private float fly_initY;
 	private ArrayList<UFO> al_ufo = new ArrayList<UFO>();
 	private Background background;
 	private Matrix backgroundMatrix;
@@ -56,18 +57,26 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 	private double power;
 	private Protagonist protagonist;
 	private boolean flag;
+	private boolean port;
 	private boolean release = false;
 	private final int stamp = 50;
-	private int PRO_INIT_X = 0;
-	private int PRO_INIT_Y;
-	private Bitmap proBitmap;
-	private Matrix proMatrix;
-	private Bitmap boomBitmap;
-	private Matrix boomMatrix;
+	private float PRO_INIT_X = 0;
+	private float PRO_INIT_Y;
+	
 	private Bitmap launcherBitmap;
+	private Bitmap crackBitmap;
+	private Bitmap shootBitmap;
+	private Bitmap region_launcherBitmap;
+	private Bitmap proBitmap;
+	private Bitmap fly_proBitmap;
+	private Bitmap boomBitmap;
+	private Matrix crackMatrix;
+	private Matrix boomMatrix;
+	private Matrix fly_proMatrix;
 	private Matrix launcherMatrix;
+	private Matrix proMatrix;
 	private long TIMEOUT = 60000;
-	private int TARGET = 30;
+	private int TARGET = 50;
 	private int bonus;
 	
 	private void drawLauncher(Canvas canvas,Paint paint){
@@ -148,15 +157,23 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 		this.width = getWidth();
 		this.height = getHeight();
 
-		planeH = height / 20;
-		planeW = width / 20;
+		planeH = height / 15;
+		planeW = width / 15;
 		launcherW = height /10;
 		launcherH = width/10;
 
+		port = false;
 		roleH = ROLEH;
 		roleW = ROLEW;
 
 		//init all the bitmap
+		
+		crackBitmap = BitmapFactory.decodeResource(context.getResources(),
+				R.drawable.ic_boom);
+		crackMatrix = new Matrix();
+		crackMatrix.postScale(planeW / crackBitmap.getWidth(),
+				planeH / crackBitmap.getHeight());
+		
 		boomBitmap = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_ufo_boom);
 		boomMatrix = new Matrix();
@@ -174,13 +191,15 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 				background.getBackgrpBitmap(), 0, 0,
 				(int) background.getWidth(), (int) background.getHeight(),
 				backgroundMatrix, true));
-		launcherBitmap = BitmapFactory.decodeResource(context.getResources(),
+		region_launcherBitmap = BitmapFactory.decodeResource(context.getResources(),
 					R.drawable.lic_auncher);
+		shootBitmap = BitmapFactory.decodeResource(context.getResources(),
+				R.drawable.ic_shoot);
 		launcherMatrix = new Matrix();
-		launcherMatrix.postScale((float)0.2,(float)0.2);
+		launcherMatrix.postScale((float)0.6,(float)0.6);
 	
-		launcherBitmap = Bitmap.createBitmap(launcherBitmap, 0, 0, 
-				launcherBitmap.getWidth(),launcherBitmap.getHeight(),launcherMatrix,true);
+		launcherBitmap = Bitmap.createBitmap(region_launcherBitmap, 0, 0, 
+				region_launcherBitmap.getWidth(),region_launcherBitmap.getHeight(),launcherMatrix,true);
 		
 		proBitmap = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.square);
@@ -189,8 +208,11 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 				roleH / proBitmap.getHeight());
 		proBitmap = Bitmap.createBitmap(proBitmap, 0, 0, proBitmap.getWidth(),
 				proBitmap.getHeight(), proMatrix, true);
-		PRO_INIT_X = (int) ( launcherBitmap.getWidth()/2 + proBitmap.getWidth()/2);
-		PRO_INIT_Y = (int) (height - launcherBitmap.getHeight()/2 - launcherBitmap.getHeight()/2);
+		PRO_INIT_X = launcherBitmap.getWidth()/2 - proBitmap.getWidth()/2;
+		PRO_INIT_Y = height - launcherBitmap.getHeight()/2 - proBitmap.getHeight()/2 ;
+		
+		fly_initX = PRO_INIT_X;
+		fly_initY = PRO_INIT_Y;
 		endTouch = new Coordinate(PRO_INIT_X + proBitmap.getWidth()/2,PRO_INIT_Y + proBitmap.getHeight()/2 );
 		protagonist = new Protagonist(new ProFlyBehaviour(), PRO_INIT_X,
 				PRO_INIT_Y, proBitmap);
@@ -251,7 +273,29 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 					&& PRO_INIT_Y == protagonist.getLoc_y()) {
 				protagonist.setSpeed((int) power / 5);
 			}
+			if(!port){
+				fly_initX = (float) (PRO_INIT_X + launcherBitmap.getWidth() *Math.cos(angle));
+				fly_initY = (float) (PRO_INIT_Y - launcherBitmap.getHeight() * Math.sin(angle));
+				protagonist.setLoc_x(fly_initX);
+				protagonist.setLoc_y(fly_initY);
+				port = true;
+			}
+			
 			protagonist.fly(angle, height);
+			
+			launcherMatrix = new Matrix();
+			launcherMatrix.postScale((float)0.6,(float)0.6);
+			
+			launcherBitmap = Bitmap.createBitmap(shootBitmap, 0, 0, 
+					shootBitmap.getWidth(),shootBitmap.getHeight(),launcherMatrix,true);
+			
+		}
+		else{
+			port = false;
+			launcherMatrix = new Matrix();
+			launcherMatrix.postScale((float)0.6,(float)0.6);
+			launcherBitmap = Bitmap.createBitmap(region_launcherBitmap, 0, 0, 
+					region_launcherBitmap.getWidth(),region_launcherBitmap.getHeight(),launcherMatrix,true);
 		}
 		for (int i = 0; i != al_ufo.size(); i++) {
 			UFO tmp = al_ufo.get(i);
@@ -271,13 +315,23 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 							protagonist.getLoc_x() + protagonist.getWidth(),
 							protagonist.getLoc_y() + protagonist.getHeight()))) {
 				release = false;
+				proMatrix = new Matrix();
+				proMatrix.postScale(roleW / proBitmap.getWidth(),
+						roleH / proBitmap.getHeight());
+				proBitmap = Bitmap.createBitmap(proBitmap, 0, 0, proBitmap.getWidth(),
+						proBitmap.getHeight(), proMatrix, true);
 				protagonist.setLoc_x(PRO_INIT_X);
 				protagonist.setLoc_y(PRO_INIT_Y);
-				Bitmap tmp_Bitmap = Bitmap.createBitmap(boomBitmap, 0, 0,boomBitmap.getWidth(),
-						boomBitmap.getHeight(),boomMatrix,true);
+				protagonist.setFigure(proBitmap);
+				Bitmap tmp_Bitmap = Bitmap.createBitmap(crackBitmap, 0, 0,crackBitmap.getWidth(),
+						crackBitmap.getHeight(),crackMatrix,true);
 				al_ufo.get(i).Boom(tmp_Bitmap);
 				bonus += tmp.getBonus();
+				background.Shake();
 				genUfo();
+			}
+			else{
+				background.Reset();
 			}
 		}
 	}
@@ -287,7 +341,7 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 		try {
 			if (canvas != null) {
 				canvas.drawColor(Color.WHITE);
-				canvas.drawBitmap(background.getBackgrpBitmap(), 0, 0, paint);
+				canvas.drawBitmap(background.getBackgrpBitmap(), background.getLoc_x(), background.getLoc_y(), paint);
 				drawLauncher(canvas,paint);
 				drawTime(canvas, paint, timeOut);
 				drawRecord(canvas, paint);
@@ -299,7 +353,9 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 					}
 					else{
 						drawFlyAbs(tmp, canvas, planeW, planeH,paint);
-						if(tmp.Crack())
+						Bitmap tmp_Bitmap = Bitmap.createBitmap(boomBitmap, 0, 0,boomBitmap.getWidth(),
+								boomBitmap.getHeight(),boomMatrix,true);
+						if(tmp.Crack(tmp_Bitmap))
 							al_ufo.remove(i);
 					}
 				}
@@ -364,17 +420,22 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 					if(kill - start > TIMEOUT){
 						flag = false;
 						Intent data = ((Activity) context).getIntent();
+						long timecost = data.getLongExtra("spend_time", 0xfffff);
 						Bag t_bag = (Bag)data.getSerializableExtra("bag");
 						if(bonus >= TARGET){
+							bonus = bonus/2;
 							Intent intent = new Intent(context,WinActivity.class);
 							intent.putExtra("bag", t_bag);
 							intent.putExtra("superBonus", bonus);
+							intent.putExtra("spend_time", timecost);
 							context.startActivity(intent);
 						}
 						else{
+							bonus = bonus/5;
 							Intent intent = new Intent(context,LoseActivity.class);
 							intent.putExtra("bag", t_bag);
 							intent.putExtra("superBonus", bonus);
+							intent.putExtra("spend_time", timecost);
 							context.startActivity(intent);
 						}
 					}

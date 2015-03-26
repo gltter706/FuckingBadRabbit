@@ -38,6 +38,14 @@
                 android:layout_height="wrap_content"
                 android:background="#0000"
                 android:text="获得金币:" />
+             <TextView
+                android:textSize="27dp"
+                android:textColor="#00DD77"
+                android:id="@+id/tv_loosesuperBonus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout

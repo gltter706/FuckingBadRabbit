@@ -106,5 +106,6 @@
     <string name="share_to_sina">分享到新浪微博</string>
     <string name="share_to_tencent">分享到腾讯微博</string>
     <string name="share_to_sms">用短信分享</string>
+    <string name="boosBonus">特殊关卡奖励:</string>
 
 </resources>

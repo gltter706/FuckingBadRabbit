@@ -40,6 +40,8 @@ public class LoseActivity extends Activity
 	private final int TIME_LIMIT = 15;
 	private final int SolidBonus = 1;
 	private final double Weight = 0.05;
+	private TextView tv_superBonus;
+	private int boosBonus = -1;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onBackPressed()
 	 */
@@ -85,7 +87,14 @@ public class LoseActivity extends Activity
 		final Button btn_replayButton = (Button) findViewById(R.id.btn_losecontinue);
 		final Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_lose);
 		iv_lose.startAnimation(animation);
+		
 		Intent data = getIntent();
+		boosBonus = data.getIntExtra("superBonus", -1);
+		if(boosBonus != -1){
+			tv_superBonus = (TextView)findViewById(R.id.tv_boosBonus);
+			tv_superBonus.setText(shitGame.shitgame01.R.string.boosBonus);
+			tv_superBonus.setText(tv_superBonus.getText().toString() +": "+boosBonus+"!!!");
+		}
 		bag = (Bag)data.getSerializableExtra("bag");
 		timeCost = data.getLongExtra("spend_time", 0xffffff);
 		date = Calendar.getInstance();
@@ -134,6 +143,8 @@ public class LoseActivity extends Activity
 		}
 		
 		tbag.sumItem(LoseActivity.this);
+		if(boosBonus != -1)
+			coinBonus += boosBonus;
 		tbag.writeItem(LoseActivity.this,coinNum ,tbag.getCoinInt()+coinBonus);
 		Bundle bundle = new Bundle();
 		Message msg = new Message();

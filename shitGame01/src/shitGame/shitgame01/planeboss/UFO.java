@@ -12,7 +12,7 @@ public class UFO extends FlyAbs{
 		super(flyBehaviour, loc_x, loc_y,figure); 
 		this.width = figure.getWidth();
 		this.height = figure.getHeight();
-		speed = 30;
+		speed = 35;
 		value = VALUE;
 		isBoom = false;
 	}
@@ -34,11 +34,14 @@ public class UFO extends FlyAbs{
 		isBoom = true;
 	}
 	
-	public boolean Crack(){
+	public boolean Crack(Bitmap boom){
 		crack ++;
 		if(4 == crack){
 			destroyed();
 			return true;
+		}
+		else if(2 == crack){
+			setFigure(boom);
 		}
 		return false;
 	}
