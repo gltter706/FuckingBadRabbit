@@ -429,6 +429,7 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 							intent.putExtra("superBonus", bonus);
 							intent.putExtra("spend_time", timecost);
 							context.startActivity(intent);
+							((Activity) context).finish();
 						}
 						else{
 							bonus = bonus/5;
@@ -437,6 +438,7 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 							intent.putExtra("superBonus", bonus);
 							intent.putExtra("spend_time", timecost);
 							context.startActivity(intent);
+							((Activity) context).finish();
 						}
 					}
 					if (end - begin < stamp) {

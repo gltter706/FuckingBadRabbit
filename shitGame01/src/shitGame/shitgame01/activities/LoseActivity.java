@@ -91,7 +91,7 @@ public class LoseActivity extends Activity
 		Intent data = getIntent();
 		boosBonus = data.getIntExtra("superBonus", -1);
 		if(boosBonus != -1){
-			tv_superBonus = (TextView)findViewById(R.id.tv_boosBonus);
+			tv_superBonus = (TextView)findViewById(R.id.tv_loosesuperBonus);
 			tv_superBonus.setText(shitGame.shitgame01.R.string.boosBonus);
 			tv_superBonus.setText(tv_superBonus.getText().toString() +": "+boosBonus+"!!!");
 		}
