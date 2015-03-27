@@ -22,11 +22,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor = "#e7DE91"
         android:id="@+id/tv_shortdesc"
         />
     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#e7DE91"
         android:id="@+id/tv_bagstore"
 		/>
     </LinearLayout>
@@ -47,7 +49,7 @@
         />
         <TextView 
             android:gravity="center"
-            android:textColor="#e7DD77"
+            android:textColor="#e7DE71"
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,12 +58,13 @@
     </LinearLayout>
 	<Button 
 	    android:layout_toRightOf="@id/liyt_buybtn"
-	    android:layout_marginTop="40dp"
+	    android:layout_marginTop="37dp"
+	    android:layout_marginLeft="10dp"
 	    android:background="#00ff"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="+"
-	    android:textSize="25dp"
+	    android:textSize="28dp"
 	    android:textColor="@drawable/btn_shop_color_selector1_1"
 	    android:id="@+id/btn_buybtn"/>
 </RelativeLayout>

@@ -62,6 +62,11 @@ public class WinActivity extends Activity
 						+ minuteString + " 分 "+secondString +" 秒 ";
 				tv_costtime.setText(display);
 			}
+			if(0x112 == msg.what){
+				tv_superBonus = (TextView)findViewById(R.id.tv_boosBonus);
+				tv_superBonus.setText(shitGame.shitgame01.R.string.bossBonus);
+				tv_superBonus.setText(tv_superBonus.getText().toString() +": "+boosBonus+"!!!");
+			}
 		}
 	}
 	@Override
@@ -80,9 +85,7 @@ public class WinActivity extends Activity
 		data = getIntent();
 		boosBonus = data.getIntExtra("superBonus", -1);
 		if(boosBonus != -1){
-			tv_superBonus = (TextView)findViewById(R.id.tv_boosBonus);
-			tv_superBonus.setText(shitGame.shitgame01.R.string.bossBonus);
-			tv_superBonus.setText(tv_superBonus.getText().toString() +": "+boosBonus+"!!!");
+			myHandler.sendEmptyMessage(0x112);
 		}
 		bag = (Bag)data.getSerializableExtra("bag");
 		timeCost = data.getLongExtra("spend_time", 0xffffff);

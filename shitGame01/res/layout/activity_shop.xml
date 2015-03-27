@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/bg_start_menu2" >
+    android:background="@drawable/bg_shop" >
     <LinearLayout 
      	android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -29,6 +29,7 @@
             android:id="@+id/tv_longdesc"
             android:layout_alignRight="@id/iv_imagedesc"
             android:layout_below="@id/iv_imagedesc"
+            android:textColor="#e7DE71"
             />
     </RelativeLayout>
     
@@ -49,7 +50,8 @@
     	        android:fontFamily="sans-serif-light"
     	        android:layout_width="wrap_content"
     	        android:layout_height="wrap_content"
-    	        android:id="@+id/tv_bagcoin"/>
+    	        android:id="@+id/tv_bagcoin"
+    	        android:textColor="#e7DE71"/>
       		 
     	    <ImageView 
     	        android:src="@drawable/ic_coin"

@@ -22,9 +22,9 @@
     <string name="star_short">五角星</string>
     <string name="hexagon_short">六边形</string>
     <string name="coin_short">金币</string>
-    <string name="speed_up_long">注射鸡血，短时间内大幅提升速度</string>
-    <string name="speed_down_long">背后吓一跳，精神萎靡速度大幅降低</string>
-    <string name="shield_long">几何人的防御工具，看起来挺像盾牌的</string>
+    <string name="speed_up_long">注射鸡血，短时间内大幅提升速度,持续5秒</string>
+    <string name="speed_down_long">背后吓一跳，精神萎靡速度大幅降低，持续5秒</string>
+    <string name="shield_long">几何人的防御工具，能撑上12秒</string>
     <string name="angel_long">得到天使的眷顾，死而复生</string>
     <string name="round_long">圆圆,***</string>
     <string name="star_long">五角星,***</string>
