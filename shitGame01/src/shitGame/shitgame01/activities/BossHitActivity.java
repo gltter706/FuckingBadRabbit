@@ -74,7 +74,7 @@ public class BossHitActivity extends Activity {
 		tv_goal.setTextColor(Color.RED);
 		tv_hitNumber = (TextView)findViewById(R.id.tv_hitNumber);
 		tv_hitNumber.setText("你打中了" + hitNumber + "只地屎!");
-		tv_hitNumber.setTextColor(Color.YELLOW);
+		tv_hitNumber.setTextColor(Color.RED);
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		widthPixels = dm.widthPixels;
