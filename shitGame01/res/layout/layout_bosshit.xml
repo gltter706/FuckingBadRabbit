@@ -1,0 +1,127 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+        <LinearLayout android:id="@+id/row1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+            <ImageView   
+            android:id="@+id/image1"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            
+            >  
+            </ImageView>  
+              
+             <ImageView   
+            android:id="@+id/image2"   
+            android:src="@drawable/thehole"    
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>   
+              
+            <ImageView   
+            android:id="@+id/image3"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>  
+            </LinearLayout>
+            
+            <LinearLayout  android:id="@+id/row2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/row1"
+            android:layout_alignLeft="@id/row1"
+            >
+            <ImageView   
+            android:id="@+id/image4"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>  
+              
+             <ImageView   
+            android:id="@+id/image5"   
+            android:src="@drawable/thehole"    
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>   
+              
+            <ImageView   
+            android:id="@+id/image6"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>
+            </LinearLayout>
+            
+            <LinearLayout  android:id="@+id/row3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignLeft="@id/row2"
+            android:layout_below="@id/row2"
+            >
+             <ImageView   
+            android:id="@+id/image7"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>  
+              
+             <ImageView   
+            android:id="@+id/image8"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>   
+              
+            <ImageView   
+            android:id="@+id/image9"   
+            android:src="@drawable/thehole"   
+            android:layout_width="wrap_content"   
+            android:layout_height="wrap_content"
+            >  
+            </ImageView>  
+            </LinearLayout>
+      
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/row1"
+        >
+            <TextView  android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+            />
+             <TextView  android:id="@+id/tv_goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+            />
+            <TextView  android:id="@+id/tv_hitNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:textSize="20sp"
+            />
+    </LinearLayout>
+   
+    </RelativeLayout>

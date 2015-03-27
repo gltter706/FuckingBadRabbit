@@ -7,6 +7,8 @@ import com.example.map2.EnemyInfo;
 import com.example.map2.Global;
 
 import shitGame.shitgame01.R;
+import shitGame.shitgame01.activities.BossHitActivity;
+import shitGame.shitgame01.activities.BossPlaneActivity;
 import shitGame.shitgame01.activities.LoseActivity;
 import shitGame.shitgame01.activities.StartActivity;
 import shitGame.shitgame01.activities.WinActivity;
@@ -227,11 +229,13 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 		int start_rectF_col=global.ALL_MAP.elementAt(cur_selected_mission_num).start_wall_num-10*start_rectF_row;
 		float start_x=start_rectF_col*wallW+wallW/2-10;
 		float start_y=start_rectF_row*wallH+wallH/2-10;
+		
+		Log.e("Lin", wallW+"######");
 		//初始化主角，包括平时状态，道具3态位图，大小，起始坐标
 		if(bag.getSelected_role()==null)
 		{
 			Bitmap role_bmp=BitmapFactory.decodeResource(getResources(), R.drawable.square);
-			player=new Player(start_x,start_y,15,15,screenW,screenH,role_bmp,
+			player=new Player(start_x,start_y,(int)(3*wallW/17),(int)(3*wallW/17),screenW,screenH,role_bmp,
 					BitmapFactory.decodeResource(getResources(), R.drawable.square_in_speedup),
 					BitmapFactory.decodeResource(getResources(), R.drawable.square_in_speeddown),
 					BitmapFactory.decodeResource(getResources(), R.drawable.square_in_shield));//player is 20px*20px
@@ -337,10 +341,26 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				bag.setSelected_2(null);
 			end_time=System.currentTimeMillis();
 			spend_time=end_time-start_time-pause_time;
-			Intent intent=new Intent(context, WinActivity.class);
-			intent.putExtra("spend_time", spend_time);
-			intent.putExtra("bag", bag);
-			context.startActivity(intent);
+			if(cur_selected_mission_num==9)//开启第一个BOSS关
+			{
+				Intent intent=new Intent(context, BossPlaneActivity.class);
+				intent.putExtra("spend_time", spend_time);
+				intent.putExtra("bag", bag);
+				context.startActivity(intent);
+			}
+			else if(cur_selected_mission_num==19)//开启第一个BOSS关
+			{
+				Intent intent=new Intent(context, BossHitActivity.class);
+				intent.putExtra("spend_time", spend_time);
+				intent.putExtra("bag", bag);
+				context.startActivity(intent);
+			}
+			else {
+				Intent intent=new Intent(context, WinActivity.class);
+				intent.putExtra("spend_time", spend_time);
+				intent.putExtra("bag", bag);
+				context.startActivity(intent);
+			}
 			flag=false;
 			((Activity)context).finish();
 		}
@@ -503,14 +523,28 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item1_counter++;
 			}
 		}
-		if(item1_counter==1190)//持续3s之后
+		if(item1_counter==99)//计时到5S的时候
 		{
-			item1_counter=0;
-			item1_ON=false;
 			if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+			{
 				player.speed-=1;
+				item1_counter=0;
+				item1_ON=false;
+			}
 			if(item1_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+			{
 				player.speed+=1;
+				item1_counter=0;
+				item1_ON=false;
+			}
+		}
+		if(item1_counter==239)//计时到12S的时候
+		{
+			if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+			{
+				item1_counter=0;
+				item1_ON=false;
+			}
 					
 		}
 		if(item2_ON)
@@ -532,14 +566,30 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item2_counter++;
 			}
 		}
-		if(item2_counter==1190)//持续3s之后
+		if(item2_counter==99)//计时到5S的时候
 		{
-			item2_counter=0;
-			item2_ON=false;
 			if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_up)))
+			{
 				player.speed-=1;
+				item2_counter=0;
+				item2_ON=false;
+			}
 			if(item2_copy.getItem_id().equals(getResources().getString(R.string.speed_down)))
+			{
 				player.speed+=1;
+				item2_counter=0;
+				item2_ON=false;
+			}
+		}
+		if(item2_counter==239)//持续12s之后
+		{
+			
+			if(item2_copy.getItem_id().equals(getResources().getString(R.string.shield)))
+			{
+				item2_counter=0;
+				item2_ON=false;
+			}
+				
 					
 		}
 	}
@@ -608,7 +658,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 	public void show_pause_Dlg()
 	{
 		AlertDialog.Builder builder=new AlertDialog.Builder(context);
-		builder.setMessage("Pause");
+		//builder.setMessage("Pause");
 		View view=LayoutInflater.from(context).inflate(R.layout.pause_dlg_main, null);
 		final ImageButton pause_btn0=(ImageButton) view.findViewById(R.id.pause_dlg_btn0);
 		final ImageButton pause_btn1=(ImageButton) view.findViewById(R.id.pause_dlg_btn1);
