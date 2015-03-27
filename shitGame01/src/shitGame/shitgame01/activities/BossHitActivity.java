@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,7 +47,7 @@ public class BossHitActivity extends Activity {
 	TextView tv_hitNumber = null;
 	
 	int hitNumber = 0;
-	int goal = 40;
+	int goal = 48;
 	int widthPixels,heightPixels = 0;
 	int ImageViewHeight,ImageViewWidth = 0;
 	@Override
@@ -67,10 +68,13 @@ public class BossHitActivity extends Activity {
 		PublicData.makeMouseTime = 700;
 		tv_time = (TextView)findViewById(R.id.tv_time);
 		tv_time.setText("时间" + "0s");
+		tv_time.setTextColor(Color.RED);
 		tv_goal = (TextView)findViewById(R.id.tv_goal);
 		tv_goal.setText("目标:" + goal + "只");
+		tv_goal.setTextColor(Color.RED);
 		tv_hitNumber = (TextView)findViewById(R.id.tv_hitNumber);
 		tv_hitNumber.setText("你打中了" + hitNumber + "只地屎!");
+		tv_hitNumber.setTextColor(Color.YELLOW);
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		widthPixels = dm.widthPixels;
@@ -117,7 +121,14 @@ public class BossHitActivity extends Activity {
 	}
 		
 
-	
+	public void stopAllTheThreads(){
+		makeMouseThread.setRunOrStop(false);
+		timeCounterThread.setRunOrStop(false);
+		backHoleThread.setRunOrStop(false);
+		makeMouseThread.interrupt();
+		timeCounterThread.interrupt();
+		backHoleThread.interrupt();
+	}
 	
 	
 	
@@ -216,14 +227,10 @@ public class BossHitActivity extends Activity {
 			if(0x111 == msg.what){
 				int currentTime = msg.arg1;
 				tv_time.setText("时间:" + currentTime + "s");
+				
 				if(0 == currentTime){
+					stopAllTheThreads();
 					if(hitNumber < goal){
-						makeMouseThread.setRunOrStop(false);
-						timeCounterThread.setRunOrStop(false);
-						backHoleThread.setRunOrStop(false);
-						makeMouseThread.interrupt();
-						timeCounterThread.interrupt();
-						backHoleThread.interrupt();
 						Intent newIntent = new Intent(BossHitActivity.this,LoseActivity.class);
 						newIntent.putExtra("bag", bag);
 						newIntent.putExtra("spend_time", spend_time);
@@ -258,8 +265,6 @@ public class BossHitActivity extends Activity {
 						
 
 					}else{
-						
-						
 						Intent newIntent = new Intent(BossHitActivity.this,WinActivity.class);
 						newIntent.putExtra("bag", bag);
 						newIntent.putExtra("spend_time", spend_time);

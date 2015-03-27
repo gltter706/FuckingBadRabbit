@@ -54,9 +54,7 @@ public class SelectItemActivity extends Activity{
 			shitGame.shitgame01.R.string.speed_up,
 			shitGame.shitgame01.R.string.speed_down,
 			shitGame.shitgame01.R.string.shield,
-			shitGame.shitgame01.R.string.round,
-			shitGame.shitgame01.R.string.star,
-			shitGame.shitgame01.R.string.hexagon,
+			
 	};
 	private ImageView iv_current = null;
 	private ImageView iv_selectitem0 = null;
@@ -186,6 +184,7 @@ public class SelectItemActivity extends Activity{
 			itemAmounts[i+1] = String.valueOf(bag.getItem_to_num().get(items[i].getItem_id()));
 			amount[i+1] += itemAmounts[i+1];
 		}
+		/*
 		for(int i = 4; i < 6; i++){
 			String personItemID = SelectItemActivity.this.
 			getResources().getString(idResource[i]);
@@ -196,7 +195,7 @@ public class SelectItemActivity extends Activity{
 			personDesc[i-4] = personItem.getItemShort();
 			needCoin[i] = String.valueOf(personItem.getCoin());
 		}
-		
+		*/
 	}
 	
 	
