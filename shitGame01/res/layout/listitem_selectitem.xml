@@ -21,6 +21,7 @@
         android:layout_toRightOf="@id/Rlyt"
         android:layout_margin="20dp"
         android:id="@+id/tv_desc_listitem"
+        android:textColor="#e7DE91"
         />
 	<TextView
 	    android:layout_width="wrap_content"
@@ -29,5 +30,6 @@
         android:id="@+id/tv_extra_listitem"
 		android:layout_centerVertical="true"
 		android:layout_alignParentRight="true"
+		android:textColor="#e7DE91"
         />
 </RelativeLayout>
