@@ -308,6 +308,9 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 		//do the bumping check
 		for (int i = 0; i != al_ufo.size(); i++) {
 			UFO tmp = al_ufo.get(i);
+			if(tmp.getIsBoom()){
+				continue;
+			}
 			if (true == bumpWithRect(
 					new RectF(tmp.getLoc_x(), tmp.getLoc_y(), tmp.getLoc_x()
 							+ tmp.getWidth(), tmp.getLoc_y() + tmp.getHeight()),
@@ -323,6 +326,9 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 				protagonist.setLoc_x(PRO_INIT_X);
 				protagonist.setLoc_y(PRO_INIT_Y);
 				protagonist.setFigure(proBitmap);
+				crackMatrix = new Matrix();
+				crackMatrix.postScale(planeW / crackBitmap.getWidth(),
+						planeH / crackBitmap.getHeight());
 				Bitmap tmp_Bitmap = Bitmap.createBitmap(crackBitmap, 0, 0,crackBitmap.getWidth(),
 						crackBitmap.getHeight(),crackMatrix,true);
 				al_ufo.get(i).Boom(tmp_Bitmap);
