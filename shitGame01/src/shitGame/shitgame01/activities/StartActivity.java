@@ -1,26 +1,33 @@
 package shitGame.shitgame01.activities;
 
 
-import shitGame.shitgame01.onekeyshare.OnekeyShare;
-import shitGame.shitgame01.onekeyshare.ShareContentCustomizeDemo;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.wechat.moments.WechatMoments;
+import cn.sharesdk.wechat.utils.WXMediaMessage;
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.constant.AppConstant;
 import shitGame.shitgame01.interfaces.MusicController;
 import shitGame.shitgame01.services.PlayMusicService;
+import shitGame.shitgame01.wxapi.Constants;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -31,19 +38,18 @@ public class StartActivity extends Activity {
 
 	private final String TAG = "activity.StartActivity";
 	private PopupWindow mPop;
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_menu);
-
+//    	api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
+//	    api.registerApp(Constants.APP_ID);  
 		// 设置btn_start
-		Button bt_start = (Button) findViewById(R.id.btn_startmenu_play);
+		ImageButton bt_start = (ImageButton) findViewById(R.id.btn_startmenu_play);
 		bt_start.setOnClickListener(new PlayButtonListener());
 
 		// 设置btn_shop
-		Button bt_shop = (Button) findViewById(R.id.btn_startmenu_shop);
+		ImageButton bt_shop = (ImageButton) findViewById(R.id.btn_startmenu_shop);
 		bt_shop.setOnClickListener(new ShopButtonListener());
 
 		// 设置imageView
@@ -98,7 +104,7 @@ public class StartActivity extends Activity {
 		SharedPreferences sharedPreferences = getSharedPreferences("data",
 				MODE_PRIVATE);
 		int is_music_on = sharedPreferences.getInt("is_music_on",
-				AppConstant.MusicPlayState.PLAY_STATE_PLAYING);
+				AppConstant.MusicPlayState.PLAY_STATE_PAUSE);
 		int curScene = AppConstant.MusicPlayState.SCENE_NOT_BATTLING;
 		
 		MusicController musicController = new MusicController();
@@ -159,25 +165,51 @@ public class StartActivity extends Activity {
 		dlg.show();
 		}
 	private void showShare(boolean silent, String platform){
-		final OnekeyShare oks = new OnekeyShare();
-		oks.setNotification(R.drawable.ic_launcher, this.getString(R.string.app_name));
-		//不同平台的分享参数，请看文档
-		//http://wiki.mob.com/Android_%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9%E7%9A%84%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E
-		String text = this.getString(R.string.share_title) + "http://www.mob.com";
-		oks.setTitle("share title");		
-		oks.setText(text);
-		//oks.setSilent(silent);
-		oks.setDialogMode();
-		oks.disableSSOWhenAuthorize();
-		if (platform != null) {
-			oks.setPlatform(platform);
-		}
-		// 去自定义不同平台的字段内容
-		// http://wiki.mob.com/Android_%E5%BF%AB%E6%8D%B7%E5%88%86%E4%BA%AB#.E4.B8.BA.E4.B8.8D.E5.90.8C.E5.B9.B3.E5.8F.B0.E5.AE.9A.E4.B9.89.E5.B7.AE.E5.88.AB.E5.8C.96.E5.88.86.E4.BA.AB.E5.86.85.E5.AE.B9
-		oks.setShareContentCustomizeCallback(new ShareContentCustomizeDemo());
-		oks.show(this);
+//		WXWebpageObject webpage = new WXWebpageObject();
+//		webpage.webpageUrl = "http://www.baidu.com";
+//		com.tencent.mm.sdk.openapi.WXMediaMessage msg = new com.tencent.mm.sdk.openapi.WXMediaMessage(webpage);
+//		msg.title = "WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title WebPage Title Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
+//		msg.description = "WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
+//		Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_role);
+//		msg.thumbData = Util.bmpToByteArray(thumb, true);
+//
+//		SendMessageToWX.Req req = new SendMessageToWX.Req();
+//		Log.d(TAG, "showshare");
+//		req.transaction = buildTransaction("webpage");
+//		Log.d(TAG, "showshare1");
+//		req.message = msg;
+//		Log.d(TAG, "showshare2");
+//		req.scene = SendMessageToWX.Req.WXSceneTimeline;
+//		Log.d(TAG, "showshare3");
+//		api.sendReq(req);
+//		Log.d(TAG, "showshare5");
+		ShareSDK.initSDK(this);
+		 OnekeyShare oks = new OnekeyShare();
+		 //关闭sso授权
+		 oks.disableSSOWhenAuthorize(); 
+		 
+		// 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+		 //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+		 // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		 oks.setTitle("分享到朋友圈");
+		 // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+//		 oks.setTitleUrl("http://sharesdk.cn");
+		 // text是分享文本，所有平台都需要这个字段
+		 oks.setText("我是分享文本");
+		 // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//		 oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+		 // url仅在微信（包括好友和朋友圈）中使用
+		 oks.setUrl("http://dev.10086.cn/mm2011");
+		 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+//		 oks.setComment("我是测试评论文本");
+		 // site是分享此内容的网站名称，仅在QQ空间使用
+//		 oks.setSite(getString(R.string.app_name));
+		 // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+//		 oks.setSiteUrl("http://sharesdk.cn");
+		 
+		// 启动分享GUI
+		 oks.show(this);
 	}
-	//call when popWindow is not shown
 
 	//below are Listener classes
     private class PlayButtonListener implements OnClickListener{
@@ -198,7 +230,12 @@ public class StartActivity extends Activity {
 				Intent intent = new Intent(StartActivity.this,SelectMissionActivity.class);
 				startActivity(intent);
 			}
-		}}
+			
+			
+		}
+
+
+}
     
     private class ShopButtonListener implements OnClickListener {
 
@@ -208,6 +245,8 @@ public class StartActivity extends Activity {
 			Intent intent = new Intent(StartActivity.this,ShopActivity.class);
 			startActivity(intent);
 		}
+
+
 	}
     
     private class RolerListener implements OnClickListener {
@@ -270,6 +309,9 @@ public class StartActivity extends Activity {
 //					startActivity(intent);
 					/*分享朋友圈*/
 					showShare(true, WechatMoments.NAME);	
+					dialog.dismiss();
+					mPop.dismiss();
+				
 				}
 			});
 			btn_vote_cancel.setOnClickListener(new OnClickListener() {

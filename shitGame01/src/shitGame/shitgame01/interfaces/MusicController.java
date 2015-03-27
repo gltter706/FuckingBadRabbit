@@ -26,12 +26,12 @@ public class MusicController {
 			SendBroadcast(AppConstant.MusicPlayController.MUSIC_SCENE_CHANGE);
 			return;
 		 }
-		 if(playState!=AppConstant.MusicPlayState.CURRENT_PLAY_STATE){
+		 else if(playState!=AppConstant.MusicPlayState.CURRENT_PLAY_STATE){
 			AppConstant.MusicPlayState.CURRENT_PLAY_STATE=playState;
 			SendBroadcast(AppConstant.MusicPlayController.MUSIC_STATE_CHANGE);
 			return;
 		 }
-		SendBroadcast(AppConstant.MusicPlayController.MUSIC_CHECK_HEALTH);
+		 else SendBroadcast(AppConstant.MusicPlayController.MUSIC_CHECK_HEALTH);
 		 
 	}
 	 

@@ -7,10 +7,11 @@
 
     <ImageButton
         android:id="@+id/btn_popWindow"
-        android:layout_width="49dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="10dp"
+        android:background="#00ffffff"
         android:gravity="right"
         android:src="@drawable/btn_popwindow" />
 
@@ -23,18 +24,21 @@
         android:alpha="0"
         android:background="@drawable/ic_role" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_startmenu_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_start" />
+        android:background="#0000"
+        android:src="@drawable/btn_start_pic_selector" />
 
-    <Button
+
+    <ImageButton
         android:id="@+id/btn_startmenu_shop"
         android:layout_width="77dp"
         android:layout_height="55dp"
-        android:background="@drawable/btn_startmenu_shop"
-        android:gravity="left" />
+        android:background="#0000"
+        android:gravity="left"
+        android:src="@drawable/btn_startmenu_shop_pic_selector" />
 
 </LinearLayout>

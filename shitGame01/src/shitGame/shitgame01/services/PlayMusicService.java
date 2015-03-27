@@ -80,9 +80,11 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 			case AppConstant.MusicPlayController.MUSIC_STATE_CHANGE:
 				Log.d(TAG,"onReceive3");
 				changeMusicStates();
+				break;
 			case AppConstant.MusicPlayController.MUSIC_CHECK_HEALTH:
 				Log.d(TAG, "OnHealthCheck");
 				musicHealthCheck();
+				break;
 			default:
 				break;
 			}
@@ -113,6 +115,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 				break;
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
+				mMediaPlayer.reset();
 				mMediaPlayer = MediaPlayer
 						.create(this,
 								AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
@@ -126,6 +129,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 				break;
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
+				mMediaPlayer.reset();
 				mMediaPlayer = MediaPlayer
 						.create(this,
 								AppConstant.MusicPlayData.CURRENT_MISIC_LIST[AppConstant.MusicPlayData.CURRENT_MISIC_INDEX]);
