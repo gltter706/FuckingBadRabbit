@@ -30,7 +30,7 @@ public class Item implements Serializable{
 			shitGame.shitgame01.R.drawable.ic_angel,
 			shitGame.shitgame01.R.drawable.ic_circle,
 			shitGame.shitgame01.R.drawable.ic_star,
-			shitGame.shitgame01.R.drawable.ic_hexagon,
+
 	 };
 	private int idResource[] = {
 			shitGame.shitgame01.R.string.speed_up,
