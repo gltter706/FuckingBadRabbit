@@ -107,13 +107,31 @@ public class StartActivity extends Activity {
 	}
 
 	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Intent sendIntent = new Intent(AppConstant.MusicPlayVariate.CTL_ACTION);
+		sendIntent.putExtra(AppConstant.MusicPlayController.MUSIC_CONTROL_STR,
+				AppConstant.MusicPlayController.MUSIC_CHECK_HEALTH);
+		Log.d(TAG,"sendBroadcast");
+		this.sendBroadcast(sendIntent);
+	}
+
+
+
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		super.finish();
+		Log.d(TAG, "onfinish");
 		Intent intent = new Intent(StartActivity.this, PlayMusicService.class);
 		stopService(intent);
+		super.finish();
+		
 	}
+
+
 
 	@Override
 	public void onBackPressed() {
@@ -141,8 +159,9 @@ public class StartActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(1);
+				Intent intent = new Intent(StartActivity.this, PlayMusicService.class);
+				stopService(intent);
+
 			}
 		});
 		btn_exit_cancel.setOnClickListener(new OnClickListener() {

@@ -23,6 +23,7 @@ public class MusicController {
 		 if(playScene!=AppConstant.MusicPlayState.CURRENT_MISIC_SCENE){
 			 Log.d(TAG,"atScene");
 			AppConstant.MusicPlayState.CURRENT_MISIC_SCENE=playScene;
+			AppConstant.MusicPlayState.CURRENT_PLAY_STATE=playState;
 			SendBroadcast(AppConstant.MusicPlayController.MUSIC_SCENE_CHANGE);
 			return;
 		 }

@@ -1,6 +1,7 @@
 package shitGame.shitgame01.services;
 
 import shitGame.shitgame01.constant.AppConstant;
+import android.app.Application;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -54,6 +55,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 		Editor editor=sharedPreferences.edit();
 		editor.putInt("is_music_on", AppConstant.MusicPlayState.CURRENT_PLAY_STATE);
 		editor.commit();
+		Log.d(TAG, "destroy");
 		unregisterReceiver(serviceReceiver);
 		unregisterReceiver(homeKeyReceiver);
 	    AppConstant.MusicPlayState.CURRENT_MISIC_SCENE=AppConstant.MusicPlayState.SCENE_BATTLING;
@@ -62,6 +64,8 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 			mMediaPlayer.release();
 			mMediaPlayer = null;
 		}
+		android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
 		
     }
  
@@ -96,7 +100,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			mMediaPlayer.pause();
+			if(mMediaPlayer.isPlaying())mMediaPlayer.pause();
 		}
     	
     	
@@ -177,7 +181,7 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 	}
 	  
 	private void musicHealthCheck(){
-		if((!mMediaPlayer.isPlaying()&&AppConstant.MusicPlayState.CURRENT_PLAY_STATE==AppConstant.MusicPlayState.PLAY_STATE_PLAYING)||
+		if(((!mMediaPlayer.isPlaying())&&AppConstant.MusicPlayState.CURRENT_PLAY_STATE==AppConstant.MusicPlayState.PLAY_STATE_PLAYING)||
 				(mMediaPlayer.isPlaying()&&AppConstant.MusicPlayState.CURRENT_PLAY_STATE==AppConstant.MusicPlayState.PLAY_STATE_PAUSE))
 			changeMusicStates();
 	}
@@ -206,19 +210,17 @@ public class PlayMusicService extends Service implements Runnable,MediaPlayer.On
 		}
 		
 	 }
-    
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 	@Override
 	public void onCompletion(MediaPlayer mp) {
 		// TODO Auto-generated method stub
 		
 	}
- 
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 }
