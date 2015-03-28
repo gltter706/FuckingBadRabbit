@@ -2,12 +2,18 @@ package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
 
+import android.R.integer;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class FirstPlayDisplayActivity extends Activity {
@@ -16,9 +22,9 @@ public class FirstPlayDisplayActivity extends Activity {
 	final int frameOfCartoon=4;          //修改漫画总帧数
 	private GestureDetector gestureDetector;
 	int counter=0;
-	private LinearLayout layout;
+	private int[] cartoon_id = new int[frameOfCartoon];
+	private ImageView iv_cartoon;
 	long starttime = System.currentTimeMillis();// 记录动画创建时间
-
 	/*
 	 * 最好不用currnetTimeMillis()，如果用户修改系统时间会影响结果
 	 */
@@ -27,9 +33,12 @@ public class FirstPlayDisplayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_start_firstplay);
-		layout = (LinearLayout) findViewById(R.id.layout_first_play);
+		cartoon_id[0] = R.drawable.bg_cartoon_firstplay1;
+		cartoon_id[1] = R.drawable.bg_cartoon_firstplay2;
+		cartoon_id[2] = R.drawable.bg_cartoon_firstplay3;
+		cartoon_id[3] = R.drawable.bg_cartoon_firstplay4;
+		iv_cartoon = (ImageView) findViewById(R.id.layout_first_play);
 		// this.init_pic();
-		Log.d(TAG, "init");
 		gestureDetector = new GestureDetector(FirstPlayDisplayActivity.this,
 				new GestureDetector.OnGestureListener() {
 
@@ -73,6 +82,9 @@ public class FirstPlayDisplayActivity extends Activity {
 							if (counter < frameOfCartoon-1) {
 								Log.d(TAG, "flingright");
 								counter++;
+								((BitmapDrawable)(iv_cartoon.getDrawable())).getBitmap().recycle();
+								iv_cartoon.setImageResource(cartoon_id[counter]);
+//							    layout.setBackground(cartoonDrawables[counter]);
 							} else {
 								Log.d(TAG, "flingright_finish");
 								Intent intent = new Intent(
@@ -84,11 +96,10 @@ public class FirstPlayDisplayActivity extends Activity {
 							}
 
 						} else if (e2.getX() - e1.getX() >0 && counter > 0) {
-							Log.d(TAG, "flingleft");
-								counter--;
+//							Log.d(TAG, "flingleft");
+//								counter--;
 						}
-						layout.setBackgroundResource(R.drawable.bg_cartoon_firstplay1
-								+ counter);
+						
 						return false;
 					}
 				});

@@ -68,11 +68,9 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 	private Bitmap shootBitmap;
 	private Bitmap region_launcherBitmap;
 	private Bitmap proBitmap;
-	private Bitmap fly_proBitmap;
 	private Bitmap boomBitmap;
 	private Matrix crackMatrix;
 	private Matrix boomMatrix;
-	private Matrix fly_proMatrix;
 	private Matrix launcherMatrix;
 	private Matrix proMatrix;
 	private long TIMEOUT = 60000;

@@ -188,9 +188,9 @@ public class StartActivity extends Activity {
 			SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 			boolean is_first_play = sharedPreferences.getBoolean("is_first_play", true);
 			if (is_first_play) {
-				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putBoolean("is_first_play", false);
-				editor.commit();
+//				SharedPreferences.Editor editor = sharedPreferences.edit();
+//				editor.putBoolean("is_first_play", false);
+//				editor.commit();
 				Intent intent = new Intent(StartActivity.this,FirstPlayDisplayActivity.class);
 				startActivity(intent);
 			} else {

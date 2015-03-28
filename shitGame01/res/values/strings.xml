@@ -35,6 +35,6 @@
     <string name="itemblock">道具</string>
     <string name="dlg_exit_sure">确定</string>
     <string name="dlg_exit_cancel">取消</string>
-    <string name="bossBonus">特殊关卡奖励:</string>
-
+    <string name="bossBonus">特殊关卡奖励</string>
+	<string name="go_plane">Go</string>
 </resources>

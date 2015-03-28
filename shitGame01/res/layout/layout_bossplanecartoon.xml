@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ImageView
+        android:id="@+id/iv_planecartoon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_cartoon_firstplay7" />
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:gravity="bottom|right">
+	    
+	    
+	    <Button
+                android:gravity="center|bottom"
+                android:id="@+id/btn_losecontinue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:background="@drawable/btn_sum_color_selector1_1"
+                android:textColor="#fff"
+                android:onClick="beginBoss"
+                android:text="@string/go_plane" />
+	</LinearLayout>
+</FrameLayout>
