@@ -409,6 +409,120 @@ public class Global {
 	ALL_MAP.add(mapinfo22);
 	
 	int map_array23[][]=new int[][]{
+			{-1,0,1,-2,0,0,0,0,2,0},
+			{0,0,1,0,0,0,1,0,0,0},
+			{1,0,2,1,0,0,0,1,1,1},
+			{1,0,1,1,0,0,0,0,0,0},
+			{1,0,0,0,0,1,1,1,1,1},
+			{1,0,1,1,0,0,0,0,0,0},
+			{1,0,0,0,1,0,0,0,0,0},
+			{1,1,1,0,0,1,0,0,0,1},
+			{0,0,0,0,0,1,1,1,1,0},
+			{0,0,1,1,1,0,0,0,0,1}};
+	int change_wall_num23[]=new int[]{46,56,78,79};
+	
+	MapInfo mapinfo23=new MapInfo(map_array23,change_wall_num23,90,95);
+	mapinfo23.add_enemy(new EnemyInfo(63, 3, 1));
+	mapinfo23.add_enemy(new EnemyInfo(34, 3, 1));
+	mapinfo23.add_enemy(new EnemyInfo(5, 3, 1));
+	mapinfo23.add_enemy(new EnemyInfo(57, 3, 1));
+	mapinfo23.add_key(new Key(0, true, new int[]{88}));
+	mapinfo23.add_key(new Key(3, true, new int[]{49}));
+	ALL_MAP.add(mapinfo23);
+	
+	int map_array24[][]=new int[][]{
+			{1,1,1,0,1,0,2,0,1,-2},
+			{0,0,0,0,1,0,0,0,1,0},
+			{0,0,1,0,1,1,1,1,0,0},
+			{0,0,1,0,1,0,0,0,0,0},
+			{1,1,1,0,1,0,0,0,1,1},
+			{0,0,0,1,0,1,1,1,0,0},
+			{1,0,1,0,0,0,0,0,0,0},
+			{1,0,0,0,0,1,1,0,2,0},
+			{1,0,0,-1,0,0,0,0,1,1},
+			{1,0,0,1,1,1,1,1,1,0}};
+	int change_wall_num24[]=new int[]{53,63};
+	
+	MapInfo mapinfo24=new MapInfo(map_array24,change_wall_num24,20,99);
+	mapinfo24.add_enemy(new EnemyInfo(72, 3, 1));
+	mapinfo24.add_enemy(new EnemyInfo(54, 3, 1));
+	mapinfo24.add_enemy(new EnemyInfo(35, 2, 1));
+	mapinfo24.add_enemy(new EnemyInfo(37, 2, 1));
+	mapinfo24.add_enemy(new EnemyInfo(29, 2, 1));
+	mapinfo24.add_key(new Key(83, true, new int[]{25}));
+	mapinfo24.add_key(new Key(9, true, new int[]{89}));
+	ALL_MAP.add(mapinfo24);
+	
+	int map_array25[][]=new int[][]{
+			{0,0,0,1,0,0,1,1,1,1},
+			{0,0,0,1,1,1,0,0,0,0},
+			{1,1,0,1,2,0,1,0,0,0},
+			{0,0,0,1,1,0,1,0,1,-2},
+			{1,0,1,0,1,0,1,1,1,1},
+			{1,0,0,0,0,0,1,0,0,0},
+			{0,1,1,1,1,1,1,1,1,0},
+			{0,0,0,0,0,1,0,0,0,0},
+			{0,0,0,1,0,0,0,1,0,0},
+			{0,2,0,1,0,0,0,1,1,-1}};
+	int change_wall_num25[]=new int[]{};
+	
+	MapInfo mapinfo25=new MapInfo(map_array25,change_wall_num25,0,4);
+	mapinfo25.add_enemy(new EnemyInfo(52, 3, 2));
+	mapinfo25.add_enemy(new EnemyInfo(72, 3, 1));
+	mapinfo25.add_enemy(new EnemyInfo(84, 3, 2));
+	mapinfo25.add_enemy(new EnemyInfo(77, 3, 2));
+	mapinfo25.add_enemy(new EnemyInfo(27, 3, 2));
+	mapinfo25.add_key(new Key(99, true, new int[]{47}));
+	mapinfo25.add_key(new Key(39, true, new int[]{6}));
+	ALL_MAP.add(mapinfo25);
+	
+	
+	int map_array26[][]=new int[][]{
+			{0,0,1,1,1,1,0,0,3,0},
+			{0,0,0,0,2,1,1,0,0,0},
+			{1,1,1,0,1,1,1,1,1,1},
+			{1,0,0,0,1,0,0,0,0,0},
+			{0,0,0,1,0,0,1,1,1,1},
+			{0,0,1,1,0,1,0,0,4,0},
+			{0,3,1,1,0,1,0,0,0,0},
+			{1,1,-2,1,0,1,0,1,0,0},
+			{0,0,-1,1,4,0,0,0,0,1},
+			{2,0,1,1,1,1,1,1,0,0}};
+	int change_wall_num26[]=new int[]{64,65,76,77,88,89};
+	
+	MapInfo mapinfo26=new MapInfo(map_array26,change_wall_num26,0,99);
+	mapinfo26.add_enemy(new EnemyInfo(31, 3, 1));
+	mapinfo26.add_enemy(new EnemyInfo(36, 3, 2));
+	mapinfo26.add_key(new Key(82, false, new int[]{78,79}));
+	mapinfo26.add_key(new Key(72, true, new int[]{27}));
+	ALL_MAP.add(mapinfo26);
+	
+	
+	int map_array27[][]=new int[][]{
+			{0,3,0,0,1,0,1,0,2,0},
+			{0,0,0,0,0,1,1,0,0,0},
+			{1,1,1,0,1,0,1,1,1,0},
+			{-2,0,1,1,1,0,0,1,0,0},
+			{0,0,0,0,0,0,0,0,1,0},
+			{1,1,0,0,0,1,1,1,3,0},
+			{0,2,1,0,1,0,0,0,1,0},
+			{1,0,1,0,0,0,1,1,-1,0},
+			{0,0,1,0,1,0,1,1,1,1},
+			{0,0,1,1,0,1,0,0,0,0}};
+	int change_wall_num27[]=new int[]{87,97};
+	
+	MapInfo mapinfo27=new MapInfo(map_array27,change_wall_num27,90,99);
+	mapinfo27.add_enemy(new EnemyInfo(3, 3, 1));
+	mapinfo27.add_enemy(new EnemyInfo(43, 3, 1));
+	mapinfo27.add_enemy(new EnemyInfo(25, 3, 1));
+	mapinfo27.add_enemy(new EnemyInfo(65, 3, 1));
+	mapinfo27.add_enemy(new EnemyInfo(29, 3, 1));
+	mapinfo27.add_key(new Key(78, true, new int[]{24}));
+	mapinfo27.add_key(new Key(30, true, new int[]{86}));
+	ALL_MAP.add(mapinfo27);
+	
+	
+	int map_array28[][]=new int[][]{
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
@@ -419,89 +533,6 @@ public class Global {
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0}};
-	int change_wall_num23[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
-	
-	MapInfo mapinfo23=new MapInfo(map_array23,change_wall_num23,0,99);
-	//mapinfo23.add_vector(null);
-	ALL_MAP.add(mapinfo23);
-	
-	int map_array24[][]=new int[][]{{0,0,0,1,0,0,1,1,1,1},
-			{1,1,0,1,0,0,1,0,0,0},
-			{0,0,1,1,1,1,1,0,1,0},
-			{0,0,0,0,0,0,0,0,1,0},
-			{1,0,1,1,1,1,1,1,0,0},
-			{1,0,1,0,0,0,0,0,0,0},
-			{1,0,1,1,1,1,1,1,1,0},
-			{1,0,1,0,0,0,0,0,1,0},
-			{1,0,1,1,0,1,1,0,1,0},
-			{0,0,0,0,0,1,1,0,0,0}};
-	int change_wall_num24[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
-	
-	MapInfo mapinfo24=new MapInfo(map_array24,change_wall_num24,0,99);
-	//mapinfo24.add_vector(null);
-	ALL_MAP.add(mapinfo24);
-	
-	int map_array25[][]=new int[][]{{0,0,0,1,0,0,1,1,1,1},
-			{1,1,0,1,0,0,1,0,0,0},
-			{0,0,1,1,1,1,1,0,1,0},
-			{0,0,0,0,0,0,0,0,1,0},
-			{1,0,1,1,1,1,1,1,0,0},
-			{1,0,1,0,0,0,0,0,0,0},
-			{1,0,1,1,1,1,1,1,1,0},
-			{1,0,1,0,0,0,0,0,1,0},
-			{1,0,1,1,0,1,1,0,1,0},
-			{0,0,0,0,0,1,1,0,0,0}};
-	int change_wall_num25[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
-	
-	MapInfo mapinfo25=new MapInfo(map_array25,change_wall_num25,0,99);
-	//mapinfo25.add_vector(null);
-	ALL_MAP.add(mapinfo25);
-	
-	
-	int map_array26[][]=new int[][]{{0,0,0,1,0,0,1,1,1,1},
-			{1,1,0,1,0,0,1,0,0,0},
-			{0,0,1,1,1,1,1,0,1,0},
-			{0,0,0,0,0,0,0,0,1,0},
-			{1,0,1,1,1,1,1,1,0,0},
-			{1,0,1,0,0,0,0,0,0,0},
-			{1,0,1,1,1,1,1,1,1,0},
-			{1,0,1,0,0,0,0,0,1,0},
-			{1,0,1,1,0,1,1,0,1,0},
-			{0,0,0,0,0,1,1,0,0,0}};
-	int change_wall_num26[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
-	
-	MapInfo mapinfo26=new MapInfo(map_array26,change_wall_num26,0,99);
-	//mapinfo26.add_vector(null);
-	ALL_MAP.add(mapinfo26);
-	
-	
-	int map_array27[][]=new int[][]{{0,0,0,1,0,0,1,1,1,1},
-			{1,1,0,1,0,0,1,0,0,0},
-			{0,0,1,1,1,1,1,0,1,0},
-			{0,0,0,0,0,0,0,0,1,0},
-			{1,0,1,1,1,1,1,1,0,0},
-			{1,0,1,0,0,0,0,0,0,0},
-			{1,0,1,1,1,1,1,1,1,0},
-			{1,0,1,0,0,0,0,0,1,0},
-			{1,0,1,1,0,1,1,0,1,0},
-			{0,0,0,0,0,1,1,0,0,0}};
-	int change_wall_num27[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
-	
-	MapInfo mapinfo27=new MapInfo(map_array27,change_wall_num27,0,99);
-	//mapinfo27.add_vector(null);
-	ALL_MAP.add(mapinfo27);
-	
-	
-	int map_array28[][]=new int[][]{{0,0,0,1,0,0,1,1,1,1},
-			{1,1,0,1,0,0,1,0,0,0},
-			{0,0,1,1,1,1,1,0,1,0},
-			{0,0,0,0,0,0,0,0,1,0},
-			{1,0,1,1,1,1,1,1,0,0},
-			{1,0,1,0,0,0,0,0,0,0},
-			{1,0,1,1,1,1,1,1,1,0},
-			{1,0,1,0,0,0,0,0,1,0},
-			{1,0,1,1,0,1,1,0,1,0},
-			{0,0,0,0,0,1,1,0,0,0}};
 	int change_wall_num28[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
 	
 	MapInfo mapinfo28=new MapInfo(map_array28,change_wall_num28,0,99);

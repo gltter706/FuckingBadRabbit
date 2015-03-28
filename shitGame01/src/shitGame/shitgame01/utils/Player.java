@@ -31,7 +31,8 @@ public class Player
 		this.h=h;
 		this.right=true;
 		this.up=false;
-		this.speed=3;
+		this.speed=(int)(3*screenW/850);
+		Log.e("Lin", ""+speed);
 		this.screenW=screenW;
 		this.screenH=screenH;
 		
