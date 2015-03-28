@@ -238,42 +238,45 @@ public class StartActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			AlertDialog.Builder builder=new AlertDialog.Builder(StartActivity.this);
-			View view = LayoutInflater.from(StartActivity.this).inflate(
-					R.layout.dlg_startact_vote, null);
-			builder.setView(view);
-			final AlertDialog dialog=builder.create();
-			final ImageButton btn_vote_ok=(ImageButton) view.findViewById(R.id.btn_vote_ok);
-			final ImageButton btn_vote_cancel=(ImageButton) view.findViewById(R.id.btn_vote_cancel);
-			btn_vote_ok.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					/*打开网页*/
+//			AlertDialog.Builder builder=new AlertDialog.Builder(StartActivity.this);
+//			View view = LayoutInflater.from(StartActivity.this).inflate(
+//					R.layout.dlg_startact_vote, null);
+//			builder.setView(view);
+//			final AlertDialog dialog=builder.create();
+//			final ImageButton btn_vote_ok=(ImageButton) view.findViewById(R.id.btn_vote_ok);
+//			final ImageButton btn_vote_cancel=(ImageButton) view.findViewById(R.id.btn_vote_cancel);
+//			btn_vote_ok.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					/*打开网页*/
 //					String url = "http://mm.10086.cn/mm2011"; // web address
 //					Intent intent = new Intent(Intent.ACTION_VIEW);
 //					intent.setData(Uri.parse(url));
 //					startActivity(intent);
-					/*分享朋友圈*/
-					showShare();	
-					dialog.dismiss();
-					mPop.dismiss();
-				
-				}
-			});
-			btn_vote_cancel.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					dialog.dismiss();
-				}
-			});
-			dialog.show();
-
+//					/*分享朋友圈*/
+//
+//					dialog.dismiss();
+//					mPop.dismiss();
+//					showShare();	
+//
+//				}
+//			});
+//			btn_vote_cancel.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					dialog.dismiss();
+//				}
+//			});
+//			dialog.show();
+//
+//		}
+			mPop.dismiss();
+			showShare();	
 		}
-		
 	}
     
     private class FeedbackListener implements OnClickListener {
@@ -334,15 +337,15 @@ public class StartActivity extends Activity {
     	// 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
     	 //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
     	 // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-//    	 oks.setTitle(getString(R.string.share));
+    	 oks.setTitle(getString(R.string.share));
     	 // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
 //    	 oks.setTitleUrl("http://sharesdk.cn");
     	 // text是分享文本，所有平台都需要这个字段
-    	 oks.setText("我是分享文本");
+    	 oks.setText("太好玩了，大家快下来玩啊~下载支持我们！下载地址猛戳：http://dev.10086.cn/mm2011");
     	 // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//    	 oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+    	 oks.setImageUrl("http://img2.ph.126.net/qp9n3ARK25_N8d7Z6CxPOg==/6630918232117649981.png");//确保SDcard下面存在此张图片
     	 // url仅在微信（包括好友和朋友圈）中使用
-    	 oks.setUrl("http://sharesdk.cn");
+//    	 oks.setUrl("http://dev.10086.cn/mm2011");
     	 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //    	 oks.setComment("我是测试评论文本");
     	 // site是分享此内容的网站名称，仅在QQ空间使用

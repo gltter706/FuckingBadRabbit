@@ -94,15 +94,15 @@
         SortId="4"
         AppId="wxc89b890b216d7b83"
         AppSecret="5e14e0f84ca3de6e4fa0d7e6cd8ec41b"
-        BypassApproval="false"
-        Enable="true" />
+        BypassApproval="true"
+        Enable="false" />
     
     <WechatMoments
         Id="5"
         SortId="5"
         AppId="wxc89b890b216d7b83"
         AppSecret="5e14e0f84ca3de6e4fa0d7e6cd8ec41b"
-        BypassApproval="false"
+        BypassApproval="true"
         Enable="true" />
         
 	<WechatFavorite
@@ -110,7 +110,7 @@
         SortId="6"
         AppId="wxc89b890b216d7b83"
         AppSecret="5e14e0f84ca3de6e4fa0d7e6cd8ec41b"
-        Enable="true" />
+        Enable="false" />
     
 	<QQ
         Id="7"
