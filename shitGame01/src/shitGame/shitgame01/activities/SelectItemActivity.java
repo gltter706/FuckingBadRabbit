@@ -168,7 +168,7 @@ public class SelectItemActivity extends Activity{
 	
 	
 	public void initItems(){
-			drawable[0] = R.drawable.ic_null;
+			drawable[0] = R.drawable.ic_nullcancel;
 			desc[0] = "取消选择";
 			needCoin[0] = "";
 			itemAmounts[0] = "";
