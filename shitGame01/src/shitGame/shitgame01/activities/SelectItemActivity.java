@@ -62,11 +62,13 @@ public class SelectItemActivity extends Activity{
 	private ImageView iv_selectitem2 = null;
 	private ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
 	private boolean personSelected = false;
+	private boolean cancelSelected = false;
 	private int cur_selected_mission = 0;
 	//第一个道具框选中的道具编号
 	private int cur_selected_item0 = -1;
 	//第二个道具框选中的道具编号
 	private int cur_selected_item1 = -1;
+	private int cur_item_number = 0;
 	private Bag bag = null;
 	private Item item_1 = null,item_2 = null,role_item = null;
 	@Override
@@ -107,7 +109,8 @@ public class SelectItemActivity extends Activity{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				if(arg2 != 0 && 0 == Integer.valueOf(itemAmounts[arg2])){
+				
+				if(arg2 != 0 && 1 == Integer.valueOf(itemAmounts[arg2]) && (arg2 == cur_selected_item0 || arg2 == cur_selected_item1)){
 					Toast.makeText(SelectItemActivity.this, "此道具数目为0!", Toast.LENGTH_LONG).show();
 				}else{
 				if( false == personSelected){
