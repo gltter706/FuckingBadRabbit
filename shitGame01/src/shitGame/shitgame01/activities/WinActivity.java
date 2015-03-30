@@ -99,8 +99,11 @@ public class WinActivity extends Activity
 //		editor.putInt("cur_mission_num", 0);  
 //		editor.commit();  
 		unlock_mission_num = sharedPreferences.getInt("cur_mission_num", 0);
-		if(unlock_mission_num == MISSION - 1)
-			btn_continueButton.setEnabled(false);
+		if(unlock_mission_num == MISSION - 1){
+			Intent intent = new Intent(WinActivity.this,FinishActivity.class);
+			startActivity(intent);
+			WinActivity.this.finish();
+		}
 		if(unlock_mission_num == cur_selected_mission){
 			SharedPreferences.Editor editor;
 			editor=sharedPreferences.edit(); 
@@ -129,20 +132,14 @@ public class WinActivity extends Activity
 				boolean plane_control = sharedPreferences.getBoolean("plane_control", false);
 				boolean hit_control = sharedPreferences.getBoolean("hit_control", false);
 				if(10 == cur_selected_mission){
-					SharedPreferences.Editor editor = sharedPreferences.edit();
-					editor.putBoolean("plane_control", true);
-					editor.commit();
-					Intent newIntent = new Intent(WinActivity.this, PlaneControlActivity.class);
+					Intent newIntent = new Intent(WinActivity.this, PlaneEndActivity.class);
 					newIntent.putExtra("bag", bag);
 					newIntent.putExtra("spend_time", timeCost);
 					startActivity(newIntent);
 				}
-				else if(20 == cur_selected_mission){
-					SharedPreferences.Editor editor = sharedPreferences.edit();
-					editor.putBoolean("hit_control", true);
-					editor.commit();
+				else if(19 == cur_selected_mission){	
 					Intent newIntent = new Intent(WinActivity.this,
-							HitControlActivity.class);
+							HitEndActivity.class);
 					newIntent.putExtra("bag", bag);
 					newIntent.putExtra("spend_time", timeCost);
 					startActivity(newIntent);
