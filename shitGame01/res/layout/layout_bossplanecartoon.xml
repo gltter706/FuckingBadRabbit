@@ -21,8 +21,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
+                android:id="@+id/btn_planecartoon"
                 android:background="@drawable/btn_sum_color_selector1_1"
                 android:textColor="#fff"
+                android:visibility="invisible"
                 android:onClick="beginBoss"
                 android:text="@string/go_plane" />
 	</LinearLayout>

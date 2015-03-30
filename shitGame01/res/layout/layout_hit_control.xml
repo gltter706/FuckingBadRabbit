@@ -6,8 +6,8 @@
     <ImageView 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/control_des1"
-    	android:id="@+id/iv_control"
+        android:src="@drawable/plane_control1"
+    	android:id="@+id/iv_hit_control"
     	android:scaleType="fitXY"/>
     
 

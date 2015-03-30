@@ -4,6 +4,7 @@ import shitGame.shitgame01.R;
 import shitGame.shitgame01.utils.Bag;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.opengl.Visibility;
 import android.os.Bundle;
@@ -96,10 +97,32 @@ public class BossPlaneCartoon extends Activity {
 	}
 
 	public void beginBoss(View v) {
-		newIntent = new Intent(BossPlaneCartoon.this, BossPlaneActivity.class);
-		newIntent.putExtra("bag", bag);
-		newIntent.putExtra("spend_time", spend_time);
-		startActivity(newIntent);
-		BossPlaneCartoon.this.finish();
+		SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+		boolean plane_control = sharedPreferences.getBoolean("plane_control", false);
+		if (!plane_control) {
+			plane_control = true;
+			SharedPreferences.Editor editor = sharedPreferences.edit();
+			editor.putBoolean("plane_control", true);
+			editor.commit();
+			newIntent = new Intent(BossPlaneCartoon.this, PlaneControlActivity.class);
+			newIntent.putExtra("bag", bag);
+			newIntent.putExtra("spend_time", spend_time);
+			startActivity(newIntent);
+			BossPlaneCartoon.this.finish();
+		} else {
+			newIntent = new Intent(BossPlaneCartoon.this, BossPlaneActivity.class);
+			newIntent.putExtra("bag", bag);
+			newIntent.putExtra("spend_time", spend_time);
+			startActivity(newIntent);
+			BossPlaneCartoon.this.finish();
+			startActivity(newIntent);
+		}
 	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		return gestureDetector.onTouchEvent(event);
+	}
+	
 }
