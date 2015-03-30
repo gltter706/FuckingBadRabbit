@@ -99,11 +99,7 @@ public class WinActivity extends Activity
 //		editor.putInt("cur_mission_num", 0);  
 //		editor.commit();  
 		unlock_mission_num = sharedPreferences.getInt("cur_mission_num", 0);
-		if(cur_selected_mission == MISSION - 1){
-			Intent intent = new Intent(WinActivity.this,FinishActivity.class);
-			startActivity(intent);
-			WinActivity.this.finish();
-		}
+		
 		if(unlock_mission_num == cur_selected_mission){
 			SharedPreferences.Editor editor;
 			editor=sharedPreferences.edit(); 
@@ -135,6 +131,11 @@ public class WinActivity extends Activity
 					Intent newIntent = new Intent(WinActivity.this, PlaneEndActivity.class);
 					newIntent.putExtra("cur_selected_mission", cur_selected_mission+1);
 					startActivity(newIntent);
+				}
+				else if(cur_selected_mission == MISSION - 1){
+					Intent intent = new Intent(WinActivity.this,FinishActivity.class);
+					startActivity(intent);
+					WinActivity.this.finish();
 				}
 				else if(19 == cur_selected_mission){	
 					Intent newIntent = new Intent(WinActivity.this,
