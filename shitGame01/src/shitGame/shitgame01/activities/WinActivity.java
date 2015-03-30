@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.utils.Bag;
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 public class WinActivity extends Activity
 {
 	Calendar date;
+	private final int MISSION = 30;
 	boolean unlock = false;
 	private MyHandler myHandler;
 	private Bag bag;
@@ -100,7 +102,11 @@ public class WinActivity extends Activity
 		if(unlock_mission_num == cur_selected_mission){
 			SharedPreferences.Editor editor;
 			editor=sharedPreferences.edit(); 
-			editor.putInt("cur_mission_num", unlock_mission_num+1);  
+			int next_mission = unlock_mission_num + 1 > MISSION ? unlock_mission_num : unlock_mission_num + 1;
+			if(next_mission == 29){
+				btn_continueButton.setEnabled(false);
+			}
+			editor.putInt("cur_mission_num", next_mission);  
 			editor.commit();  
 			unlock = true;
 		}
