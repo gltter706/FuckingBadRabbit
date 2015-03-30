@@ -8,10 +8,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class HitControlActivity extends Activity{
-	final int frameOfCartoon = 4; // 修改漫画总帧数
+	final int frameOfCartoon = 2; // 修改漫画总帧数
 	private GestureDetector gestureDetector;
 	private int counter = 0;
 	private int[] cartoon_id = new int[frameOfCartoon];
@@ -22,13 +23,11 @@ public class HitControlActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent getIntent = getIntent();
-		setContentView(R.layout.layout_bosshitcartoon);
+		setContentView(R.layout.layout_hit_control);
 		spend_time = getIntent.getLongExtra("spend_time", 0xfffff);
 		bag = (Bag) getIntent.getSerializableExtra("bag");
-		cartoon_id[0] = R.drawable.plane_control1;
-		cartoon_id[1] = R.drawable.plane_control2;
-		cartoon_id[2] = R.drawable.plane_control3;
-		cartoon_id[3] = R.drawable.plane_control4;
+		cartoon_id[0] = R.drawable.hit_control1;
+		cartoon_id[1] = R.drawable.hit_control2;
 
 		iv_cartoon = (ImageView) findViewById(R.id.iv_hit_control);
 		// this.init_pic();

@@ -69,7 +69,7 @@ public class Bag implements Serializable{
 		roundInt = sharedPreferences.getInt(roundString, 0);
 		starInt = sharedPreferences.getInt(starString, 0);
 		hexagonInt = sharedPreferences.getInt(hexagonString, 0);
-		coinInt = sharedPreferences.getInt("coin", 10000);
+		coinInt = sharedPreferences.getInt("coin", 0);
 		
 		item_to_num.put(speedupString,new Integer(speedupInt));
 		item_to_num.put(speeddownString, speeddownInt);
