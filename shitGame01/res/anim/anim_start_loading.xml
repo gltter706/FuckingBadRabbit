@@ -4,7 +4,7 @@ xmlns:android="http://schemas.android.com/apk/res/android" >
 
 <item android:duration="2000" android:drawable="@drawable/bg_cartoon_firstplay1" />
 <item android:duration="2000" android:drawable="@drawable/bg_cartoon_firstplay2" />
-<item android:duration="2000" android:drawable="@drawable/bg_cartoon_firstplay3" />
+<item android:duration="2000" android:drawable="@drawable/bg_hit_cartoon1" />
 <item android:duration="10" android:drawable="@drawable/bg_cartoon_firstplay4" />
 
 </animation-list>

@@ -107,7 +107,31 @@
             android:name=".activities.BossPlaneCartoon"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:theme="@android.style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+         <activity 
+            android:name=".activities.HitCartoonActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+         <activity 
+            android:name=".activities.HitEndActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+         <activity 
+            android:name=".activities.PlaneEndActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+         <activity 
+            android:name=".activities.ControlActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name="cn.sharesdk.framework.ShareSDKUIShell"
