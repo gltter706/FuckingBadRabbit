@@ -99,7 +99,7 @@ public class WinActivity extends Activity
 //		editor.putInt("cur_mission_num", 0);  
 //		editor.commit();  
 		unlock_mission_num = sharedPreferences.getInt("cur_mission_num", 0);
-		if(unlock_mission_num == MISSION - 1){
+		if(cur_selected_mission == MISSION - 1){
 			Intent intent = new Intent(WinActivity.this,FinishActivity.class);
 			startActivity(intent);
 			WinActivity.this.finish();
