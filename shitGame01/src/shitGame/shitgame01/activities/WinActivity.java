@@ -125,9 +125,34 @@ public class WinActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(WinActivity.this,SelectItemActivity.class);
-				intent.putExtra("cur_selected_mission", cur_selected_mission+1);
-				WinActivity.this.startActivity(intent);
+				SharedPreferences sharedPreferences = getSharedPreferences("data",
+						MODE_PRIVATE);
+				boolean plane_control = sharedPreferences.getBoolean("plane_control", false);
+				boolean hit_control = sharedPreferences.getBoolean("hit_control", false);
+				if(9 == cur_selected_mission && !plane_control){
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putBoolean("plane_control", true);
+					editor.commit();
+					Intent newIntent = new Intent(WinActivity.this, PlaneControlActivity.class);
+					newIntent.putExtra("bag", bag);
+					newIntent.putExtra("spend_time", timeCost);
+					startActivity(newIntent);
+				}
+				else if(19 == cur_selected_mission && !hit_control){
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putBoolean("hit_control", true);
+					editor.commit();
+					Intent newIntent = new Intent(WinActivity.this,
+							HitControlActivity.class);
+					newIntent.putExtra("bag", bag);
+					newIntent.putExtra("spend_time", timeCost);
+					startActivity(newIntent);
+				}
+				else{
+					Intent intent = new Intent(WinActivity.this,SelectItemActivity.class);
+					intent.putExtra("cur_selected_mission", cur_selected_mission+1);
+					WinActivity.this.startActivity(intent);
+				}
 				WinActivity.this.finish();
 			}
 		});
