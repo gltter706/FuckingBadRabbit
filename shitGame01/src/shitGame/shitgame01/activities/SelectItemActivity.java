@@ -62,7 +62,7 @@ public class SelectItemActivity extends Activity{
 	private ImageView iv_selectitem2 = null;
 	private ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
 	private boolean personSelected = false;
-	private boolean cancelSelected = false;
+	private boolean zero = true;
 	private int cur_selected_mission = 0;
 	//第一个道具框选中的道具编号
 	private int cur_selected_item0 = -1;
@@ -110,9 +110,16 @@ public class SelectItemActivity extends Activity{
 					long arg3) {
 				// TODO Auto-generated method stub
 				
+				if(arg2 != 0 && 0 == Integer.valueOf(itemAmounts[arg2])){
+					zero = true;
+					Toast.makeText(SelectItemActivity.this, "此道具数目为0!", Toast.LENGTH_LONG).show();
+				} else{
+					zero = false;
+				}
 				if(arg2 != 0 && 1 == Integer.valueOf(itemAmounts[arg2]) && (arg2 == cur_selected_item0 || arg2 == cur_selected_item1)){
 					Toast.makeText(SelectItemActivity.this, "此道具数目为0!", Toast.LENGTH_LONG).show();
 				}else{
+					
 				if( false == personSelected){
 					if(0 == arg2 && iv_current == iv_selectitem0){
 						iv_current.setImageResource(R.drawable.ic_originalitems);
@@ -120,7 +127,7 @@ public class SelectItemActivity extends Activity{
 					}else if(0 == arg2 && iv_current == iv_selectitem1){
 						iv_current.setImageResource(R.drawable.ic_originalitems);
 						cur_selected_item1 = -1;
-					}else{
+					}else if(!zero){
 				iv_current.setImageResource(drawable[arg2]);
 					if(iv_current == iv_selectitem0){
 					   item_1 = items[arg2-1];
@@ -232,15 +239,15 @@ public class SelectItemActivity extends Activity{
 					iv_selectitem0.setImageResource(R.drawable.ic_originalitems_withfingerprint);
 					}
 					//第一个道具框未选过而第二个选过
-				else if(-1 == cur_selected_item0 && -1 != cur_selected_item1){
+				else if(-1 == cur_selected_item0 && -1 != cur_selected_item1 && !zero){
 					iv_selectitem0.setImageResource(R.drawable.ic_originalitems_withfingerprint);
 					iv_selectitem1.setImageResource(drawable[cur_selected_item1]);
 					//第一个道具框选过而第二个未选过
-			   }else if(-1 != cur_selected_item0 && -1 == cur_selected_item1){
+			   }else if(-1 != cur_selected_item0 && -1 == cur_selected_item1 && !zero){
 				   iv_selectitem0.setImageResource(drawableWithFingerPrints[cur_selected_item0]);
 				   iv_selectitem1.setImageResource(R.drawable.ic_originalitems);
 				   //第一个道具框选过而第二个道具框也选过
-			 }else if(-1 != cur_selected_item0 && -1 != cur_selected_item1){
+			 }else if(-1 != cur_selected_item0 && -1 != cur_selected_item1 && !zero){
 				   iv_selectitem0.setImageResource(drawableWithFingerPrints[cur_selected_item0]);
 				   iv_selectitem1.setImageResource(drawable[cur_selected_item1]);
 				 }
@@ -250,13 +257,13 @@ public class SelectItemActivity extends Activity{
 					iv_selectitem0.setImageResource(R.drawable.ic_originalitems);
 					iv_selectitem1.setImageResource(R.drawable.ic_originalitems_withfingerprint);
 					}
-				else if(-1 == cur_selected_item1 && -1 != cur_selected_item0){
+				else if(-1 == cur_selected_item1 && -1 != cur_selected_item0 && !zero){
 					iv_selectitem1.setImageResource(R.drawable.ic_originalitems_withfingerprint);
 					iv_selectitem0.setImageResource(drawable[cur_selected_item0]);
-			   }else if(-1 != cur_selected_item1 && -1 == cur_selected_item0){
+			   }else if(-1 != cur_selected_item1 && -1 == cur_selected_item0 && !zero){
 				   iv_selectitem1.setImageResource(drawableWithFingerPrints[cur_selected_item1]);
 				   iv_selectitem0.setImageResource(R.drawable.ic_originalitems);
-			 }else if(-1 != cur_selected_item1 && -1 != cur_selected_item0){
+			 }else if(-1 != cur_selected_item1 && -1 != cur_selected_item0 && !zero){
 				   iv_selectitem1.setImageResource(drawableWithFingerPrints[cur_selected_item1]);
 				   iv_selectitem0.setImageResource(drawable[cur_selected_item0]);
 				 }
