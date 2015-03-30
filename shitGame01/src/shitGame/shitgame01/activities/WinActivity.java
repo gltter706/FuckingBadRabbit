@@ -99,13 +99,12 @@ public class WinActivity extends Activity
 //		editor.putInt("cur_mission_num", 0);  
 //		editor.commit();  
 		unlock_mission_num = sharedPreferences.getInt("cur_mission_num", 0);
+		if(unlock_mission_num == MISSION - 1)
+			btn_continueButton.setEnabled(false);
 		if(unlock_mission_num == cur_selected_mission){
 			SharedPreferences.Editor editor;
 			editor=sharedPreferences.edit(); 
-			int next_mission = unlock_mission_num + 1 > MISSION ? unlock_mission_num : unlock_mission_num + 1;
-			if(next_mission == 29){
-				btn_continueButton.setEnabled(false);
-			}
+			int next_mission = unlock_mission_num + 1 >= MISSION ? unlock_mission_num : unlock_mission_num + 1;
 			editor.putInt("cur_mission_num", next_mission);  
 			editor.commit();  
 			unlock = true;
@@ -129,7 +128,7 @@ public class WinActivity extends Activity
 						MODE_PRIVATE);
 				boolean plane_control = sharedPreferences.getBoolean("plane_control", false);
 				boolean hit_control = sharedPreferences.getBoolean("hit_control", false);
-				if(9 == cur_selected_mission && !plane_control){
+				if(10 == cur_selected_mission){
 					SharedPreferences.Editor editor = sharedPreferences.edit();
 					editor.putBoolean("plane_control", true);
 					editor.commit();
@@ -138,7 +137,7 @@ public class WinActivity extends Activity
 					newIntent.putExtra("spend_time", timeCost);
 					startActivity(newIntent);
 				}
-				else if(19 == cur_selected_mission && !hit_control){
+				else if(20 == cur_selected_mission){
 					SharedPreferences.Editor editor = sharedPreferences.edit();
 					editor.putBoolean("hit_control", true);
 					editor.commit();
