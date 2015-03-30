@@ -38,4 +38,5 @@ public class HitCartoonActivity extends Activity{
 		startActivity(newIntent);
 		HitCartoonActivity.this.finish();
 	}
+	
 }

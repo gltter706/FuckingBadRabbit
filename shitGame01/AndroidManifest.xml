@@ -128,7 +128,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
          <activity 
-            android:name=".activities.ControlActivity"
+            android:name="shitGame.shitgame01.activities.ControlActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">

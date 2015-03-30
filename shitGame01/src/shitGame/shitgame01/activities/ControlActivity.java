@@ -93,4 +93,13 @@ public class ControlActivity extends Activity {
 				});
 	}
 
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		// TODO Auto-generated method stub
+		return gestureDetector.onTouchEvent(event);
+	}
+	
+	
+
 }

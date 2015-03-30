@@ -191,10 +191,33 @@ public class SelectMissionActivity extends Activity{
 	public void selectmission_btn_OnClick(View view)
 	{
 		int cur_selected_mission=view.getId()-R.id.selectmission_btn0+cur_theme_first_mission_num;
-		Intent intent=new Intent(SelectMissionActivity.this, SelectItemActivity.class);
-		intent.putExtra("cur_selected_mission", cur_selected_mission);
-		startActivity(intent);
-		finish();
+		if(cur_selected_mission==0)
+		{
+			Intent intent=new Intent(SelectMissionActivity.this, ControlActivity.class);
+			intent.putExtra("cur_selected_mission", cur_selected_mission);
+			startActivity(intent);
+			finish();
+		}
+		else if(cur_selected_mission==10)
+		{
+			Intent intent=new Intent(SelectMissionActivity.this, PlaneEndActivity.class);
+			intent.putExtra("cur_selected_mission", cur_selected_mission);
+			startActivity(intent);
+			finish();
+		}
+		else if(cur_selected_mission==20)
+		{
+			Intent intent=new Intent(SelectMissionActivity.this, HitEndActivity.class);
+			intent.putExtra("cur_selected_mission", cur_selected_mission);
+			startActivity(intent);
+			finish();
+		}else {
+			Intent intent=new Intent(SelectMissionActivity.this, SelectItemActivity.class);
+			intent.putExtra("cur_selected_mission", cur_selected_mission);
+			startActivity(intent);
+			finish();
+		}
+		
 	}
 
 
