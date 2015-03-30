@@ -68,13 +68,13 @@ public class BossHitActivity extends Activity {
 		PublicData.makeMouseTime = 700;
 		tv_time = (TextView)findViewById(R.id.tv_time);
 		tv_time.setText("时间" + "0s");
-		tv_time.setTextColor(Color.RED);
+		tv_time.setTextColor(Color.WHITE);
 		tv_goal = (TextView)findViewById(R.id.tv_goal);
 		tv_goal.setText("目标:" + goal + "只");
-		tv_goal.setTextColor(Color.RED);
+		tv_goal.setTextColor(Color.WHITE);
 		tv_hitNumber = (TextView)findViewById(R.id.tv_hitNumber);
 		tv_hitNumber.setText("你打中了" + hitNumber + "只地屎!");
-		tv_hitNumber.setTextColor(Color.RED);
+		tv_hitNumber.setTextColor(Color.BLACK);
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		widthPixels = dm.widthPixels;

@@ -27,8 +27,8 @@ public class TimeCounterThread extends Thread{
 				while(runOrStop){
 				Thread.sleep(1000);
 				originalTime-- ;
-				PublicData.makeMouseTime = PublicData.makeMouseTime-14;
-				PublicData.stayTime = PublicData.stayTime-10;
+				PublicData.makeMouseTime = PublicData.makeMouseTime-12;
+				PublicData.stayTime = PublicData.stayTime-8;
 				Message timeMsg = BossHitActivity.timeCounterHandler.obtainMessage();
 				timeMsg.what = 0x111;
 				timeMsg.arg1 = originalTime;
