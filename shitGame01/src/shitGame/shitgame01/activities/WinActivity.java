@@ -131,17 +131,15 @@ public class WinActivity extends Activity
 						MODE_PRIVATE);
 				boolean plane_control = sharedPreferences.getBoolean("plane_control", false);
 				boolean hit_control = sharedPreferences.getBoolean("hit_control", false);
-				if(10 == cur_selected_mission){
+				if(9 == cur_selected_mission){
 					Intent newIntent = new Intent(WinActivity.this, PlaneEndActivity.class);
-					newIntent.putExtra("bag", bag);
-					newIntent.putExtra("spend_time", timeCost);
+					newIntent.putExtra("cur_selected_mission", cur_selected_mission+1);
 					startActivity(newIntent);
 				}
 				else if(19 == cur_selected_mission){	
 					Intent newIntent = new Intent(WinActivity.this,
 							HitEndActivity.class);
-					newIntent.putExtra("bag", bag);
-					newIntent.putExtra("spend_time", timeCost);
+					newIntent.putExtra("cur_selected_mission", cur_selected_mission+1);
 					startActivity(newIntent);
 				}
 				else{
