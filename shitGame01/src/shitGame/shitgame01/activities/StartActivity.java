@@ -316,7 +316,7 @@ public class StartActivity extends Activity {
 					//设置要默认发送的内容
 					email.putExtra(android.content.Intent.EXTRA_TEXT, emailBody);
 					//调用系统的邮件系统
-					startActivity(Intent.createChooser(email, "请选择邮件发送软件"));
+					startActivity(Intent.createChooser(email, "请选择邮件发送软件\r或直接发送至jasoncar@outlook.com"));
 					
 				}
 			});
