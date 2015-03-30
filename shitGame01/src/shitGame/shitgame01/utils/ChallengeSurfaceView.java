@@ -540,7 +540,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item1_ON=false;
 			}
 		}
-		if(item1_counter==23900)//计时到12S的时候
+		if(item1_counter==239)//计时到12S的时候
 		{
 			if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
 			{
