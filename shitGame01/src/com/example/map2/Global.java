@@ -575,10 +575,10 @@ public class Global {
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0}};
-	int change_wall_num30[]=new int[]{8,18,21,22,28,29,30,40,38,39,47,48,54,64,58,48};
+	int change_wall_num30[]=new int[]{0,1,2,3,4,5,6,7,8,9,12,16,17,19,20,29,34,35,39,
+			42,47,49,53,58,59,60,65,66,69,70,79,80,83,84,87,89,90,91,92,93,94,95,96,97};
 	
-	MapInfo mapinfo30=new MapInfo(map_array30,change_wall_num30,0,99);
-	//mapinfo30.add_vector(null);
+	MapInfo mapinfo30=new MapInfo(map_array30,change_wall_num30,40,99);
 	ALL_MAP.add(mapinfo30);
 	}
 	
