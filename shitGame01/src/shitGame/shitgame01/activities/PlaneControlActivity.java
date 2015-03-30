@@ -24,13 +24,13 @@ public class PlaneControlActivity extends Activity{
 		Intent getIntent = getIntent();
 		spend_time = getIntent.getLongExtra("spend_time", 0xfffff);
 		bag = (Bag) getIntent.getSerializableExtra("bag");
-		setContentView(R.layout.layout_control);
+		setContentView(R.layout.layout_plane_control);
 		cartoon_id[0] = R.drawable.plane_control1;
 		cartoon_id[1] = R.drawable.plane_control2;
 		cartoon_id[2] = R.drawable.plane_control3;
 		cartoon_id[3] = R.drawable.plane_control4;
 
-		iv_cartoon = (ImageView) findViewById(R.id.iv_control);
+		iv_cartoon = (ImageView) findViewById(R.id.iv_plane_control);
 		// this.init_pic();
 		gestureDetector = new GestureDetector(PlaneControlActivity.this,
 				new GestureDetector.OnGestureListener() {
