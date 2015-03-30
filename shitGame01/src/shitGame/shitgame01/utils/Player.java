@@ -16,7 +16,7 @@ public class Player
 	
 	public float x,y;
 	public int w,h;
-	public int speed;
+	public float speed;
 	public float screenW,screenH;
 	public boolean right,up;
 	public Item item1;
@@ -31,7 +31,7 @@ public class Player
 		this.h=h;
 		this.right=true;
 		this.up=false;
-		this.speed=(int)(3*screenW/850);
+		this.speed=(float) (3.0*screenW/850.0);
 		Log.e("Lin", ""+speed);
 		this.screenW=screenW;
 		this.screenH=screenH;

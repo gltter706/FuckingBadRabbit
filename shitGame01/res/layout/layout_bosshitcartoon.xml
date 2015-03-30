@@ -4,11 +4,11 @@
     android:layout_height="match_parent" >
     
     <ImageView
-        android:id="@+id/iv_planecartoon"
+        android:id="@+id/iv_Hitcartoon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_plane_cartoon1" />
+        android:src="@drawable/bg_hit_cartoon1" />
 
 	<LinearLayout 
 	    android:layout_width="match_parent"
@@ -21,11 +21,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
-                android:id="@+id/btn_planecartoon"
+                android:id="@+id/btn_hitcartoon"
                 android:background="@drawable/btn_sum_color_selector1_1"
                 android:textColor="#fff"
-                android:visibility="invisible"
-                android:onClick="beginBoss"
+                android:onClick="beginHit"
                 android:text="@string/go_plane" />
 	</LinearLayout>
 </FrameLayout>

@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="磕磕碰碰造出了这个操作“方便”的游戏，又磕磕碰碰地选了方块和便做主题，如果觉得题材或者操作方式有新意，分享一下既是对我们的鼓励，几个学生也是蛮拼的,thanks for all~同时我们期待来自你的反馈"
+        android:text="our team story...敬请期待"
         android:textColor="#FFFFFFFF"
         android:textSize="20sp" />
 

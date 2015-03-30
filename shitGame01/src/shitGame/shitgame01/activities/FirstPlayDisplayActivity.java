@@ -1,34 +1,21 @@
 package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
-
-import android.R.integer;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class FirstPlayDisplayActivity extends Activity {
 
-	final String TAG = "firstplayactivity";
-	final int frameOfCartoon=4;          //修改漫画总帧数
+	final int frameOfCartoon=6;          //修改漫画总帧数
 	private GestureDetector gestureDetector;
 	int counter=0;
 	private int[] cartoon_id = new int[frameOfCartoon];
 	private ImageView iv_cartoon;
-	long starttime = System.currentTimeMillis();// 记录动画创建时间
-	/*
-	 * 最好不用currnetTimeMillis()，如果用户修改系统时间会影响结果
-	 */
-
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -37,6 +24,9 @@ public class FirstPlayDisplayActivity extends Activity {
 		cartoon_id[1] = R.drawable.bg_cartoon_firstplay2;
 		cartoon_id[2] = R.drawable.bg_cartoon_firstplay3;
 		cartoon_id[3] = R.drawable.bg_cartoon_firstplay4;
+		cartoon_id[4] = R.drawable.bg_cartoon_firstplay5;
+		cartoon_id[5] = R.drawable.bg_cartoon_firstplay6;
+		
 		iv_cartoon = (ImageView) findViewById(R.id.layout_first_play);
 		// this.init_pic();
 		gestureDetector = new GestureDetector(FirstPlayDisplayActivity.this,
@@ -76,17 +66,13 @@ public class FirstPlayDisplayActivity extends Activity {
 					@Override
 					public boolean onFling(MotionEvent e1, MotionEvent e2,
 							float velocityX, float velocityY) {
-						// TODO Auto-generated method stub
-						Log.d(TAG, "fling");
 						if (e2.getX() - e1.getX() < 0) {
 							if (counter < frameOfCartoon-1) {
-								Log.d(TAG, "flingright");
 								counter++;
 								((BitmapDrawable)(iv_cartoon.getDrawable())).getBitmap().recycle();
 								iv_cartoon.setImageResource(cartoon_id[counter]);
 //							    layout.setBackground(cartoonDrawables[counter]);
 							} else {
-								Log.d(TAG, "flingright_finish");
 								Intent intent = new Intent(
 										FirstPlayDisplayActivity.this,
 										SelectMissionActivity.class);

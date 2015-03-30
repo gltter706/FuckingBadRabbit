@@ -100,7 +100,8 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 		int second;
 		int mil_second;
 		Calendar date;
-		int txtWidth = (int) (width*0.9);
+		paint.setTextSize(21);
+		int txtWidth = (int) (width*0.83);
 		int txtHeight = (int) (height*0.15 );
 		
 		date = Calendar.getInstance();
@@ -109,7 +110,8 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 		second = date.get(Calendar.SECOND);
 	    mil_second = date.get(Calendar.MILLISECOND);
 	    mil_second *= 0.01;
-		canvas.drawText(second+" : "+mil_second, txtWidth, txtHeight, paint);
+		canvas.drawText(second+" : "+mil_second+"ms", txtWidth, txtHeight, paint);
+		paint.reset();
 	}
 	//draw something who could fly
 	private void drawFlyAbs(FlyAbs flyAbs, Canvas canvas, float w, float h,Paint paint) {
@@ -181,7 +183,7 @@ public class PlaneSurfaceView extends SurfaceView implements Callback {
 
 		//init background
 		background = new Background(BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.gaming_bg1_01), 0, 0);
+				context.getResources(), R.drawable.bg_plane), 0, 0);
 		backgroundMatrix = background.getMatrix();
 		backgroundMatrix.postScale(width / background.getWidth(), height
 				/ background.getHeight());

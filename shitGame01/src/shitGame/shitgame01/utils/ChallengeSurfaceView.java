@@ -9,6 +9,8 @@ import com.example.map2.Global;
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.activities.BossHitActivity;
 import shitGame.shitgame01.activities.BossPlaneActivity;
+import shitGame.shitgame01.activities.BossPlaneCartoon;
+import shitGame.shitgame01.activities.HitCartoonActivity;
 import shitGame.shitgame01.activities.LoseActivity;
 import shitGame.shitgame01.activities.StartActivity;
 import shitGame.shitgame01.activities.WinActivity;
@@ -343,14 +345,14 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 			spend_time=end_time-start_time-pause_time;
 			if(cur_selected_mission_num==9)//开启第一个BOSS关
 			{
-				Intent intent=new Intent(context, BossPlaneActivity.class);
+				Intent intent=new Intent(context, BossPlaneCartoon.class);
 				intent.putExtra("spend_time", spend_time);
 				intent.putExtra("bag", bag);
 				context.startActivity(intent);
 			}
 			else if(cur_selected_mission_num==19)//开启第一个BOSS关
 			{
-				Intent intent=new Intent(context, BossHitActivity.class);
+				Intent intent=new Intent(context, HitCartoonActivity.class);
 				intent.putExtra("spend_time", spend_time);
 				intent.putExtra("bag", bag);
 				context.startActivity(intent);
@@ -538,7 +540,7 @@ public class ChallengeSurfaceView extends SurfaceView implements Callback
 				item1_ON=false;
 			}
 		}
-		if(item1_counter==239)//计时到12S的时候
+		if(item1_counter==23900)//计时到12S的时候
 		{
 			if(item1_copy.getItem_id().equals(getResources().getString(R.string.shield)))
 			{
