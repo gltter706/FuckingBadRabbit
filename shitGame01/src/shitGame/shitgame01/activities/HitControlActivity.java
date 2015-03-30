@@ -77,7 +77,7 @@ public class HitControlActivity extends Activity{
 										.setImageResource(cartoon_id[counter]);
 								// layout.setBackground(cartoonDrawables[counter]);
 							} else {
-								Intent intent=new Intent(HitControlActivity.this, HitControlActivity.class);
+								Intent intent=new Intent(HitControlActivity.this, BossHitActivity.class);
 								intent.putExtra("bag", bag);
 								intent.putExtra("spend_time", spend_time);
 								HitControlActivity.this.startActivity(intent);
