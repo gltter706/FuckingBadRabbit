@@ -1,20 +1,13 @@
 package shitGame.shitgame01.activities;
 
 import shitGame.shitgame01.R;
-
-import android.R.integer;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class FirstPlayDisplayActivity extends Activity {
 

@@ -39,17 +39,6 @@ public interface AppConstant {
 
 		};
 		//battling
-		public static final int[]MUSIC_LIST_BATTLE=new int[]{
-			R.raw.battling1
-		};
-		//win
-		public static final int[] MUSIC_LIST_WON=new int[] {
-			R.raw.win
-		};
-		//lose
-		public static final int[] MUSIC_LIST_LOSED=new int[]{
-			R.raw.lose
-		};
 		
 	}
 	

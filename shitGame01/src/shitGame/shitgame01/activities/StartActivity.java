@@ -3,7 +3,6 @@ package shitGame.shitgame01.activities;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.wechat.moments.WechatMoments;
 import shitGame.shitgame01.R;
 import shitGame.shitgame01.constant.AppConstant;
 import shitGame.shitgame01.interfaces.MusicController;
@@ -15,7 +14,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +46,6 @@ public class StartActivity extends Activity {
 		// 设置imageView
 		ImageView roler = (ImageView) findViewById(R.id.imgv_startmenu_role);
 		roler.setOnClickListener(new RolerListener() );
-		Log.d(TAG, "imageView");
 		//设置popWindow
 		ImageButton btn_popWindowButton=(ImageButton) findViewById(R.id.btn_popWindow);
 		btn_popWindowButton.setOnClickListener(new OnClickListener() {
@@ -64,7 +61,6 @@ public class StartActivity extends Activity {
 							LayoutParams.WRAP_CONTENT);
 
 					// 设置btn_vote
-					Log.d(TAG, "btn_vote_finish");
 					ImageButton btn_vote = (ImageButton) view
 							.findViewById(R.id.btn_vote);
 					btn_vote.setOnClickListener(new VoteListener());
@@ -73,14 +69,12 @@ public class StartActivity extends Activity {
 					// 设置btn_music
 					ImageButton btn_music = (ImageButton) view
 							.findViewById(R.id.btn_music);
-					Log.d(TAG, "btn_music");
 					btn_music.setOnClickListener(new MusicButtonListener());
 
 					// 设置btn_feedback
 					ImageButton btn_feedback = (ImageButton) view
 							.findViewById(R.id.btn_feedback);
 					btn_feedback.setOnClickListener(new FeedbackListener());
-					Log.d(TAG, "btn_feedback");
 					
 				}
 		       if(mPop.isShowing())
@@ -90,7 +84,6 @@ public class StartActivity extends Activity {
 				
 			}
 		});
-		Log.d(TAG, "popWin");
 
 
 		// 初始化音乐播放
@@ -103,7 +96,7 @@ public class StartActivity extends Activity {
 		MusicController musicController = new MusicController();
 		musicController.onAttach(StartActivity.this);
 		musicController.playMusic(is_music_on, curScene);
-		Log.d(TAG, "create_finish");
+
 	}
 
 	
@@ -115,7 +108,6 @@ public class StartActivity extends Activity {
 		Intent sendIntent = new Intent(AppConstant.MusicPlayVariate.CTL_ACTION);
 		sendIntent.putExtra(AppConstant.MusicPlayController.MUSIC_CONTROL_STR,
 				AppConstant.MusicPlayController.MUSIC_CHECK_HEALTH);
-		Log.d(TAG,"sendBroadcast");
 		this.sendBroadcast(sendIntent);
 	}
 
@@ -124,7 +116,6 @@ public class StartActivity extends Activity {
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "onfinish");
 		Intent intent = new Intent(StartActivity.this, PlayMusicService.class);
 		stopService(intent);
 		super.finish();
@@ -235,10 +226,8 @@ public class StartActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Log.d(TAG, "btn_music0");
 			MusicController musicController = new MusicController();
 			musicController.onAttach(StartActivity.this);
-			Log.d(TAG, "btn_music1");
 			if (AppConstant.MusicPlayState.CURRENT_PLAY_STATE == AppConstant.MusicPlayState.PLAY_STATE_PAUSE) {
 				musicController.playMusic(
 						AppConstant.MusicPlayState.PLAY_STATE_PLAYING,
@@ -248,7 +237,6 @@ public class StartActivity extends Activity {
 						AppConstant.MusicPlayState.PLAY_STATE_PAUSE,
 						AppConstant.MusicPlayState.SCENE_NOT_BATTLING);
 			}
-			Log.d(TAG, "btn_music2");
 		}
     }
     
@@ -317,8 +305,8 @@ public class StartActivity extends Activity {
 					// TODO Auto-generated method stub
 					Intent email = new Intent(android.content.Intent.ACTION_SEND);
 					email.setType("plain/text");
-					String[] emailReciver = new String[]{"zhouyongyang122@gmail.com", "421134693@qq.com"};
-					String emailSubject = "你有一条短信";
+					String[] emailReciver = new String[]{"CZHowlWS@outlook.com"};
+					String emailSubject = "用户反馈";
 					String emailBody ="Feedback from ShitGame User";
 
 					//设置邮件默认地址
@@ -360,7 +348,7 @@ public class StartActivity extends Activity {
     	 // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
 //    	 oks.setTitleUrl("http://sharesdk.cn");
     	 // text是分享文本，所有平台都需要这个字段
-    	 oks.setText("太好玩了，大家快下来玩啊~下载支持我们！下载地址猛戳：http://dev.10086.cn/mm2011");
+    	 oks.setText("太好玩了，大家快下来玩啊~下载就是对这几个学生的支持！下载地址猛戳：shitgame02.sinaapp.com");
     	 // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
     	 oks.setImageUrl("http://img2.ph.126.net/qp9n3ARK25_N8d7Z6CxPOg==/6630918232117649981.png");//确保SDcard下面存在此张图片
     	 // url仅在微信（包括好友和朋友圈）中使用
